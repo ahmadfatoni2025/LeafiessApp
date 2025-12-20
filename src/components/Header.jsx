@@ -9,7 +9,7 @@ const Header = () => {
     const navLinks = [
         { name: "Home", id: "home" },
         { name: "Services", id: "services" },
-        { name: "Team", id: "team" },
+        { name: "Profile", id: "profile" },
         { name: "Projects", id: "projects" },
         { name: "Contact", id: "contact" },
     ];

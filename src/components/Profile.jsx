@@ -15,26 +15,26 @@ import { cn } from '@/lib/utils';
 
 const teamMembers = [
     {
-        name: "MARCUS",
+        name: "Tony",
         role: "FRONTEND LEAD",
         focus: "UI/UX ARCHITECTURE",
-        img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop",
+        img: "https://i.pinimg.com/736x/2b/f0/b0/2bf0b0feecc5c890ea47f90c7c7c775d.jpg",
         icon: <Code2 size={16} />,
         color: "#10b981"
     },
     {
-        name: "ELARA",
+        name: "Manyu",
         role: "BACKEND LEAD",
         focus: "SCALABLE SYSTEMS",
-        img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000&auto=format&fit=crop",
+        img: "https://i.pinimg.com/736x/09/e4/0a/09e40a3f556058ae2f57ba22bce36f12.jpg",
         icon: <Database size={16} />,
         color: "#059669"
     },
     {
-        name: "ADRIAN",
+        name: "candra",
         role: "HUMAN RESOURCE",
         focus: "TALENT ACQUISITION",
-        img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1000&auto=format&fit=crop",
+        img: "https://i.pinimg.com/1200x/d3/a2/38/d3a238f0e817a045c2002f14457eddc0.jpg",
         icon: <Users2 size={16} />,
         color: "#34d399"
     }
@@ -42,7 +42,7 @@ const teamMembers = [
 
 const Profile = () => {
     return (
-        <section id="team" className="py-32 px-4 relative overflow-hidden bg-black text-white">
+        <section id="profile" className="py-32 px-4 relative overflow-hidden bg-black text-white selection:bg-emerald-500/30 selection:text-emerald-400">
             {/* Background Effects matching Hero */}
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full blur-[160px] opacity-10"
@@ -50,13 +50,48 @@ const Profile = () => {
                         background: 'radial-gradient(circle, rgba(16, 185, 129, 0.4) 0%, transparent 70%)'
                     }}
                 />
-                <div className="absolute inset-0 opacity-[0.05] bg-[linear-gradient(#fff_1px,transparent_1px),linear-gradient(90deg,#fff_1px,transparent_1px)] bg-[size:50px_50px]" />
+                <div className="absolute inset-0 opacity-[0.05] bg-[linear-gradient(#fff_1px,transparent_1px),linear-gradient(90deg,#fff_1px,transparent_1px)] bg-size-[50px_50px]" />
                 <div className="absolute inset-0 bg-linear-to-b from-black via-transparent to-black" />
             </div>
 
             <div className="container mx-auto relative z-10">
+                {/* --- ELEGANT H1 HEADER --- */}
+                <div className="flex flex-col mb-20">
+                    <motion.div
+                        initial={{ opacity: 0, x: -50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                        className="flex items-center gap-4 mb-4"
+                    >
+                        <div className="flex gap-1">
+                            {[1, 2, 3].map(i => <div key={i} className="w-8 h-1 bg-emerald-500 rounded-full" />)}
+                        </div>
+                        <span className="text-[10px] font-black tracking-[0.4em] uppercase text-emerald-500/60">Elite_Profiles//2024</span>
+                    </motion.div>
 
-                {/* --- AGENCY CORE TEAM (Inspired by bottom part image) --- */}
+                    <motion.h1
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                        className="text-6xl md:text-[120px] font-[1000] italic tracking-tighter leading-[0.85] text-white uppercase"
+                    >
+                        Our Core Team<span className="text-emerald-500">.</span>
+                    </motion.h1>
+
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, delay: 0.4 }}
+                        className="text-neutral-500 text-lg md:text-xl font-medium mt-8 max-w-2xl border-l border-emerald-500/30 pl-8"
+                    >
+                        Engineering high-performance digital ecosystems with a specialized collective of frontend architects, backend engineers, and talent specialists.
+                    </motion.p>
+                </div>
+
+                {/* --- AGENCY CORE TEAM --- */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {teamMembers.map((member, i) => (
                         <motion.div
@@ -116,7 +151,7 @@ const Profile = () => {
                             </div>
 
                             {/* Scanner Line Effect */}
-                            <div className="absolute top-0 left-0 w-full h-[1px] bg-emerald-500/30 opacity-0 group-hover:opacity-100 group-hover:top-full transition-all duration-[3000ms] pointer-events-none" />
+                            <div className="absolute top-0 left-0 w-full h-px bg-emerald-500/30 opacity-0 group-hover:opacity-100 group-hover:top-full transition-all duration-3000 pointer-events-none" />
                         </motion.div>
                     ))}
                 </div>
