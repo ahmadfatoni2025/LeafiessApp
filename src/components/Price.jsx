@@ -1,236 +1,226 @@
-import { motion } from 'framer-motion';
-import { Check, X, Zap, Crown, Rocket, ArrowRight, Info } from 'lucide-react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Check, ArrowUpRight, Sparkles } from 'lucide-react';
 
 const pricingPlans = [
     {
-        name: "Starter",
-        tagline: "Presence",
-        price: "500K",
-        period: "/project",
-        description: "Ideal untuk UMKM atau Landing Page promosi cepat.",
-        features: ["1 Page Design", "Responsive", "SEO Basic", "1 Month Support"],
-        icon: <Rocket className="w-5 h-5" />,
+        name: "Basic",
+        tagline: "For the basics",
+        price: { monthly: "Rp2.999.-", yearly: "Rp2.999.-" },
+        description: "Per agent per month",
+        features: ["Basic speed", "10 GB storage", "Private key security", "No backups"],
+        cta: "Join waitlist",
         recommended: false
     },
     {
-        name: "Professional",
-        tagline: "Growth",
-        price: "3M",
-        period: "/project",
-        description: "Solusi lengkap untuk bisnis yang sedang berkembang.",
-        features: ["Unlimited Pages", "E-Commerce", "Admin Panel", "6 Months Support"],
-        icon: <Zap className="w-5 h-5" />,
+        name: "Plus",
+        tagline: "For the basics",
+        price: { monthly: "Rp3.499.-", yearly: "Rp2.999.-" },
+        description: "Per agent per month",
+        features: ["Medium speed server", "100 GB storage", "VPN", "Other apps", "Advanced security", "24/7 backups"],
+        cta: "Start trial",
+        recommended: false
+    },
+    {
+        name: "Premium",
+        tagline: "For the basics",
+        price: { monthly: "Rp5.499.-", yearly: "Rp4.999.-" },
+        description: "Per agent per month",
+        features: ["High speed server", "1 TB storage", "VPN", "Other apps", "Advanced security", "24/7 backups"],
+        cta: "Start trial",
+        badge: "10% discount",
         recommended: true
-    },
-    {
-        name: "Enterprise",
-        tagline: "Elite",
-        price: "Custom",
-        period: "",
-        description: "Sistem custom dengan performa & keamanan enterprise.",
-        features: ["Custom Logic", "High Security", "Cloud API", "Lifetime Support"],
-        icon: <Crown className="w-5 h-5" />,
-        recommended: false
-    }
-];
-
-const featureComparison = [
-    {
-        category: "Main Features",
-        features: [
-            { name: "Pages / Sections", starter: "Up to 5", pro: "Unlimited", enterprise: "Unlimited" },
-            { name: "Responsive Design", starter: true, pro: true, enterprise: true },
-            { name: "Custom Domain", starter: ".my.id", pro: ".com / .net", enterprise: "Any (.id/.com)" },
-            { name: "Content Strategy", starter: "-", pro: "Included", enterprise: "Full Strategy" },
-        ]
-    },
-    {
-        category: "Marketing & Analytics",
-        features: [
-            { name: "SEO Optimization", starter: "Basic", pro: "Advanced", enterprise: "Full Audit" },
-            { name: "Google Analytics", starter: true, pro: true, enterprise: true },
-            { name: "Facebook Pixel", starter: false, pro: true, enterprise: true },
-            { name: "Email Marketing", starter: false, pro: "Integrasi", enterprise: "Automated" },
-        ]
-    },
-    {
-        category: "E-Commerce",
-        features: [
-            { name: "Payment Gateway", starter: false, pro: true, enterprise: true },
-            { name: "Product Management", starter: false, pro: "Standard", enterprise: "Advanced DB" },
-            { name: "Auto Resi Shipping", starter: false, pro: true, enterprise: true },
-        ]
-    },
-    {
-        category: "Support & Security",
-        features: [
-            { name: "Maintenance", starter: "1 Month", pro: "6 Months", enterprise: "Priority" },
-            { name: "SSL Certificate", starter: true, pro: true, enterprise: true },
-            { name: "Server Setup", starter: "Shared", pro: "Cloud High", enterprise: "Dedicated" },
-            { name: "Weekly Backup", starter: false, pro: true, enterprise: true },
-        ]
     }
 ];
 
 const Price = () => {
+    const [billingCycle, setBillingCycle] = useState('monthly'); // 'monthly' or 'yearly'
+
     return (
         <section id="pricing" className="py-32 px-4 relative overflow-hidden bg-black text-white">
-            {/* Background branding text */}
-            <div className="absolute top-20 left-1/2 -translate-x-1/2 w-full overflow-hidden flex justify-center pointer-events-none select-none z-0">
-                <h1 className="text-[20vw] font-black leading-none m-0 tracking-tighter text-white opacity-[0.02]">
-                    SELECT_PLAN
-                </h1>
+            {/* Liquid Background Glows */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <motion.div
+                    animate={{
+                        scale: [1, 1.2, 1],
+                        opacity: [0.15, 0.25, 0.15],
+                        x: ['-10%', '10%', '-10%'],
+                        y: ['-10%', '10%', '-10%']
+                    }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute top-[-20%] left-[-10%] w-[70%] h-[70%] bg-emerald-600/20 blur-[150px] rounded-full"
+                />
+                <motion.div
+                    animate={{
+                        scale: [1.2, 1, 1.2],
+                        opacity: [0.1, 0.2, 0.1],
+                        x: ['10%', '-10%', '10%'],
+                        y: ['10%', '-10%', '10%']
+                    }}
+                    transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-emerald-500/10 blur-[150px] rounded-full"
+                />
             </div>
 
             <div className="container mx-auto relative z-10">
-                <div className="text-center mb-24">
+                {/* Header Content */}
+                <div className="text-center mb-16">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
+                        className="flex flex-col items-center"
                     >
-                        <h2 className="text-5xl md:text-8xl font-black mb-8 tracking-tighter italic uppercase leading-none">
-                            Pricing<span className="text-emerald-500">.</span>
+                        <span className="text-emerald-500 text-[10px] font-black mb-4 tracking-[0.4em] uppercase">Pricing Strategy</span>
+                        <h2 className="text-5xl md:text-7xl font-black mb-6 tracking-tighter uppercase italic">
+                            Choose Your Plan<span className="text-emerald-500">.</span>
                         </h2>
-                        <p className="text-neutral-500 text-lg max-w-2xl mx-auto font-medium">
-                            Pilih rencana yang tepat untuk bisnis Anda. Transparan, terukur, dan premium.
+                        <p className="text-neutral-500 text-lg max-w-xl mx-auto font-medium leading-relaxed">
+                            Sign up now, upgrade anytime. Every new account gets a 14-day trial of our Pro features.
                         </p>
                     </motion.div>
-                </div>
 
-                {/* Top 3 Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-32">
-                    {pricingPlans.map((plan, index) => (
+                    {/* Dynamic Island Toggle */}
+                    <div className="mt-12 group">
                         <motion.div
-                            key={plan.name}
                             initial={{ opacity: 0, scale: 0.9 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            className={`relative flex flex-col p-10 rounded-[40px] border backdrop-blur-3xl transition-all duration-700 group ${plan.recommended
-                                    ? "bg-emerald-500/5 border-emerald-500/30 shadow-[0_40px_100px_-20px_rgba(16,185,129,0.15)] ring-1 ring-emerald-500/50"
-                                    : "bg-white/[0.02] border-white/5 hover:border-emerald-500/20"
-                                }`}
+                            className="inline-flex items-center p-1.5 bg-neutral-900/80 backdrop-blur-3xl rounded-full border border-white/5 relative shadow-2xl"
                         >
-                            {plan.recommended && (
-                                <div className="absolute -top-4 right-10 bg-emerald-500 text-black px-6 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest">
-                                    Recommended
-                                </div>
-                            )}
+                            <div className="relative flex items-center">
+                                <button
+                                    onClick={() => setBillingCycle('monthly')}
+                                    className={`relative z-10 px-8 py-2.5 text-[10px] font-black uppercase tracking-[0.2em] transition-colors duration-500 ${billingCycle === 'monthly' ? 'text-black' : 'text-neutral-500 hover:text-white'}`}
+                                >
+                                    Monthly
+                                </button>
+                                <button
+                                    onClick={() => setBillingCycle('yearly')}
+                                    className={`relative z-10 px-8 py-2.5 text-[10px] font-black uppercase tracking-[0.2em] transition-colors duration-500 ${billingCycle === 'yearly' ? 'text-black' : 'text-neutral-500 hover:text-white'}`}
+                                >
+                                    Yearly
+                                </button>
 
-                            <div className="mb-10">
-                                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 border transition-transform group-hover:rotate-12 ${plan.recommended ? 'bg-emerald-500 border-emerald-400 text-black' : 'bg-white/5 border-white/10 text-emerald-400'
-                                    }`}>
-                                    {plan.icon}
-                                </div>
-                                <h3 className="text-3xl font-black text-white mb-2 uppercase italic tracking-tighter">{plan.name}</h3>
-                                <div className="flex items-baseline gap-2 mb-4">
-                                    <span className="text-5xl font-black text-white">{plan.price}</span>
-                                    <span className="text-neutral-500 text-xs font-bold uppercase tracking-widest">{plan.period}</span>
-                                </div>
-                                <p className="text-neutral-400 text-sm font-medium leading-relaxed">
-                                    {plan.description}
-                                </p>
+                                {/* The "Island" Slider */}
+                                <motion.div
+                                    layoutId="activeToggle"
+                                    className="absolute inset-0 bg-emerald-500 rounded-full shadow-[0_0_20px_rgba(16,185,129,0.4)]"
+                                    initial={false}
+                                    animate={{
+                                        x: billingCycle === 'monthly' ? 0 : '100%',
+                                        width: '50%'
+                                    }}
+                                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                />
                             </div>
-
-                            <div className="space-y-4 mb-12">
-                                {plan.features.map((f, i) => (
-                                    <div key={i} className="flex items-center gap-3">
-                                        <div className="w-5 h-5 rounded-full bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20">
-                                            <Check size={10} className="text-emerald-500" strokeWidth={4} />
-                                        </div>
-                                        <span className="text-xs text-neutral-300 font-bold uppercase tracking-wider">{f}</span>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <motion.button
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                                className={`w-full py-5 rounded-2xl font-black text-[11px] uppercase tracking-[0.3em] transition-all flex items-center justify-center gap-3 ${plan.recommended
-                                        ? "bg-emerald-500 text-black shadow-[0_20px_40px_rgba(16,185,129,0.3)] hover:bg-emerald-400"
-                                        : "bg-white/5 text-white border border-white/10 hover:bg-white/10"
-                                    }`}
-                            >
-                                Get Started
-                                <ArrowRight size={14} />
-                            </motion.button>
                         </motion.div>
-                    ))}
+                    </div>
                 </div>
 
-                {/* Detailed Comparison Table */}
+                {/* Bento Pricing Grid */}
                 <div className="max-w-6xl mx-auto">
-                    <div className="flex flex-col mb-12">
-                        <div className="flex items-center gap-3 mb-2">
-                            <Info size={16} className="text-emerald-500" />
-                            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-emerald-500/60">Metric Comparison Matrix</span>
-                        </div>
-                        <h3 className="text-4xl font-black italic tracking-tighter text-white uppercase">Feature Details<span className="text-emerald-500">_</span></h3>
-                    </div>
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-px bg-white/5 border border-white/10 rounded-[2.5rem] overflow-hidden backdrop-blur-sm shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)]">
+                        {pricingPlans.map((plan, index) => (
+                            <motion.div
+                                key={plan.name}
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.1 }}
+                                className={`relative p-8 md:p-12 flex flex-col group transition-all duration-700 hover:bg-white/[0.03] ${index < 2 ? 'lg:border-r border-white/10' : ''}`}
+                            >
+                                {/* Special Badge for Premium */}
+                                {plan.badge && (
+                                    <motion.div
+                                        initial={{ rotate: 10, scale: 0.8 }}
+                                        animate={{ rotate: -5, scale: 1 }}
+                                        className="absolute top-12 right-8 bg-emerald-500 text-black px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest shadow-[0_10px_20px_rgba(16,185,129,0.3)] z-20"
+                                    >
+                                        {plan.badge}
+                                    </motion.div>
+                                )}
 
-                    <div className="border border-white/10 rounded-[32px] overflow-hidden bg-white/[0.01] backdrop-blur-xl">
-                        <div className="overflow-x-auto">
-                            <table className="w-full text-left border-collapse">
-                                <thead>
-                                    <tr className="border-b border-white/10 bg-white/[0.02]">
-                                        <th className="p-8 text-[10px] font-black uppercase tracking-[0.3em] text-neutral-500">Category / Feature</th>
-                                        <th className="p-8 text-[10px] font-black uppercase tracking-[0.3em] text-neutral-500 text-center">Starter</th>
-                                        <th className="p-8 text-[10px] font-black uppercase tracking-[0.3em] text-emerald-500 text-center bg-emerald-500/5">Pro</th>
-                                        <th className="p-8 text-[10px] font-black uppercase tracking-[0.3em] text-neutral-500 text-center">Enterprise</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {featureComparison.map((cat, i) => (
-                                        <>
-                                            <tr key={`cat-${i}`} className="bg-white/5">
-                                                <td colSpan={4} className="px-8 py-4 text-[9px] font-black uppercase tracking-[0.5em] text-emerald-500/40">
-                                                    // {cat.category}
-                                                </td>
-                                            </tr>
-                                            {cat.features.map((feat, j) => (
-                                                <tr key={`feat-${j}`} className="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
-                                                    <td className="p-6">
-                                                        <span className="text-xs font-bold text-neutral-300 uppercase tracking-widest">{feat.name}</span>
-                                                    </td>
-                                                    <td className="p-6 text-center">
-                                                        {renderTableCell(feat.starter)}
-                                                    </td>
-                                                    <td className="p-6 text-center bg-emerald-500/[0.02]">
-                                                        {renderTableCell(feat.pro)}
-                                                    </td>
-                                                    <td className="p-6 text-center">
-                                                        {renderTableCell(feat.enterprise)}
-                                                    </td>
-                                                </tr>
-                                            ))}
-                                        </>
+                                {/* Card Header */}
+                                <div className="mb-10 relative z-10">
+                                    <h3 className="text-xl font-black text-white mb-1 group-hover:text-emerald-400 transition-colors duration-500 uppercase italic tracking-tighter">{plan.name}</h3>
+                                    <p className="text-neutral-500 text-[10px] font-black uppercase tracking-[0.2em] mb-10">{plan.tagline}</p>
+
+                                    <div className="mb-2">
+                                        <AnimatePresence mode="wait">
+                                            <motion.div
+                                                key={billingCycle}
+                                                initial={{ opacity: 0, y: 10, filter: 'blur(10px)' }}
+                                                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                                                exit={{ opacity: 0, y: -10, filter: 'blur(10px)' }}
+                                                className="flex items-baseline gap-1"
+                                            >
+                                                <span className="text-6xl font-black tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                                                    {billingCycle === 'monthly' ? plan.price.monthly : plan.price.yearly}
+                                                </span>
+                                            </motion.div>
+                                        </AnimatePresence>
+                                        <p className="text-neutral-500 text-[9px] font-black uppercase tracking-[0.3em] mt-4 opacity-50">{plan.description}</p>
+                                    </div>
+                                </div>
+
+                                {/* CTA Button (Fluid Style) */}
+                                <div className="mb-10 w-fit relative z-10">
+                                    <motion.button
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        className={`py-3.5 px-10 rounded-full font-black text-[10px] uppercase tracking-[0.2em] transition-all flex items-center gap-2 group/btn relative overflow-hidden ${plan.name === 'Standard'
+                                            ? "bg-white/5 text-white border border-white/10 hover:bg-white/10"
+                                            : "bg-emerald-500 text-black hover:bg-emerald-400 shadow-[0_15px_30px_rgba(16,185,129,0.2)]"
+                                            }`}
+                                    >
+                                        <span className="relative z-10">{plan.cta}</span>
+                                        <ArrowUpRight size={14} className="relative z-10 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" strokeWidth={3} />
+                                    </motion.button>
+                                </div>
+
+                                {/* Features List */}
+                                <div className="space-y-4 pt-8 border-t border-white/5 relative z-10">
+                                    {plan.features.map((feature, i) => (
+                                        <div key={i} className="flex items-center gap-3 group/feat">
+                                            <div className="w-5 h-5 rounded-full bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 group-hover/feat:bg-emerald-500/20 transition-all duration-300">
+                                                <Check size={12} className="text-emerald-500" strokeWidth={3} />
+                                            </div>
+                                            <span className="text-[10px] font-bold text-neutral-400 group-hover/feat:text-white transition-colors uppercase tracking-widest">
+                                                {feature}
+                                            </span>
+                                        </div>
                                     ))}
-                                </tbody>
-                            </table>
-                        </div>
+                                </div>
+
+                                {/* Liquid Reflective Effect */}
+                                <div className="absolute inset-0 bg-linear-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
+
+                                {plan.recommended && (
+                                    <div className="absolute inset-0 bg-emerald-500/5 pointer-events-none" />
+                                )}
+                            </motion.div>
+                        ))}
                     </div>
                 </div>
 
-                {/* Footer Insight */}
-                <div className="mt-20 text-center">
-                    <p className="text-neutral-500 text-[10px] font-black uppercase tracking-[0.4em]">
-                        All prices are initial estimates. Final quotes depend on technical complexity.
-                    </p>
-                </div>
+                {/* Footer Note */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    className="mt-16 text-center"
+                >
+                    <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/5 border border-white/10 text-[9px] font-black uppercase tracking-[0.3em] text-neutral-500 backdrop-blur-md">
+                        <Sparkles size={14} className="text-emerald-500" />
+                        <span>Infrastructure Performance Standard</span>
+                    </div>
+                </motion.div>
             </div>
 
-            {/* Scanlines Overlay matching Hero/Profile */}
-            <div className="absolute inset-0 z-20 pointer-events-none opacity-[0.02] bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,#fff_3px)]" />
+            {/* Subtle Scanlines */}
+            <div className="absolute inset-0 z-20 pointer-events-none opacity-[0.03] bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,#fff_3px)]" />
         </section>
     );
 };
-
-const renderTableCell = (val) => {
-    if (typeof val === 'boolean') {
-        return val ? <Check size={16} className="text-emerald-500 mx-auto" strokeWidth={3} /> : <X size={16} className="text-neutral-700 mx-auto" />;
-    }
-    return <span className="text-[10px] font-black uppercase tracking-widest text-neutral-400">{val}</span>;
-}
 
 export default Price;

@@ -167,8 +167,7 @@ const Project = () => {
                         className="max-w-md"
                     >
                         <p className="text-neutral-400 text-sm md:text-base font-medium leading-relaxed mb-6 opacity-80">
-                            Our premier showcase of digital excellence. Each project is crafted with high-performance
-                            precision and tailored to scale with the speed of global innovation.
+                            Portofolio ini merepresentasikan standar keunggulan digital kami. Setiap proyek dikembangkan dengan fokus pada performa, ketelitian teknis, dan kesiapan untuk beradaptasi dengan perkembangan inovasi global.
                             <span className="block mt-4 text-emerald-400/60 text-xs font-black uppercase tracking-widest italic">
                                 Design warm, soft, natural
                             </span>

@@ -159,14 +159,14 @@ const Hero = () => {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => scrollToSection('projects')}
-                        className="relative px-10 py-4 rounded-full font-black text-xs uppercase tracking-[0.2em] text-white flex items-center gap-4 group overflow-hidden transition-all duration-500 shadow-[0_20px_40px_-15px_rgba(16,185,129,0.3)] hover:shadow-[0_25px_50px_-12px_rgba(16,185,129,0.5)] bg-emerald-500"
+                        className="relative px-10 py-4 rounded-full font-black text-xs uppercase tracking-[0.2em] text-white flex items-center gap-4 group overflow-hidden transition-all duration-500 shadow-[0_20px_40px_-15px_rgba(16,185,129,0.3)] hover:shadow-[0_25px_50px_-12px_rgba(16,185,129,0.5)] bg-emerald-700"
                     >
                         {/* Liquid Shine Effect */}
                         <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none" />
 
-                        <span className="relative z-10 text-black">Start a challenge</span>
-                        <div className="relative z-10 w-6 h-6 rounded-full bg-black/10 backdrop-blur-md flex items-center justify-center transition-transform group-hover:translate-x-1 border border-black/10">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={4} stroke="black" className="size-3">
+                        <span className="relative z-10 text-white">Buat website sekarang</span>
+                        <div className="relative z-10 w-6 h-6 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center transition-transform group-hover:translate-x-1 border border-white/10">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={4} stroke="white" className="size-3">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                             </svg>
                         </div>
@@ -187,7 +187,9 @@ const Hero = () => {
                         {/* Floating Shine */}
                         <div className="absolute -inset-full bg-linear-to-r from-transparent via-white/5 to-transparent rotate-45 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
 
-                        <span className="relative z-10">Free Trial</span>
+                        <span className="relative z-10">
+                            <routerlink to="/contact">about us</routerlink>
+                        </span>
                         <div className="relative z-10 w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_10px_#10b981] animate-pulse" />
                     </motion.button>
                 </motion.div>

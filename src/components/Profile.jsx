@@ -87,7 +87,7 @@ const Profile = () => {
                         transition={{ duration: 1, delay: 0.4 }}
                         className="text-neutral-500 text-lg md:text-xl font-medium mt-8 max-w-2xl border-l border-emerald-500/30 pl-8"
                     >
-                        Engineering high-performance digital ecosystems with a specialized collective of frontend architects, backend engineers, and talent specialists.
+                        Dengan pendekatan rekayasa yang terukur, kami membangun ekosistem digital berperforma tinggi yang didukung oleh tim arsitek frontend, engineer backend, dan talenta spesialis untuk menghasilkan solusi yang stabil, scalable, dan berkelanjutan.
                     </motion.p>
                 </div>
 

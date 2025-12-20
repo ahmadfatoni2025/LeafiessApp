@@ -1,17 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowRight, MessageSquareCode, Sparkles } from "lucide-react";
 
 const Header = () => {
-    const [activeTab, setActiveTab] = useState("Home");
+    const [activeTab, setActiveTab] = useState("home");
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const isScrollingRef = useRef(false);
 
     const navLinks = [
         { name: "Home", id: "home" },
         { name: "Services", id: "services" },
         { name: "Profile", id: "profile" },
         { name: "Projects", id: "projects" },
+        { name: "Pricing", id: "pricing" },
         { name: "Contact", id: "contact" },
     ];
 
@@ -20,14 +22,49 @@ const Header = () => {
             setScrolled(window.scrollY > 50);
         };
         window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
+
+        // Intersection Observer for active section detection
+        const observerOptions = {
+            root: null,
+            rootMargin: "-40% 0px -40% 0px", // Detect section in the center of the viewport
+            threshold: 0
+        };
+
+        const observerCallback = (entries) => {
+            if (isScrollingRef.current) return; // Don't update while smooth scrolling manually
+
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    setActiveTab(entry.target.id);
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+        navLinks.forEach((link) => {
+            const element = document.getElementById(link.id);
+            if (element) observer.observe(element);
+        });
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            observer.disconnect();
+        };
     }, []);
 
     const scrollToSection = (id) => {
         const element = document.getElementById(id);
         if (element) {
+            isScrollingRef.current = true;
+            setActiveTab(id);
             element.scrollIntoView({ behavior: "smooth" });
             setIsMenuOpen(false);
+
+            // Re-enable observer after scroll ends
+            setTimeout(() => {
+                isScrollingRef.current = false;
+            }, 1000);
         }
     };
 
@@ -42,7 +79,7 @@ const Header = () => {
                 {/* Unified Premium Pill */}
                 <div className={`relative flex items-center justify-between bg-black/40 backdrop-blur-3xl rounded-full border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] p-1.5 transition-all duration-700 ${scrolled ? "px-2 shadow-[0_10px_30px_rgba(16,185,129,0.1)]" : "px-3"}`}>
 
-                    {/* Animated Edge Glow (Image-inspired) */}
+                    {/* Animated Edge Glow */}
                     <div className="absolute inset-0 rounded-full overflow-hidden pointer-events-none">
                         <motion.div
                             className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent"
@@ -65,28 +102,27 @@ const Header = () => {
                         </span>
                     </motion.div>
 
-                    {/* Middle Section: Desktop Nav links (Perfectly Centered) */}
+                    {/* Middle Section: Desktop Nav links */}
                     <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center">
                         <ul className="flex items-center gap-1">
                             {navLinks.map((link) => (
-                                <li key={link.name} className="relative">
+                                <li key={link.id} className="relative">
                                     <button
-                                        onClick={() => {
-                                            setActiveTab(link.name);
-                                            scrollToSection(link.id);
-                                        }}
-                                        className={`px-5 py-2 text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-500 relative z-10 ${activeTab === link.name ? "text-white" : "text-neutral-500 hover:text-white"
-                                            } `}
+                                        onClick={() => scrollToSection(link.id)}
+                                        className={`px-5 py-2 text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-500 relative z-10 ${activeTab === link.id ? "text-white" : "text-neutral-500 hover:text-white"
+                                            }`}
                                     >
                                         {link.name}
                                     </button>
-                                    {activeTab === link.name && (
+                                    {activeTab === link.id && (
                                         <motion.div
                                             layoutId="activePill"
-                                            className="absolute inset-0 bg-white/5 rounded-full border border-white/10"
+                                            className="absolute inset-0 bg-white/5 rounded-full border border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.2)]"
                                             transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                                         >
-                                            <div className="absolute inset-0 bg-emerald-500/5 blur-md rounded-full" />
+                                            {/* Subtle Glow Outline */}
+                                            <div className="absolute -inset-px rounded-full border border-emerald-500/30 blur-[2px]" />
+                                            <div className="absolute inset-0 bg-emerald-500/10 rounded-full" />
                                         </motion.div>
                                     )}
                                 </li>
@@ -94,19 +130,17 @@ const Header = () => {
                         </ul>
                     </div>
 
-                    {/* Right Section: Desktop Button / Mobile Toggle */}
+                    {/* Right Section */}
                     <div className="flex items-center gap-2">
-                        {/* Desktop Button */}
                         <motion.button
                             whileHover={{ scale: 1.05, backgroundColor: "#10b981" }}
                             whileTap={{ scale: 0.95 }}
-                            className="hidden md:flex items-center gap-2 bg-emerald-500/90 text-black px-6 py-2.5 rounded-full font-bold text-[10px] uppercase tracking-widest transition-all duration-300 shadow-[0_5px_15px_rgba(16,185,129,0.2)]"
+                            className="hidden md:flex items-center gap-2 bg-emerald-500/90 text-white px-6 py-2.5 rounded-full font-bold text-[10px] uppercase tracking-widest transition-all duration-300 shadow-[0_5px_15px_rgba(16,185,129,0.2)]"
                         >
                             Konsultasi
                             <ArrowRight size={14} strokeWidth={3} />
                         </motion.button>
 
-                        {/* Mobile Toggle */}
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
                             className="lg:hidden w-11 h-11 rounded-full flex items-center justify-center text-white hover:bg-white/5 transition-all relative border border-white/5"
@@ -126,7 +160,7 @@ const Header = () => {
                     </div>
                 </div>
 
-                {/* Mobile Dropdown (Glass Card Style from Image) */}
+                {/* Mobile Dropdown */}
                 <AnimatePresence>
                     {isMenuOpen && (
                         <motion.div
@@ -143,17 +177,14 @@ const Header = () => {
                                         initial={{ opacity: 0, x: -10 }}
                                         animate={{ opacity: 1, x: 0 }}
                                         transition={{ delay: index * 0.05 + 0.1 }}
-                                        onClick={() => {
-                                            setActiveTab(link.name);
-                                            scrollToSection(link.id);
-                                        }}
-                                        className={`flex items-center justify-between px-6 py-4 rounded-3xl transition-all duration-500 ${activeTab === link.name
-                                                ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
-                                                : "text-neutral-400 hover:bg-white/5 hover:text-white"
-                                            } `}
+                                        onClick={() => scrollToSection(link.id)}
+                                        className={`flex items-center justify-between px-6 py-4 rounded-3xl transition-all duration-500 ${activeTab === link.id
+                                            ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                                            : "text-neutral-400 hover:bg-white/5 hover:text-white"
+                                            }`}
                                     >
                                         <span className="text-xs font-bold uppercase tracking-[0.2em]">{link.name}</span>
-                                        {activeTab === link.name && (
+                                        {activeTab === link.id && (
                                             <div className="flex items-center gap-2">
                                                 <div className="w-1 h-1 rounded-full bg-emerald-500 animate-ping" />
                                                 <div className="w-1 h-1 rounded-full bg-emerald-500" />
