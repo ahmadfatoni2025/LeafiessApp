@@ -1,5 +1,7 @@
 // @ts-nocheck
 import { motion } from "framer-motion";
+import { HiCommandLine } from "react-icons/hi2";
+import { AiFillSliders, AiOutlineSlack, AiFillProfile } from "react-icons/ai";
 
 const Hero = () => {
     const containerVariants = {
@@ -129,51 +131,64 @@ const Hero = () => {
                 <motion.div variants={itemVariants} className="mb-10">
                     <h1 className="text-5xl md:text-8xl font-black text-white tracking-tighter leading-[0.9] mb-4 drop-shadow-[0_0_30px_rgba(52,211,153,0.3)]">
                         Leafiess<br />
-                        <span className="text-emerald-400 text-4xl md:text-8xl">Solusi Manajemen untuk Kebutuhan Bisnis Anda</span>
+                        <span className="text-emerald-400 text-4xl md:text-8xl">Solusi Manajemen Kebutuhan Bisnis</span>
                     </h1>
                 </motion.div>
 
                 <motion.div variants={itemVariants} className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 mb-12 text-neutral-300">
                     <div className="flex items-center gap-2 text-[10px] md:text-xs font-semibold tracking-wide bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
-                        <span className="text-emerald-400">👤</span>
+                        <span className="text-emerald-400"><AiFillSliders /></span>
                         Custom Website
                     </div>
                     <div className="flex items-center gap-2 text-[10px] md:text-xs font-semibold tracking-wide bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
-                        <span className="text-emerald-400">📁</span>
+                        <span className="text-emerald-400"><AiOutlineSlack /></span>
                         Responsive dan Optimized
                     </div>
                     <div className="flex items-center gap-2 text-[10px] md:text-xs font-semibold tracking-wide bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
-                        <span className="text-emerald-400">⏰</span>
+                        <span className="text-emerald-400"><HiCommandLine /></span>
                         Modern UI/UX
                     </div>
                     <div className="flex items-center gap-2 text-[10px] md:text-xs font-semibold tracking-wide bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
-                        <span className="text-emerald-400">⚡</span>
+                        <span className="text-emerald-400"><AiFillProfile /></span>
                         Maintenance & Support
                     </div>
                 </motion.div>
 
-                <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+                <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => scrollToSection('projects')}
-                        className="bg-white text-black px-8 py-3.5 rounded-full font-black text-sm uppercase tracking-widest flex items-center gap-4 group transition-all"
+                        className="relative px-10 py-4 rounded-full font-black text-xs uppercase tracking-[0.2em] text-white flex items-center gap-4 group overflow-hidden transition-all duration-500 shadow-[0_20px_40px_-15px_rgba(16,185,129,0.3)] hover:shadow-[0_25px_50px_-12px_rgba(16,185,129,0.5)] bg-emerald-500"
                     >
-                        Start a challenge
-                        <div className="w-6 h-6 rounded-full bg-emerald-500 flex items-center justify-center transition-transform group-hover:translate-x-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="white" className="size-3">
+                        {/* Liquid Shine Effect */}
+                        <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none" />
+
+                        <span className="relative z-10 text-black">Start a challenge</span>
+                        <div className="relative z-10 w-6 h-6 rounded-full bg-black/10 backdrop-blur-md flex items-center justify-center transition-transform group-hover:translate-x-1 border border-black/10">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={4} stroke="black" className="size-3">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                             </svg>
                         </div>
+
+                        {/* Liquid Glow Accent */}
+                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-linear-to-tr from-white/20 to-transparent pointer-events-none" />
                     </motion.button>
 
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => scrollToSection('home')}
-                        className="px-8 py-3.5 rounded-full font-black text-sm uppercase tracking-widest text-white border border-white/20 hover:bg-white/5 transition-all"
+                        className="relative px-10 py-4 rounded-full font-black text-xs uppercase tracking-[0.2em] text-white flex items-center gap-4 group overflow-hidden border border-white/20 hover:border-emerald-500/50 transition-all duration-500 bg-white/5 backdrop-blur-xl"
                     >
-                        Free Trial
+                        {/* Hover Liquid Background */}
+                        <div className="absolute inset-0 bg-emerald-500/0 group-hover:bg-emerald-500/10 transition-colors duration-500" />
+
+                        {/* Floating Shine */}
+                        <div className="absolute -inset-full bg-linear-to-r from-transparent via-white/5 to-transparent rotate-45 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
+
+                        <span className="relative z-10">Free Trial</span>
+                        <div className="relative z-10 w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_10px_#10b981] animate-pulse" />
                     </motion.button>
                 </motion.div>
             </motion.div>

@@ -5,6 +5,7 @@ import Products from './components/Products.jsx'
 import Project from './components/Project.jsx'
 import Footer from './components/Footer.jsx'
 import Profile from './components/Profile.jsx'
+import Price from './components/Price.jsx'
 import { motion } from 'framer-motion'
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
       </section>
       <Profile />
       <Project />
+      <Price />
       <div id="contact">
         <Footer />
       </div>
