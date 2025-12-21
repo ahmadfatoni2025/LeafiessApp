@@ -100,32 +100,45 @@ const ProjectCard = memo(({ project, index }) => {
                     </h3>
                 </motion.div>
 
-                <p className="max-w-sm text-neutral-500 text-sm font-medium leading-relaxed mb-8 group-hover:text-neutral-300 transition-colors duration-500">
-                    {project.description}
-                </p>
+                {/* Tech Stack & Description Wrapper for better flow */}
+                <div className="mb-10 space-y-6">
+                    <p className="max-w-sm text-neutral-500 text-sm font-medium leading-relaxed group-hover:text-neutral-300 transition-colors duration-500">
+                        {project.description}
+                    </p>
 
-                {/* Tech Stack Badges */}
-                <div className="flex flex-wrap gap-2 mb-10">
-                    {project.tech.map((t) => (
-                        <span key={t} className="px-3 py-1 rounded-md bg-white/5 border border-white/5 text-[8px] font-black text-neutral-500 uppercase tracking-widest">
-                            {t}
-                        </span>
-                    ))}
+                    {/* Tech Stack Badges - More Premium */}
+                    <div className="flex flex-wrap gap-2">
+                        {project.tech.map((t) => (
+                            <span key={t} className="px-3 py-1 rounded-md bg-white/5 border border-white/10 text-[8px] font-black text-emerald-400/60 uppercase tracking-widest backdrop-blur-md group-hover:bg-emerald-500/10 group-hover:border-emerald-500/20 group-hover:text-emerald-400 transition-all duration-500">
+                                {t}
+                            </span>
+                        ))}
+                    </div>
                 </div>
 
-                {/* CTA Button */}
+                {/* ELITE CTA BUTTON - Redesigned for Clarity & Impact */}
                 <motion.a
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="flex items-center gap-4 text-white group/btn w-fit"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="group/btn relative w-full block"
                 >
-                    <div className="w-12 h-12 rounded-full border border-white/10 bg-white/5 flex items-center justify-center transition-all group-hover/btn:bg-emerald-500 group-hover/btn:border-emerald-400 group-hover/btn:text-black shadow-[0_10px_20px_rgba(0,0,0,0.2)]">
-                        <ArrowUpRight size={20} strokeWidth={3} />
+                    <div className="relative overflow-hidden rounded-2xl bg-white/5 border border-white/10 p-px group-hover/btn:border-emerald-500/50 transition-all duration-500 shadow-2xl">
+                        {/* Animated Border/Glow effect on Hover */}
+                        <div className="absolute inset-x-0 bottom-0 h-[2px] bg-linear-to-r from-transparent via-emerald-500 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-700" />
+
+                        <div className="relative px-8 py-5 rounded-2xl bg-neutral-950/80 backdrop-blur-2xl flex items-center justify-between group-hover/btn:bg-emerald-500/5 transition-colors duration-500">
+                            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white group-hover/btn:text-emerald-400 transition-colors">
+                                Lihat Project Selengkapnya
+                            </span>
+                            <div className="flex items-center gap-3">
+                                <div className="w-px h-4 bg-white/10" />
+                                <ArrowUpRight size={18} className="text-neutral-500 group-hover/btn:text-emerald-400 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-all" />
+                            </div>
+                        </div>
                     </div>
-                    <span className="text-[10px] font-black uppercase tracking-[0.3em] text-neutral-400 group-hover/btn:text-white transition-colors">Kunjungi Situs</span>
                 </motion.a>
             </div>
 
@@ -140,20 +153,21 @@ ProjectCard.displayName = 'ProjectCard';
 const Project = memo(() => {
     return (
         <section id="projects" className="py-32 px-6 relative overflow-hidden bg-black text-white border-t border-white/5">
-            {/* Ambient Background Glows */}
-            <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                <div
-                    className="absolute top-1/4 left-1/4 w-[800px] h-[800px] opacity-10 transform-gpu"
-                    style={{ background: 'radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%)' }}
-                />
-                <div
-                    className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] opacity-5 transform-gpu"
-                    style={{ background: 'radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%)' }}
+            {/* Subtle Masked Background - Project Variation (Dot Grid) */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-30">
+                {/* 1. Base Gradient Glow */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,#061a12_0%,#000_100%)] opacity-20" />
+
+                {/* 2. Masked Dot Pattern (Small Dots) */}
+                <div className="absolute inset-0 opacity-[0.1]"
+                    style={{
+                        backgroundImage: 'radial-gradient(circle, #10b981 1px, transparent 1px)',
+                        backgroundSize: '40px 40px',
+                        maskImage: 'radial-gradient(circle at center, black 10%, transparent 90%)',
+                        WebkitMaskImage: 'radial-gradient(circle at center, black 10%, transparent 90%)'
+                    }}
                 />
             </div>
-
-            {/* Subtle Grid Decor */}
-            <div className="absolute inset-0 bg-size-[40px_40px] bg-[radial-gradient(circle,white_1px,transparent_1px)] mask-[radial-gradient(ellipse_at_center,black,transparent_75%)] opacity-[0.03]" />
 
             <div className="container mx-auto relative z-10">
                 {/* Section Header */}
@@ -171,7 +185,7 @@ const Project = memo(() => {
                         </div>
                         <h2 className="text-5xl md:text-8xl font-black mb-6 tracking-tighter uppercase italic leading-[0.85] select-none">
                             <span className="bg-clip-text text-transparent bg-linear-to-b from-white via-[#cbd5e1] to-[#64748b] drop-shadow-[0_10px_30px_rgba(16,185,129,0.2)]">
-                                KARYA<span className="text-emerald-500">.</span>KAMI
+                                KARYA PROYEK<span className="text-emerald-500">.</span>
                             </span>
                         </h2>
                     </motion.div>
@@ -201,25 +215,6 @@ const Project = memo(() => {
                     ))}
                 </div>
 
-                {/* Section Footer Call To Action */}
-                <div className="mt-32 flex flex-col items-center">
-                    <div className="flex items-center gap-3 mb-10">
-                        <div className="w-1 h-1 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981]" />
-                        <div className="w-1 h-1 rounded-full bg-emerald-500/40" />
-                        <div className="w-1 h-1 rounded-full bg-emerald-500/10" />
-                    </div>
-
-                    <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="group flex flex-col items-center gap-6"
-                    >
-                        <span className="text-[10px] font-black uppercase tracking-[0.6em] text-neutral-600 group-hover:text-emerald-500 transition-colors duration-500">Jelajahi Arsip Lengkap</span>
-                        <div className="w-16 h-16 rounded-full border border-white/5 bg-neutral-900/50 backdrop-blur-3xl flex items-center justify-center transition-all duration-700 group-hover:scale-110 group-hover:border-emerald-500/50 group-hover:bg-emerald-500/5">
-                            <ExternalLink size={20} className="text-neutral-500 group-hover:text-white transition-colors" />
-                        </div>
-                    </motion.button>
-                </div>
             </div>
 
             {/* Subtle Scanlines Decor */}

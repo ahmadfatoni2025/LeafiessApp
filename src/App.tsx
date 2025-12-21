@@ -6,20 +6,31 @@ import Project from './components/Project.jsx'
 import Footer from './components/Footer.jsx'
 import Profile from './components/Profile.jsx'
 import Price from './components/Price.jsx'
+import CustomCursor from './components/CustomCursor.jsx'
 import { motion } from 'framer-motion'
 
 function App() {
   return (
-    <div className="min-h-screen text-white">
+    <div className="min-h-screen text-white cursor-none">
+      <CustomCursor />
       <Header />
       <Hero />
-      <section id="services" className="py-32 px-4 relative overflow-hidden">
-        {/* Main Green Glow - Optimized: removed blur filter for better scroll performance */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-60 pointer-events-none transform-gpu"
-          style={{
-            background: 'radial-gradient(circle, rgba(16, 185, 129, 0.05) 0%, transparent 80%)'
-          }}
-        />
+      <section id="services" className="py-32 px-4 relative overflow-hidden bg-[#030502]">
+        {/* Subtle Masked Background - Services Variation */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-30">
+          {/* 1. Base Gradient Glow */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,#061a12_0%,#000_100%)] opacity-20" />
+
+          {/* 2. Masked Grid Pattern (Medium Grid) */}
+          <div className="absolute inset-0 opacity-[0.1]"
+            style={{
+              backgroundImage: `linear-gradient(#10b981 1px, transparent 1px), linear-gradient(90deg, #10b981 1px, transparent 1px)`,
+              backgroundSize: '70px 70px',
+              maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)',
+              WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)'
+            }}
+          />
+        </div>
 
         <div className="max-w-4xl mx-auto text-center mb-20 relative z-10">
           <motion.div

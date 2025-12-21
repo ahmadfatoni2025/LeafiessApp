@@ -126,8 +126,35 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    }
+  }
+  
   body {
     @apply bg-background text-foreground;
+  }
+
+  /* Global Cursor Kill for Desktop */
+  @media (min-width: 768px) {
+    html, body, *, a, button, input, select, textarea {
+      cursor: none !important;
     }
+  }
+
+  /* Professional Slim Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #030502;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(16, 185, 129, 0.2);
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #10b981;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
 }

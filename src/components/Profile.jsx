@@ -43,15 +43,23 @@ const teamMembers = [
 const Profile = () => {
     return (
         <section id="profile" className="py-32 px-4 relative overflow-hidden bg-black text-white selection:bg-emerald-500/30 selection:text-emerald-400">
-            {/* Background Effects matching Hero */}
-            <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full blur-[160px] opacity-10"
+            {/* Subtle Masked Background - Profile Variation */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                {/* 1. Base Gradient Glow */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,#061a12_0%,#000_100%)] opacity-20" />
+
+                {/* 2. Masked Grid Pattern (Large Grid) */}
+                <div className="absolute inset-0 opacity-[0.08]"
                     style={{
-                        background: 'radial-gradient(circle, rgba(16, 185, 129, 0.4) 0%, transparent 70%)'
+                        backgroundImage: `linear-gradient(#10b981 1px, transparent 1px), linear-gradient(90deg, #10b981 1px, transparent 1px)`,
+                        backgroundSize: '120px 120px',
+                        maskImage: 'radial-gradient(circle at center, black 20%, transparent 80%)',
+                        WebkitMaskImage: 'radial-gradient(circle at center, black 20%, transparent 80%)'
                     }}
                 />
-                <div className="absolute inset-0 opacity-[0.05] bg-[linear-gradient(#fff_1px,transparent_1px),linear-gradient(90deg,#fff_1px,transparent_1px)] bg-size-[50px_50px]" />
-                <div className="absolute inset-0 bg-linear-to-b from-black via-transparent to-black" />
+
+                {/* 3. Soft Ambient Glow */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[70vw] bg-emerald-500/5 rounded-full blur-[120px] opacity-40" />
             </div>
 
             <div className="container mx-auto relative z-10">
@@ -159,7 +167,7 @@ const Profile = () => {
 
             {/* Global Holographic Scanlines */}
             <div className="absolute inset-0 z-20 pointer-events-none opacity-[0.03] bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,#fff_3px)]" />
-        </section>
+        </section >
     );
 };
 

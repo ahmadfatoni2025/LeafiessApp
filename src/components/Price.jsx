@@ -98,42 +98,6 @@ const Price = () => {
                         </p>
                     </motion.div>
 
-                    {/* Dynamic Island Toggle */}
-                    <div className="mt-12 group">
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            className="inline-flex items-center p-1.5 bg-neutral-900/80 backdrop-blur-3xl rounded-full border border-white/5 relative shadow-2xl"
-                        >
-                            <div className="relative flex items-center">
-                                <button
-                                    onClick={() => setBillingCycle('monthly')}
-                                    className={`relative z-10 px-8 py-2.5 text-[10px] font-black uppercase tracking-[0.2em] transition-colors duration-500 ${billingCycle === 'monthly' ? 'text-black' : 'text-neutral-500 hover:text-white'}`}
-                                >
-                                    Bulanan
-                                </button>
-                                <button
-                                    onClick={() => setBillingCycle('yearly')}
-                                    className={`relative z-10 px-8 py-2.5 text-[10px] font-black uppercase tracking-[0.2em] transition-colors duration-500 ${billingCycle === 'yearly' ? 'text-black' : 'text-neutral-500 hover:text-white'}`}
-                                >
-                                    Tahunan
-                                </button>
-
-                                {/* The "Island" Slider */}
-                                <motion.div
-                                    layoutId="activeToggle"
-                                    className="absolute inset-0 bg-emerald-500 rounded-full shadow-[0_0_20px_rgba(16,185,129,0.4)]"
-                                    initial={false}
-                                    animate={{
-                                        x: billingCycle === 'monthly' ? 0 : '100%',
-                                        width: '50%'
-                                    }}
-                                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                                />
-                            </div>
-                        </motion.div>
-                    </div>
                 </div>
 
                 {/* High-End Integrated Comparison Matrix */}
