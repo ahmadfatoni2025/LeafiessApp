@@ -31,7 +31,22 @@ const CustomCursor = () => {
         );
     }, []);
 
+    const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
+
     useEffect(() => {
+        const checkDevice = () => {
+            const isTouch = window.matchMedia('(pointer: coarse)').matches;
+            const isSmallScreen = window.innerWidth < 1024;
+            setIsMobileOrTablet(isTouch || isSmallScreen);
+        };
+        checkDevice();
+        window.addEventListener('resize', checkDevice);
+        return () => window.removeEventListener('resize', checkDevice);
+    }, []);
+
+    useEffect(() => {
+        if (isMobileOrTablet) return;
+
         const moveMouse = (e) => {
             mouseX.set(e.clientX);
             mouseY.set(e.clientY);
@@ -49,7 +64,6 @@ const CustomCursor = () => {
         window.addEventListener('mouseover', handleOver);
         window.addEventListener('mousedown', handleMouseDown);
         window.addEventListener('mouseup', handleMouseUp);
-        // Handle when mouse leaves the window
         document.addEventListener('mouseleave', () => setIsVisible(false));
         document.addEventListener('mouseenter', () => setIsVisible(true));
 
@@ -61,13 +75,13 @@ const CustomCursor = () => {
             document.removeEventListener('mouseleave', () => setIsVisible(false));
             document.removeEventListener('mouseenter', () => setIsVisible(true));
         };
-    }, [mouseX, mouseY, isVisible, checkClickable]);
+    }, [mouseX, mouseY, isVisible, checkClickable, isMobileOrTablet]);
 
-    if (!isVisible) return null;
+    if (!isVisible || isMobileOrTablet) return null;
 
     return (
         <div
-            className="fixed inset-0 pointer-events-none hidden md:block"
+            className="fixed inset-0 pointer-events-none hidden lg:block"
             style={{ zIndex: 999999 }}
         >
             {/* 1. Precision Core (Main Point) */}

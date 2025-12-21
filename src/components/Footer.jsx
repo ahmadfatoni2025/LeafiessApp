@@ -24,7 +24,7 @@ const Footer = () => {
         ],
         perusahaan: [
             { name: 'Tentang Kami', href: '#' },
-            { name: 'Bergabung dengan Tim Kami', href: '#' },
+            { name: 'Bergabung', href: '#' },
             { name: 'Kisah Sukses', href: '#' },
             { name: 'Press Kit', href: '#' }
         ],
@@ -118,17 +118,60 @@ const Footer = () => {
                             dengan eksekusi tanpa latensi.
                         </p>
 
-                        <motion.button
-                            whileHover={{ x: 10 }}
-                            className="w-full sm:w-auto bg-emerald-500 text-black px-8 py-4 rounded-xl md:rounded-2xl font-black text-xs md:text-sm uppercase tracking-widest flex items-center justify-center sm:justify-start gap-4 group/btn shadow-[0_15px_30px_rgba(16,185,129,0.2)]"
-                        >
-                            Hubungi Dukungan
-                            <div className="w-6 h-6 rounded-full bg-black/20 flex items-center justify-center">
-                                <ArrowUpRight size={16} className="group-hover/btn:rotate-45 transition-transform" />
-                            </div>
-                        </motion.button>
+                        <div className="relative group/btn-wrap w-full sm:w-fit">
+                            {/* 3D Depth Layer */}
+                            <div className="absolute inset-0 bg-emerald-700 translate-y-1.5 rounded-2xl md:rounded-[2rem] blur-[2px] opacity-40" />
 
-                        <p className="mt-4 text-[9px] md:text-xs text-neutral-500 font-bold uppercase tracking-[0.2em]">Semua pertanyaan dijawab dalam 24 jam.</p>
+                            <motion.a
+                                href="https://wa.me/6285714412716"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                whileHover={{ y: -4, scale: 1.02 }}
+                                whileTap={{ y: 2, scale: 0.98 }}
+                                className="relative w-full sm:w-auto bg-emerald-500 text-black px-10 py-5 rounded-2xl md:rounded-[2rem] font-black text-xs md:text-sm uppercase tracking-[0.2em] flex items-center justify-center sm:justify-start gap-5 group/btn overflow-hidden shadow-[0_20px_40px_rgba(16,185,129,0.3)] border-t border-white/30"
+                            >
+                                {/* Futuristic Internal Glow */}
+                                <div className="absolute inset-0 bg-linear-to-tr from-white/20 to-transparent pointer-events-none" />
+
+                                {/* Shimmer Effect */}
+                                <motion.div
+                                    className="absolute inset-0 bg-linear-to-r from-transparent via-white/40 to-transparent -translate-x-full"
+                                    animate={{ x: ["-100%", "200%"] }}
+                                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                                />
+
+                                <div className="relative z-10 flex items-center gap-4">
+                                    <div className="relative">
+                                        <div className="w-2 h-2 rounded-full bg-black animate-ping absolute inset-0 opacity-20" />
+                                        <div className="w-2 h-2 rounded-full bg-black" />
+                                    </div>
+                                    <span>Hubungi Dukungan</span>
+                                </div>
+
+                                <div className="relative z-10 w-8 h-8 rounded-full bg-black/10 backdrop-blur-md flex items-center justify-center group-hover/btn:bg-black group-hover:text-emerald-500 transition-all duration-500 border border-black/5">
+                                    <ArrowUpRight size={18} className="group-hover/btn:rotate-45 transition-transform duration-500" />
+                                </div>
+
+                                {/* Tech Accents - Corner dots */}
+                                <div className="absolute top-2 right-2 flex gap-1">
+                                    <div className="w-1 h-1 rounded-full bg-black/20" />
+                                    <div className="w-1 h-1 rounded-full bg-black/20" />
+                                </div>
+                            </motion.a>
+                        </div>
+
+                        <div className="mt-6 flex items-center gap-4">
+                            <div className="flex -space-x-2">
+                                {[1, 2, 3].map(i => (
+                                    <div key={i} className="w-6 h-6 rounded-full border-2 border-black bg-neutral-800 overflow-hidden">
+                                        <img src={`https://i.pravatar.cc/100?u=${i + 10}`} alt="Support Team" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all" />
+                                    </div>
+                                ))}
+                            </div>
+                            <p className="text-[10px] text-neutral-500 font-black uppercase tracking-[0.2em]">
+                                Tim Ahli <span className="text-emerald-500">Standby 24/7</span>
+                            </p>
+                        </div>
                     </motion.div>
 
                     {/* Links Grid */}

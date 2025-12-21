@@ -87,25 +87,25 @@ const Hero = () => {
                 <div className="flex flex-col items-center text-center max-w-5xl mx-auto">
                     {/* Status Badge */}
                     <motion.div
-                        initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                        initial={{ opacity: 0, y: 15, filter: "blur(5px)" }}
                         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                        transition={{ duration: 1, delay: baseDelay, ease: [0.16, 1, 0.3, 1] }}
+                        transition={{ duration: 0.8, delay: baseDelay, ease: [0.16, 1, 0.3, 1] }}
                         className="mb-6 md:mb-10"
                     >
-                        <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-3xl shadow-2xl overflow-hidden group">
+                        <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-2xl shadow-2xl overflow-hidden group">
                             <div className="absolute inset-0 bg-linear-to-r from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                             <Sparkles size={10} className="text-emerald-400" />
                             <span className="text-emerald-400 text-[7px] md:text-[10px] font-black uppercase tracking-[0.3em] md:tracking-[0.4em] relative z-10">
-                                STATUS_SISTEM://<span className="text-white/40 ml-1">AKTIF_v2.0.4</span>
+                                Tamilan elegan & modern, serta <span className="text-white/40 ml-1">Automasi Sistem</span>
                             </span>
                         </div>
                     </motion.div>
 
                     {/* Pre-title */}
                     <motion.div
-                        initial={{ opacity: 0, y: 20, letterSpacing: "0.2em" }}
-                        animate={{ opacity: 1, y: 0, letterSpacing: "0.4em" }}
-                        transition={{ duration: 1.2, delay: baseDelay + 0.2, ease: [0.16, 1, 0.3, 1] }}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: baseDelay + 0.1, ease: "easeOut" }}
                         className="mb-2 md:mb-4"
                     >
                         <h2 className="text-[8px] md:text-sm font-black text-white/30 uppercase tracking-[0.3em] md:tracking-[0.4em] italic leading-none">
@@ -113,22 +113,17 @@ const Hero = () => {
                         </h2>
                     </motion.div>
 
-                    {/* Main Title - Responsive Polish */}
+                    {/* Main Title - snappier scale entrance */}
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.9, y: 40, rotateX: 20 }}
-                        animate={{ opacity: 1, scale: 1, y: 0, rotateX: 0 }}
-                        transition={{ duration: 1.5, delay: baseDelay + 0.4, ease: [0.16, 1, 0.3, 1] }}
+                        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        transition={{ duration: 1, delay: baseDelay + 0.2, ease: [0.16, 1, 0.3, 1] }}
                         className="relative mb-6 md:mb-8 select-none"
                     >
-                        <h1 className="text-[18vw] sm:text-[15vw] md:text-[140px] lg:text-[180px] xl:text-[220px] font-black leading-[0.85] tracking-tighter uppercase italic text-emerald-500 drop-shadow-[0_20px_50px_rgba(16,185,129,0.3)]"
+                        <h1 className="text-[18vw] sm:text-[15vw] md:text-[140px] lg:text-[180px] xl:text-[220px] font-black leading-[0.85] tracking-tighter uppercase italic text-emerald-500"
                             style={{
                                 WebkitTextStroke: '1px rgba(255,255,255,0.05)',
-                                textShadow: `
-                                    1px 1px 0px #065f46,
-                                    2px 2px 0px #065f46,
-                                    3px 3px 0px #064e3b,
-                                    6px 6px 0px #000
-                                `
+                                textShadow: '4px 4px 0px #000'
                             }}>
                             Leafiess
                         </h1>
@@ -137,28 +132,28 @@ const Hero = () => {
                     {/* Hook & Subtext */}
                     <div className="max-w-3xl mx-auto space-y-4 px-2">
                         <motion.h3
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 15 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 1, delay: baseDelay + 0.8, ease: [0.16, 1, 0.3, 1] }}
+                            transition={{ duration: 0.8, delay: baseDelay + 0.3, ease: "easeOut" }}
                             className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-black text-white tracking-tighter uppercase italic leading-[1.1]"
                         >
                             Bangun <span className="text-emerald-500">Website Elit</span> & Sistem Manajemen Digital.
                         </motion.h3>
                         <motion.p
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 15 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 1, delay: baseDelay + 1, ease: [0.16, 1, 0.3, 1] }}
-                            className="text-neutral-500 text-[9px] md:text-sm lg:text-base font-bold tracking-[0.1em] md:tracking-[0.25em] uppercase leading-relaxed max-w-2xl mx-auto"
+                            transition={{ duration: 0.8, delay: baseDelay + 0.4, ease: "easeOut" }}
+                            className="text-neutral-500 text-[9px] md:text-sm lg:text-base font-bold tracking-widest md:tracking-[0.25em] uppercase leading-relaxed max-w-2xl mx-auto"
                         >
                             Transformasi bisnis Anda menjadi otoritas digital dengan desain premium dan rekayasa tanpa latensi.
                         </motion.p>
                     </div>
 
-                    {/* CTAs - Responsive Layout */}
+                    {/* CTAs */}
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 15 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, delay: baseDelay + 1.2, ease: [0.16, 1, 0.3, 1] }}
+                        transition={{ duration: 0.8, delay: baseDelay + 0.5, ease: "easeOut" }}
                         className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-8 mt-10 md:mt-16 w-full px-4 sm:px-0"
                     >
                         <motion.button

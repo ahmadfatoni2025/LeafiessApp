@@ -6,6 +6,7 @@ import Project from './components/Project.jsx'
 import Footer from './components/Footer.jsx'
 import Profile from './components/Profile.jsx'
 import Price from './components/Price.jsx'
+import FAQ from './components/FAQ.jsx'
 import CustomCursor from './components/CustomCursor.jsx'
 import LoadingScreen from './components/LoadingScreen.jsx'
 import { motion } from 'framer-motion'
@@ -24,11 +25,12 @@ function App() {
   }, [])
 
   return (
-    <div className="min-h-screen text-white cursor-none">
+    <div className="min-h-screen text-white lg:cursor-none">
       <LoadingScreen isLoading={isLoading} />
       <CustomCursor />
       <Header />
       <Hero />
+
       <section id="services" className="py-20 md:py-32 px-4 relative overflow-hidden bg-[#030502]">
         {/* Subtle Masked Background - Services Variation */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-30">
@@ -70,6 +72,7 @@ function App() {
       <Profile />
       <Project />
       <Price />
+      <FAQ />
       <div id="contact">
         <Footer />
       </div>

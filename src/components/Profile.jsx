@@ -20,7 +20,8 @@ const teamMembers = [
         focus: "UI/UX ARCHITECTURE",
         img: "https://i.pinimg.com/736x/2b/f0/b0/2bf0b0feecc5c890ea47f90c7c7c775d.jpg",
         icon: <Code2 size={16} />,
-        color: "#10b981"
+        color: "#10b981",
+        link: "https://wa.me/6285714412716"
     },
     {
         name: "Manyu",
@@ -28,7 +29,8 @@ const teamMembers = [
         focus: "SCALABLE SYSTEMS",
         img: "https://i.pinimg.com/736x/09/e4/0a/09e40a3f556058ae2f57ba22bce36f12.jpg",
         icon: <Database size={16} />,
-        color: "#059669"
+        color: "#059669",
+        link: "https://wa.me/6288233078885"
     },
     {
         name: "candra",
@@ -36,7 +38,8 @@ const teamMembers = [
         focus: "TALENT ACQUISITION",
         img: "https://i.pinimg.com/1200x/d3/a2/38/d3a238f0e817a045c2002f14457eddc0.jpg",
         icon: <Users2 size={16} />,
-        color: "#34d399"
+        color: "#34d399",
+        link: "https://wa.me/6283194785932"
     }
 ];
 
@@ -102,13 +105,16 @@ const Profile = () => {
                 {/* --- AGENCY CORE TEAM --- */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {teamMembers.map((member, i) => (
-                        <motion.div
+                        <motion.a
                             key={member.name}
+                            href={member.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                            className="group relative h-[450px] md:h-[600px] rounded-[32px] overflow-hidden border border-white/5 bg-neutral-900/40 cursor-pointer"
+                            className="group relative h-[450px] md:h-[600px] rounded-[32px] overflow-hidden border border-white/5 bg-neutral-900/40 cursor-pointer block"
                         >
                             {/* Member Image */}
                             <img
@@ -160,7 +166,7 @@ const Profile = () => {
 
                             {/* Scanner Line Effect */}
                             <div className="absolute top-0 left-0 w-full h-px bg-emerald-500/30 opacity-0 group-hover:opacity-100 group-hover:top-full transition-all duration-3000 pointer-events-none" />
-                        </motion.div>
+                        </motion.a>
                     ))}
                 </div>
             </div>

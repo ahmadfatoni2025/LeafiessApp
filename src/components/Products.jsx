@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState, useEffect, useCallback, memo } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 
 const services = [
@@ -60,9 +60,9 @@ const services = [
     }
 ];
 
-const AnimatedItem = ({ children, delay = 0, index, isSelected, onClick }) => {
+const AnimatedItem = memo(({ children, delay = 0, index, isSelected, onClick }) => {
     const ref = useRef(null);
-    const inView = useInView(ref, { amount: 0.1, triggerOnce: false });
+    const inView = useInView(ref, { amount: 0.1, triggerOnce: true });
 
     return (
         <motion.div
@@ -71,13 +71,14 @@ const AnimatedItem = ({ children, delay = 0, index, isSelected, onClick }) => {
             onClick={onClick}
             initial={{ y: 20, opacity: 0 }}
             animate={inView ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
-            transition={{ duration: 0.5, delay }}
+            transition={{ duration: 0.4, delay: Math.min(delay, 0.4), ease: "easeOut" }}
             className="mb-4 cursor-pointer"
         >
             {children}
         </motion.div>
     );
-};
+});
+AnimatedItem.displayName = "AnimatedItem";
 
 const Products = ({
     className = "",
@@ -96,10 +97,10 @@ const Products = ({
     }, []);
 
     return (
-        <div className={`relative w-full max-w-[900px] mx-auto ${className}`}>
+        <div className={`relative w-full max-w-7xl mx-auto px-4 ${className}`}>
             <div
                 ref={listRef}
-                className={`max-h-[800px] overflow-y-auto px-4 py-12 ${displayScrollbar
+                className={`max-h-[1200px] overflow-y-auto px-2 py-8 ${displayScrollbar
                     ? '[&::-webkit-scrollbar]:w-[4px] [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-emerald-500/20 [&::-webkit-scrollbar-thumb]:rounded-full'
                     : 'scrollbar-hide'
                     }`}
@@ -117,29 +118,31 @@ const Products = ({
                             onClick={() => setSelectedIndex(index === selectedIndex ? -1 : index)}
                         >
                             <motion.div
-                                className={`relative border rounded-2xl md:rounded-4xl overflow-hidden transition-all duration-700 ${isSelected
-                                    ? "bg-emerald-500/3 border-emerald-500/40 shadow-[0_0_50px_rgba(16,185,129,0.08)]"
-                                    : "bg-white/1 border-white/5 hover:border-emerald-500/20"
+                                className={`relative border rounded-2xl md:rounded-[2.5rem] overflow-hidden transition-all duration-700 ${isSelected
+                                    ? "bg-emerald-500/5 border-emerald-500/40 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)]"
+                                    : "bg-white/5 border-white/5 hover:border-emerald-500/20 hover:bg-white/10"
                                     }`}
                             >
-                                <div className="p-5 md:p-8">
+                                <div className="p-6 md:p-10">
                                     <div className="flex items-center justify-between">
-                                        <div className="flex items-center gap-4 md:gap-6">
-                                            <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center border transition-all duration-500 ${isSelected ? 'bg-emerald-500 border-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.5)]' : 'bg-white/5 border-white/10'
+                                        <div className="flex items-center gap-6 md:gap-10">
+                                            <div className={`w-10 h-10 md:w-14 md:h-14 rounded-2xl flex items-center justify-center border transition-all duration-500 ${isSelected
+                                                ? 'bg-emerald-500 border-emerald-400 shadow-[0_10px_30px_rgba(16,185,129,0.4)] rotate-3'
+                                                : 'bg-white/5 border-white/10'
                                                 }`}>
-                                                <span className={`text-[10px] md:text-xs font-mono font-bold ${isSelected ? 'text-black' : 'text-neutral-500'}`}>
-                                                    {index + 1}
+                                                <span className={`text-xs md:text-lg font-black ${isSelected ? 'text-black' : 'text-neutral-500'}`}>
+                                                    0{index + 1}
                                                 </span>
                                             </div>
-                                            <h3 className={`text-base md:text-2xl font-black tracking-tight transition-colors duration-500 ${isSelected ? 'text-white' : 'text-neutral-400'}`}>
+                                            <h3 className={`text-xl md:text-4xl font-black tracking-tighter transition-colors duration-500 ${isSelected ? 'text-white' : 'text-neutral-500'}`}>
                                                 {service.title}
                                             </h3>
                                         </div>
                                         <motion.div
-                                            animate={{ rotate: isSelected ? 180 : 0, scale: isSelected ? 1.2 : 1 }}
-                                            className={isSelected ? 'text-emerald-400' : 'text-neutral-700'}
+                                            animate={{ rotate: isSelected ? 180 : 0, scale: isSelected ? 1.3 : 1 }}
+                                            className={isSelected ? 'text-emerald-500' : 'text-neutral-800'}
                                         >
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="md:w-6 md:h-6">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="md:w-8 md:h-8">
                                                 <path d="m6 9 6 6 6-6" />
                                             </svg>
                                         </motion.div>
@@ -151,71 +154,85 @@ const Products = ({
                                                 initial={{ height: 0, opacity: 0 }}
                                                 animate={{ height: "auto", opacity: 1 }}
                                                 exit={{ height: 0, opacity: 0 }}
-                                                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                                                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                                             >
-                                                <div className="mt-6 md:mt-8 pt-6 md:pt-8 border-t border-white/5 grid lg:grid-cols-[1.2fr_1fr] gap-8 md:gap-10">
-                                                    <div className="space-y-6">
-                                                        <motion.p
-                                                            initial={{ y: 10, opacity: 0 }}
-                                                            animate={{ y: 0, opacity: 1 }}
-                                                            transition={{ delay: 0.2 }}
-                                                            className="text-neutral-400 leading-relaxed text-xs md:text-base px-1"
-                                                        >
-                                                            {service.description}
-                                                        </motion.p>
+                                                <div className="mt-10 md:mt-14 pt-10 md:pt-14 border-t border-white/5 grid lg:grid-cols-2 gap-12 md:gap-16 items-center">
+                                                    <div className="space-y-10">
+                                                        <div className="space-y-4">
+                                                            <div className="flex items-center gap-3">
+                                                                <div className="w-8 h-px bg-emerald-500" />
+                                                                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-emerald-500">Overview</span>
+                                                            </div>
+                                                            <motion.p
+                                                                initial={{ y: 10, opacity: 0 }}
+                                                                animate={{ y: 0, opacity: 1 }}
+                                                                transition={{ delay: 0.2 }}
+                                                                className="text-neutral-400 leading-relaxed text-sm md:text-xl font-medium"
+                                                            >
+                                                                {service.description}
+                                                            </motion.p>
+                                                        </div>
 
                                                         <motion.div
                                                             initial={{ y: 10, opacity: 0 }}
                                                             animate={{ y: 0, opacity: 1 }}
                                                             transition={{ delay: 0.3 }}
-                                                            className="bg-emerald-500/5 rounded-xl md:rounded-2xl p-4 md:p-5 border border-emerald-500/10 backdrop-blur-sm"
+                                                            className="bg-emerald-500/5 rounded-3xl p-6 md:p-8 border border-emerald-500/10 backdrop-blur-md"
                                                         >
-                                                            <div className="flex items-center gap-2 mb-2">
-                                                                <div className="w-1 h-3 bg-emerald-400 rounded-full" />
-                                                                <span className="text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-black text-emerald-400">
-                                                                    Cocok Untuk:
+                                                            <div className="flex items-center gap-3 mb-4">
+                                                                <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+                                                                <span className="text-[10px] md:text-[11px] uppercase tracking-[0.3em] font-black text-neutral-400">
+                                                                    Target Audience:
                                                                 </span>
                                                             </div>
-                                                            <p className="text-neutral-300 text-[11px] md:text-sm font-medium leading-relaxed">
-                                                                {service.suitable}
+                                                            <p className="text-white text-sm md:text-lg font-bold leading-relaxed italic">
+                                                                "{service.suitable}"
                                                             </p>
                                                         </motion.div>
 
-                                                        <motion.button
-                                                            initial={{ y: 10, opacity: 0 }}
-                                                            animate={{ y: 0, opacity: 1 }}
-                                                            transition={{ delay: 0.4 }}
-                                                            whileHover={{ scale: 1.02, backgroundColor: "#fff", color: "#000" }}
-                                                            whileTap={{ scale: 0.98 }}
-                                                            className="w-full py-4 bg-emerald-500 text-black rounded-xl md:rounded-full font-black text-[10px] md:text-xs uppercase tracking-[0.2em] transition-all shadow-[0_0_30px_rgba(16,185,129,0.2)]"
-                                                        >
-                                                            Konsultasi Sekarang
-                                                        </motion.button>
+                                                        <div className="flex flex-col sm:flex-row gap-4">
+                                                            <motion.a
+                                                                href="https://wa.me/6288233078885"
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                initial={{ y: 10, opacity: 0 }}
+                                                                animate={{ y: 0, opacity: 1 }}
+                                                                transition={{ delay: 0.4 }}
+                                                                whileHover={{ scale: 1.02, backgroundColor: "#fff", color: "#000" }}
+                                                                whileTap={{ scale: 0.98 }}
+                                                                className="flex-1 py-5 bg-emerald-500 text-black rounded-full font-black text-[10px] md:text-xs uppercase tracking-[0.3em] transition-all shadow-[0_20px_40px_rgba(16,185,129,0.2)] flex items-center justify-center gap-3"
+                                                            >
+                                                                Konsultasi Sekarang
+                                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14m-7-7 7 7-7 7" /></svg>
+                                                            </motion.a>
+                                                        </div>
                                                     </div>
 
                                                     <motion.div
-                                                        initial={{ scale: 0.95, opacity: 0, y: 20 }}
-                                                        animate={{ scale: 1, opacity: 1, y: 0 }}
-                                                        transition={{ delay: 0.3, duration: 0.5 }}
-                                                        className="relative aspect-video lg:aspect-4/3 rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 group/img"
+                                                        initial={{ scale: 0.9, opacity: 0, x: 20 }}
+                                                        animate={{ scale: 1, opacity: 1, x: 0 }}
+                                                        transition={{ delay: 0.4, duration: 0.8 }}
+                                                        className="relative aspect-4/3 rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-white/5 group/img"
                                                     >
                                                         <img
                                                             src={service.image}
                                                             alt={service.title}
-                                                            className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-110"
+                                                            className="w-full h-full object-cover transition-transform duration-1000 group-hover/img:scale-110"
                                                             onError={(e) => {
-                                                                e.target.src = "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800";
+                                                                e.target.src = "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200";
                                                             }}
                                                         />
-                                                        <div className="absolute inset-0 bg-linear-to-t from-[#030712] via-transparent to-transparent opacity-80" />
+                                                        <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-transparent opacity-60" />
 
-                                                        {/* Floating Tag */}
-                                                        <div className="absolute bottom-3 left-3 right-3 md:bottom-4 md:left-4 md:right-4 p-2 md:p-3 bg-black/40 backdrop-blur-md rounded-lg md:rounded-xl border border-white/10 flex items-center justify-between">
-                                                            <span className="text-[8px] md:text-[10px] font-bold text-white uppercase tracking-tighter">Preview Design</span>
-                                                            <div className="flex gap-1">
-                                                                <div className="w-1 h-1 rounded-full bg-emerald-400" />
-                                                                <div className="w-1 h-1 rounded-full bg-emerald-400/40" />
-                                                                <div className="w-1 h-1 rounded-full bg-emerald-400/40" />
+                                                        {/* Floating Minimal Info */}
+                                                        <div className="absolute bottom-6 left-6 right-6 p-6 bg-black/40 backdrop-blur-2xl rounded-3xl border border-white/10">
+                                                            <div className="flex items-center justify-between">
+                                                                <span className="text-[10px] font-black text-white uppercase tracking-[0.2em]">Preview Architecture</span>
+                                                                <div className="flex -space-x-2">
+                                                                    {[1, 2, 3].map(i => (
+                                                                        <div key={i} className="w-6 h-6 rounded-full border-2 border-black bg-emerald-500/20 backdrop-blur-sm" />
+                                                                    ))}
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </motion.div>
