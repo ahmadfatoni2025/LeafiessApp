@@ -117,21 +117,21 @@ const Products = ({
                             onClick={() => setSelectedIndex(index === selectedIndex ? -1 : index)}
                         >
                             <motion.div
-                                className={`relative border rounded-4xl overflow-hidden transition-all duration-700 ${isSelected
+                                className={`relative border rounded-2xl md:rounded-4xl overflow-hidden transition-all duration-700 ${isSelected
                                     ? "bg-emerald-500/3 border-emerald-500/40 shadow-[0_0_50px_rgba(16,185,129,0.08)]"
                                     : "bg-white/1 border-white/5 hover:border-emerald-500/20"
                                     }`}
                             >
-                                <div className="p-8">
+                                <div className="p-5 md:p-8">
                                     <div className="flex items-center justify-between">
-                                        <div className="flex items-center gap-6">
-                                            <div className={`w-10 h-10 rounded-full flex items-center justify-center border transition-all duration-500 ${isSelected ? 'bg-emerald-500 border-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.5)]' : 'bg-white/5 border-white/10'
+                                        <div className="flex items-center gap-4 md:gap-6">
+                                            <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center border transition-all duration-500 ${isSelected ? 'bg-emerald-500 border-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.5)]' : 'bg-white/5 border-white/10'
                                                 }`}>
-                                                <span className={`text-xs font-mono font-bold ${isSelected ? 'text-black' : 'text-neutral-500'}`}>
+                                                <span className={`text-[10px] md:text-xs font-mono font-bold ${isSelected ? 'text-black' : 'text-neutral-500'}`}>
                                                     {index + 1}
                                                 </span>
                                             </div>
-                                            <h3 className={`text-xl md:text-2xl font-black tracking-tight transition-colors duration-500 ${isSelected ? 'text-white' : 'text-neutral-400'}`}>
+                                            <h3 className={`text-base md:text-2xl font-black tracking-tight transition-colors duration-500 ${isSelected ? 'text-white' : 'text-neutral-400'}`}>
                                                 {service.title}
                                             </h3>
                                         </div>
@@ -139,7 +139,7 @@ const Products = ({
                                             animate={{ rotate: isSelected ? 180 : 0, scale: isSelected ? 1.2 : 1 }}
                                             className={isSelected ? 'text-emerald-400' : 'text-neutral-700'}
                                         >
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="md:w-6 md:h-6">
                                                 <path d="m6 9 6 6 6-6" />
                                             </svg>
                                         </motion.div>
@@ -153,13 +153,13 @@ const Products = ({
                                                 exit={{ height: 0, opacity: 0 }}
                                                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                                             >
-                                                <div className="mt-8 pt-8 border-t border-white/5 grid lg:grid-cols-[1.2fr_1fr] gap-10">
+                                                <div className="mt-6 md:mt-8 pt-6 md:pt-8 border-t border-white/5 grid lg:grid-cols-[1.2fr_1fr] gap-8 md:gap-10">
                                                     <div className="space-y-6">
                                                         <motion.p
                                                             initial={{ y: 10, opacity: 0 }}
                                                             animate={{ y: 0, opacity: 1 }}
                                                             transition={{ delay: 0.2 }}
-                                                            className="text-neutral-400 leading-relaxed text-sm md:text-base"
+                                                            className="text-neutral-400 leading-relaxed text-xs md:text-base px-1"
                                                         >
                                                             {service.description}
                                                         </motion.p>
@@ -168,15 +168,15 @@ const Products = ({
                                                             initial={{ y: 10, opacity: 0 }}
                                                             animate={{ y: 0, opacity: 1 }}
                                                             transition={{ delay: 0.3 }}
-                                                            className="bg-emerald-500/5 rounded-2xl p-5 border border-emerald-500/10 backdrop-blur-sm"
+                                                            className="bg-emerald-500/5 rounded-xl md:rounded-2xl p-4 md:p-5 border border-emerald-500/10 backdrop-blur-sm"
                                                         >
                                                             <div className="flex items-center gap-2 mb-2">
                                                                 <div className="w-1 h-3 bg-emerald-400 rounded-full" />
-                                                                <span className="text-[10px] uppercase tracking-[0.2em] font-black text-emerald-400">
+                                                                <span className="text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-black text-emerald-400">
                                                                     Cocok Untuk:
                                                                 </span>
                                                             </div>
-                                                            <p className="text-neutral-300 text-xs md:text-sm font-medium leading-relaxed">
+                                                            <p className="text-neutral-300 text-[11px] md:text-sm font-medium leading-relaxed">
                                                                 {service.suitable}
                                                             </p>
                                                         </motion.div>
@@ -187,7 +187,7 @@ const Products = ({
                                                             transition={{ delay: 0.4 }}
                                                             whileHover={{ scale: 1.02, backgroundColor: "#fff", color: "#000" }}
                                                             whileTap={{ scale: 0.98 }}
-                                                            className="w-full py-4 bg-emerald-500 text-black rounded-full font-black text-xs uppercase tracking-[0.2em] transition-all shadow-[0_0_30px_rgba(16,185,129,0.2)]"
+                                                            className="w-full py-4 bg-emerald-500 text-black rounded-xl md:rounded-full font-black text-[10px] md:text-xs uppercase tracking-[0.2em] transition-all shadow-[0_0_30px_rgba(16,185,129,0.2)]"
                                                         >
                                                             Konsultasi Sekarang
                                                         </motion.button>
@@ -197,7 +197,7 @@ const Products = ({
                                                         initial={{ scale: 0.95, opacity: 0, y: 20 }}
                                                         animate={{ scale: 1, opacity: 1, y: 0 }}
                                                         transition={{ delay: 0.3, duration: 0.5 }}
-                                                        className="relative aspect-4/3 rounded-3xl overflow-hidden border border-white/10 group/img"
+                                                        className="relative aspect-video lg:aspect-4/3 rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 group/img"
                                                     >
                                                         <img
                                                             src={service.image}
@@ -210,8 +210,8 @@ const Products = ({
                                                         <div className="absolute inset-0 bg-linear-to-t from-[#030712] via-transparent to-transparent opacity-80" />
 
                                                         {/* Floating Tag */}
-                                                        <div className="absolute bottom-4 left-4 right-4 p-3 bg-black/40 backdrop-blur-md rounded-xl border border-white/10 flex items-center justify-between">
-                                                            <span className="text-[10px] font-bold text-white uppercase tracking-tighter">Preview Design</span>
+                                                        <div className="absolute bottom-3 left-3 right-3 md:bottom-4 md:left-4 md:right-4 p-2 md:p-3 bg-black/40 backdrop-blur-md rounded-lg md:rounded-xl border border-white/10 flex items-center justify-between">
+                                                            <span className="text-[8px] md:text-[10px] font-bold text-white uppercase tracking-tighter">Preview Design</span>
                                                             <div className="flex gap-1">
                                                                 <div className="w-1 h-1 rounded-full bg-emerald-400" />
                                                                 <div className="w-1 h-1 rounded-full bg-emerald-400/40" />

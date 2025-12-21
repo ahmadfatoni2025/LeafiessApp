@@ -64,7 +64,7 @@ const Profile = () => {
 
             <div className="container mx-auto relative z-10">
                 {/* --- ELEGANT H1 HEADER --- */}
-                <div className="flex flex-col mb-20">
+                <div className="flex flex-col mb-12 md:mb-20">
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -73,9 +73,9 @@ const Profile = () => {
                         className="flex items-center gap-4 mb-4"
                     >
                         <div className="flex gap-1">
-                            {[1, 2, 3].map(i => <div key={i} className="w-8 h-1 bg-emerald-500 rounded-full" />)}
+                            {[1, 2, 3].map(i => <div key={i} className="w-6 md:w-8 h-1 bg-emerald-500 rounded-full" />)}
                         </div>
-                        <span className="text-[10px] font-black tracking-[0.4em] uppercase text-emerald-500/60">Elite_Profiles//2024</span>
+                        <span className="text-[9px] md:text-[10px] font-black tracking-[0.3em] md:tracking-[0.4em] uppercase text-emerald-500/60">Elite_Profiles//2024</span>
                     </motion.div>
 
                     <motion.h1
@@ -83,7 +83,7 @@ const Profile = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                        className="text-6xl md:text-[120px] font-[1000] italic tracking-tighter leading-[0.85] text-white uppercase"
+                        className="text-4xl md:text-[120px] font-[1000] italic tracking-tighter leading-[0.85] text-white uppercase"
                     >
                         Our Core Team<span className="text-emerald-500">.</span>
                     </motion.h1>
@@ -93,7 +93,7 @@ const Profile = () => {
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 1, delay: 0.4 }}
-                        className="text-neutral-500 text-lg md:text-xl font-medium mt-8 max-w-2xl border-l border-emerald-500/30 pl-8"
+                        className="text-neutral-500 text-sm md:text-xl font-medium mt-6 md:mt-8 max-w-2xl border-l border-emerald-500/30 pl-4 md:pl-8"
                     >
                         Dengan pendekatan rekayasa yang terukur, kami membangun ekosistem digital berperforma tinggi yang didukung oleh tim arsitek frontend, engineer backend, dan talenta spesialis untuk menghasilkan solusi yang stabil, scalable, dan berkelanjutan.
                     </motion.p>
@@ -108,7 +108,7 @@ const Profile = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                            className="group relative h-[600px] rounded-[32px] overflow-hidden border border-white/5 bg-neutral-900/40 cursor-pointer"
+                            className="group relative h-[450px] md:h-[600px] rounded-[32px] overflow-hidden border border-white/5 bg-neutral-900/40 cursor-pointer"
                         >
                             {/* Member Image */}
                             <img
@@ -145,7 +145,7 @@ const Profile = () => {
                                     </div>
 
                                     <span className="text-[10px] font-black uppercase tracking-[0.4em] text-emerald-500 mb-2 block">{member.role}</span>
-                                    <h3 className="text-5xl font-black italic tracking-tighter text-white uppercase leading-none mb-4 group-hover:text-emerald-400 transition-colors">
+                                    <h3 className="text-2xl md:text-4xl font-black italic tracking-tighter text-white uppercase leading-none mb-4 group-hover:text-emerald-400 transition-colors">
                                         {member.name}<span className="text-emerald-500">!</span>
                                     </h3>
 

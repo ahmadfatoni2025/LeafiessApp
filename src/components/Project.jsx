@@ -60,7 +60,7 @@ const ProjectCard = memo(({ project, index }) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="group relative h-[550px] rounded-[2.5rem] overflow-hidden bg-neutral-900/40 border border-white/5 flex flex-col transform-gpu backdrop-blur-sm"
+            className="group relative h-[450px] md:h-[550px] rounded-3xl md:rounded-[2.5rem] overflow-hidden bg-neutral-900/40 border border-white/5 flex flex-col transform-gpu backdrop-blur-sm"
         >
             {/* Project Background - Website Preview */}
             <div className="absolute inset-0 z-0 overflow-hidden">
@@ -92,10 +92,10 @@ const ProjectCard = memo(({ project, index }) => {
                     whileInView={{ x: 0, opacity: 1 }}
                     transition={{ delay: 0.3 }}
                 >
-                    <p className={`text-[9px] font-black tracking-[0.5em] mb-4 ${project.accent} uppercase`}>
+                    <p className={`text-[8px] md:text-[9px] font-black tracking-[0.3em] md:tracking-[0.5em] mb-3 md:mb-4 ${project.accent} uppercase`}>
                         {project.subHeadline}
                     </p>
-                    <h3 className="text-5xl md:text-6xl font-black text-white leading-none tracking-tighter uppercase italic mb-6">
+                    <h3 className="text-2xl md:text-5xl font-black text-gradient-to-r from-emerald-500 to-emerald-600 leading-none tracking-tighter uppercase italic mb-4 md:mb-6">
                         {project.headline}
                     </h3>
                 </motion.div>
@@ -129,13 +129,13 @@ const ProjectCard = memo(({ project, index }) => {
                         {/* Animated Border/Glow effect on Hover */}
                         <div className="absolute inset-x-0 bottom-0 h-[2px] bg-linear-to-r from-transparent via-emerald-500 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-700" />
 
-                        <div className="relative px-8 py-5 rounded-2xl bg-neutral-950/80 backdrop-blur-2xl flex items-center justify-between group-hover/btn:bg-emerald-500/5 transition-colors duration-500">
-                            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white group-hover/btn:text-emerald-400 transition-colors">
+                        <div className="relative px-6 md:px-8 py-4 md:py-5 rounded-xl md:rounded-2xl bg-neutral-950/80 backdrop-blur-2xl flex items-center justify-between group-hover/btn:bg-emerald-500/5 transition-colors duration-500">
+                            <span className="text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] md:tracking-[0.4em] text-white group-hover/btn:text-emerald-400 transition-colors">
                                 Lihat Project Selengkapnya
                             </span>
-                            <div className="flex items-center gap-3">
-                                <div className="w-px h-4 bg-white/10" />
-                                <ArrowUpRight size={18} className="text-neutral-500 group-hover/btn:text-emerald-400 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-all" />
+                            <div className="flex items-center gap-2 md:gap-3">
+                                <div className="w-px h-3 md:h-4 bg-white/10" />
+                                <ArrowUpRight size={16} className="text-neutral-500 group-hover/btn:text-emerald-400 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-all md:w-[18px] md:h-[18px]" />
                             </div>
                         </div>
                     </div>
@@ -171,7 +171,7 @@ const Project = memo(() => {
 
             <div className="container mx-auto relative z-10">
                 {/* Section Header */}
-                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-12 mb-24">
+                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 md:gap-12 mb-16 md:mb-24">
                     <motion.div
                         initial={{ opacity: 0, x: -30 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -179,11 +179,11 @@ const Project = memo(() => {
                         transition={{ duration: 0.8 }}
                         className="w-full lg:w-auto"
                     >
-                        <div className="flex items-center gap-4 mb-6">
-                            <Code2 size={24} className="text-emerald-500" />
-                            <span className="text-[10px] font-black uppercase tracking-[0.5em] text-emerald-500">Eksposisi Galeri</span>
+                        <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
+                            <Code2 size={20} className="text-emerald-500 md:w-6 md:h-6" />
+                            <span className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.3em] md:tracking-[0.5em] text-emerald-500">Eksposisi Galeri</span>
                         </div>
-                        <h2 className="text-5xl md:text-8xl font-black mb-6 tracking-tighter uppercase italic leading-[0.85] select-none">
+                        <h2 className="text-4xl md:text-8xl font-black mb-4 md:mb-6 tracking-tighter uppercase italic leading-[0.85] select-none">
                             <span className="bg-clip-text text-transparent bg-linear-to-b from-white via-[#cbd5e1] to-[#64748b] drop-shadow-[0_10px_30px_rgba(16,185,129,0.2)]">
                                 KARYA PROYEK<span className="text-emerald-500">.</span>
                             </span>

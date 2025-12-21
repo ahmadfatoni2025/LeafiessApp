@@ -32,7 +32,7 @@ const pricingPlans = [
         ],
         cta: "Mulai Pro",
         recommended: true,
-        badge: "Paling Populer"
+        badge: "BEST"
     },
     {
         name: "Enterprise",
@@ -100,13 +100,69 @@ const Price = () => {
 
                 </div>
 
-                {/* High-End Integrated Comparison Matrix */}
+                {/* Mobile/Tablet Card Layout (Hidden on Large Screens) */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:hidden mb-20 px-4">
+                    {pricingPlans.map((plan, idx) => (
+                        <motion.div
+                            key={idx}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: idx * 0.1 }}
+                            className={`p-8 rounded-[2.5rem] border ${plan.recommended ? 'border-emerald-500 bg-emerald-500/5 shadow-[0_20px_40px_rgba(16,185,129,0.1)]' : 'border-white/10 bg-white/5'} backdrop-blur-3xl relative overflow-hidden group`}
+                        >
+                            {plan.badge && (
+                                <div className="absolute top-6 right-6 bg-emerald-500 text-black text-[10px] font-black uppercase px-4 py-1.5 rounded-full shadow-lg">
+                                    {plan.badge}
+                                </div>
+                            )}
+                            <div className="mb-8">
+                                <span className="text-emerald-500 text-[10px] font-black uppercase tracking-widest block mb-2">{plan.tagline}</span>
+                                <h3 className="text-3xl font-black text-white uppercase italic tracking-tighter mb-4">{plan.name}</h3>
+                                <div className="flex items-baseline gap-2">
+                                    <span className="text-5xl font-black text-white tracking-tighter">
+                                        {billingCycle === 'monthly' ? plan.price.monthly : plan.price.yearly}
+                                    </span>
+                                    <span className="text-neutral-500 text-[10px] font-bold uppercase tracking-widest">/ Project</span>
+                                </div>
+                            </div>
+
+                            <ul className="space-y-4 mb-10">
+                                {plan.features.map((feature, fIdx) => (
+                                    <li key={fIdx} className="flex items-center gap-3">
+                                        <div className="w-5 h-5 rounded-full bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20">
+                                            <Check size={12} className="text-emerald-500" strokeWidth={3} />
+                                        </div>
+                                        <span className="text-sm font-bold text-neutral-400">{feature}</span>
+                                    </li>
+                                ))}
+                            </ul>
+
+                            <motion.button
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
+                                className={`w-full py-5 rounded-2xl text-xs font-black uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-3 ${plan.recommended
+                                    ? 'bg-emerald-600 text-white shadow-2xl border2 border-emerald-500'
+                                    : 'bg-white/5 text-white border border-white/10'
+                                    }`}
+                            >
+                                {plan.cta}
+                                <ArrowUpRight size={16} strokeWidth={3} />
+                            </motion.button>
+
+                            {/* Decorative Background Elements */}
+                            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-emerald-500/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                        </motion.div>
+                    ))}
+                </div>
+
+                {/* High-End Integrated Comparison Matrix (Desktop Only) */}
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                    className="max-w-6xl mx-auto mb-32 relative overflow-hidden"
+                    className="max-w-6xl mx-auto mb-32 relative overflow-hidden hidden lg:block"
                 >
                     {/* Background Vertical Glow for Highlighted Column (Business Pro) */}
                     <div className="absolute top-0 bottom-0 left-[33.33%] right-[33.33%] bg-emerald-500/5 border-x border-white/10 pointer-events-none hidden lg:block z-0" />
@@ -151,8 +207,8 @@ const Price = () => {
                             </thead>
                             <tbody>
                                 {[
-                                    { label: "Waktu Pengerjaan", values: ["2-3 Hari", "7-14 Hari", "Custom"] },
-                                    { label: "Kustomisasi UI/UX", values: ["Template Based", "High-End Custom", "Structural Engineering"] },
+                                    { label: "Waktu Pengerjaan", values: ["7-8 Hari", "14-21 Hari", "Custom"] },
+                                    { label: "Kustomisasi UI/UX", values: ["HTML/CSS/JS", "React + Tailwind + Next.JS", "costume programming"] },
                                     { label: "Optimasi SEO", values: [true, true, true] },
                                     { label: "Sistem Manajemen / CMS", values: [false, true, true] },
                                     { label: "Server & Hosting", values: [true, true, true] },
@@ -225,17 +281,6 @@ const Price = () => {
                     </div>
                 </motion.div>
 
-                {/* Footer Note */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    className="mt-16 text-center"
-                >
-                    <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/5 border border-white/10 text-[9px] font-black uppercase tracking-[0.3em] text-neutral-500 backdrop-blur-md">
-                        <Sparkles size={14} className="text-emerald-500" />
-                        <span>Standar Performa Infrastruktur</span>
-                    </div>
-                </motion.div>
             </div>
 
             {/* Subtle Scanlines */}

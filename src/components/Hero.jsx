@@ -92,10 +92,10 @@ const Hero = () => {
                         transition={{ duration: 1, delay: baseDelay, ease: [0.16, 1, 0.3, 1] }}
                         className="mb-6 md:mb-10"
                     >
-                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-3xl shadow-2xl overflow-hidden group">
+                        <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-3xl shadow-2xl overflow-hidden group">
                             <div className="absolute inset-0 bg-linear-to-r from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                             <Sparkles size={10} className="text-emerald-400" />
-                            <span className="text-emerald-400 text-[8px] md:text-[10px] font-black uppercase tracking-[0.4em] relative z-10">
+                            <span className="text-emerald-400 text-[7px] md:text-[10px] font-black uppercase tracking-[0.3em] md:tracking-[0.4em] relative z-10">
                                 STATUS_SISTEM://<span className="text-white/40 ml-1">AKTIF_v2.0.4</span>
                             </span>
                         </div>
@@ -108,7 +108,7 @@ const Hero = () => {
                         transition={{ duration: 1.2, delay: baseDelay + 0.2, ease: [0.16, 1, 0.3, 1] }}
                         className="mb-2 md:mb-4"
                     >
-                        <h2 className="text-[9px] md:text-sm font-black text-white/30 uppercase tracking-[0.4em] italic leading-none">
+                        <h2 className="text-[8px] md:text-sm font-black text-white/30 uppercase tracking-[0.3em] md:tracking-[0.4em] italic leading-none">
                             Arsitektur Digital <span className="text-white not-italic tracking-normal opacity-80">Masa Depan</span>
                         </h2>
                     </motion.div>
@@ -120,14 +120,14 @@ const Hero = () => {
                         transition={{ duration: 1.5, delay: baseDelay + 0.4, ease: [0.16, 1, 0.3, 1] }}
                         className="relative mb-6 md:mb-8 select-none"
                     >
-                        <h1 className="text-[14vw] sm:text-[12vw] md:text-[140px] lg:text-[180px] xl:text-[220px] font-black leading-[0.85] tracking-tighter uppercase italic text-emerald-500 drop-shadow-[0_20px_50px_rgba(16,185,129,0.3)]"
+                        <h1 className="text-[18vw] sm:text-[15vw] md:text-[140px] lg:text-[180px] xl:text-[220px] font-black leading-[0.85] tracking-tighter uppercase italic text-emerald-500 drop-shadow-[0_20px_50px_rgba(16,185,129,0.3)]"
                             style={{
                                 WebkitTextStroke: '1px rgba(255,255,255,0.05)',
                                 textShadow: `
+                                    1px 1px 0px #065f46,
                                     2px 2px 0px #065f46,
-                                    4px 4px 0px #065f46,
-                                    6px 6px 0px #064e3b,
-                                    12px 12px 0px #000
+                                    3px 3px 0px #064e3b,
+                                    6px 6px 0px #000
                                 `
                             }}>
                             Leafiess
@@ -135,12 +135,12 @@ const Hero = () => {
                     </motion.div>
 
                     {/* Hook & Subtext */}
-                    <div className="max-w-3xl mx-auto space-y-4 px-4">
+                    <div className="max-w-3xl mx-auto space-y-4 px-2">
                         <motion.h3
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 1, delay: baseDelay + 0.8, ease: [0.16, 1, 0.3, 1] }}
-                            className="text-lg sm:text-2xl md:text-4xl lg:text-5xl font-black text-white tracking-tighter uppercase italic leading-[1.1]"
+                            className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-black text-white tracking-tighter uppercase italic leading-[1.1]"
                         >
                             Bangun <span className="text-emerald-500">Website Elit</span> & Sistem Manajemen Digital.
                         </motion.h3>
@@ -148,7 +148,7 @@ const Hero = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 1, delay: baseDelay + 1, ease: [0.16, 1, 0.3, 1] }}
-                            className="text-neutral-500 text-[10px] md:text-sm lg:text-base font-bold tracking-[0.15em] md:tracking-[0.25em] uppercase leading-relaxed max-w-2xl mx-auto"
+                            className="text-neutral-500 text-[9px] md:text-sm lg:text-base font-bold tracking-[0.1em] md:tracking-[0.25em] uppercase leading-relaxed max-w-2xl mx-auto"
                         >
                             Transformasi bisnis Anda menjadi otoritas digital dengan desain premium dan rekayasa tanpa latensi.
                         </motion.p>
@@ -159,13 +159,13 @@ const Hero = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: baseDelay + 1.2, ease: [0.16, 1, 0.3, 1] }}
-                        className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-8 mt-10 md:mt-16 w-full sm:w-auto"
+                        className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-8 mt-10 md:mt-16 w-full px-4 sm:px-0"
                     >
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.98 }}
                             onClick={() => scrollToSection('services')}
-                            className="w-full sm:w-auto px-10 md:px-14 py-4.5 bg-emerald-500 text-white font-black text-[10px] md:text-[12px] uppercase tracking-widest rounded-2xl flex items-center justify-center gap-3 shadow-[0_20px_40px_rgba(16,185,129,0.25)] transition-all"
+                            className="w-full sm:w-auto px-8 md:px-14 py-4 md:py-4.5 bg-emerald-500 text-white font-black text-[10px] md:text-[12px] uppercase tracking-widest rounded-xl md:rounded-2xl flex items-center justify-center gap-3 shadow-[0_20px_40px_rgba(16,185,129,0.25)] transition-all"
                         >
                             <span>MULAI EKSPLORASI</span>
                             <ChevronRight size={16} strokeWidth={4} />
@@ -174,7 +174,7 @@ const Hero = () => {
                         <motion.button
                             whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.05)" }}
                             whileTap={{ scale: 0.95 }}
-                            className="w-full sm:w-auto px-10 md:px-14 py-4.5 border border-white/10 text-white font-black text-[10px] md:text-[12px] uppercase tracking-widest rounded-2xl backdrop-blur-md transition-all flex items-center justify-center gap-3 relative group"
+                            className="w-full sm:w-auto px-8 md:px-14 py-4 md:py-4.5 border border-white/10 text-white font-black text-[10px] md:text-[12px] uppercase tracking-widest rounded-xl md:rounded-2xl backdrop-blur-md transition-all flex items-center justify-center gap-3 relative group"
                         >
                             <a href="https://wa.me/+6285714412716" className="flex items-center gap-3">
                                 KONSULTASI GRATIS
