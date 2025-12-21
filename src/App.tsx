@@ -14,10 +14,10 @@ function App() {
       <Header />
       <Hero />
       <section id="services" className="py-32 px-4 relative overflow-hidden">
-        {/* Ambient background glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-4xl max-h-4xl blur-[120px] opacity-20 pointer-events-none"
+        {/* Main Green Glow - Optimized: removed blur filter for better scroll performance */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-60 pointer-events-none transform-gpu"
           style={{
-            background: 'radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%)'
+            background: 'radial-gradient(circle, rgba(16, 185, 129, 0.05) 0%, transparent 80%)'
           }}
         />
 

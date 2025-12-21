@@ -1,35 +1,53 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, ArrowUpRight, Sparkles } from 'lucide-react';
+import { Check, X, ArrowUpRight, Sparkles } from 'lucide-react';
 
 const pricingPlans = [
     {
-        name: "Basic",
-        tagline: "For the basics",
-        price: { monthly: "Rp2.999.-", yearly: "Rp2.999.-" },
-        description: "Per agent per month",
-        features: ["Basic speed", "10 GB storage", "Private key security", "No backups"],
-        cta: "Join waitlist",
+        name: "Starter",
+        tagline: "Landing Page Kilat",
+        price: { monthly: "Rp1.4jt", yearly: "Rp1.2jt" },
+        description: "Sekali bayar / maintenance tahunan",
+        features: [
+            "Waktu Live: ~2-3 Hari",
+            "Kustomisasi: Template Based",
+            "Sistem Login: Tanpa Sistem Login",
+            "Domain & Hosting: 1 Tahun Gratis",
+            "Cocok Untuk: Personal & UMKM"
+        ],
+        cta: "Pilih Starter",
         recommended: false
     },
     {
-        name: "Plus",
-        tagline: "For the basics",
-        price: { monthly: "Rp3.499.-", yearly: "Rp2.999.-" },
-        description: "Per agent per month",
-        features: ["Medium speed server", "100 GB storage", "VPN", "Other apps", "Advanced security", "24/7 backups"],
-        cta: "Start trial",
-        recommended: false
+        name: "Business Pro",
+        tagline: "Custom Company Profile",
+        price: { monthly: "Rp3.9jt", yearly: "Rp3.5jt" },
+        description: "Investasi branding profesional",
+        features: [
+            "Waktu Live: 7-14 Hari Kerja",
+            "Kustomisasi: Tinggi (Bebas Custom)",
+            "Sistem Login: Dashboard Basic",
+            "Fitur: SEO & Speed Optimized",
+            "Cocok Untuk: Bisnis & Portfolio"
+        ],
+        cta: "Mulai Pro",
+        recommended: true,
+        badge: "Paling Populer"
     },
     {
-        name: "Premium",
-        tagline: "For the basics",
-        price: { monthly: "Rp5.499.-", yearly: "Rp4.999.-" },
-        description: "Per agent per month",
-        features: ["High speed server", "1 TB storage", "VPN", "Other apps", "Advanced security", "24/7 backups"],
-        cta: "Start trial",
-        badge: "10% discount",
-        recommended: true
+        name: "Enterprise",
+        tagline: "Full Custom System",
+        price: { monthly: "Rp8.5jt", yearly: "Rp7.9jt" },
+        description: "Solusi digital skala besar",
+        features: [
+            "Waktu Live: Sesuai Kompleksitas",
+            "Kustomisasi: Ultra (Full Engineering)",
+            "Sistem Login: Integrated Dashboard",
+            "Security: SSL & Layered Security",
+            "Cocok Untuk: Startup & Corporate"
+        ],
+        cta: "Konsultasi",
+        recommended: false
     }
 ];
 
@@ -38,27 +56,25 @@ const Price = () => {
 
     return (
         <section id="pricing" className="py-32 px-4 relative overflow-hidden bg-black text-white">
-            {/* Liquid Background Glows */}
+            {/* Liquid Background Glows - Optimized with radial gradients instead of heavy blur filters */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <motion.div
                     animate={{
-                        scale: [1, 1.2, 1],
-                        opacity: [0.15, 0.25, 0.15],
-                        x: ['-10%', '10%', '-10%'],
-                        y: ['-10%', '10%', '-10%']
+                        scale: [1, 1.1, 1],
+                        opacity: [0.15, 0.2, 0.15],
                     }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute top-[-20%] left-[-10%] w-[70%] h-[70%] bg-emerald-600/20 blur-[150px] rounded-full"
+                    transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                    className="absolute top-[-20%] left-[-10%] w-[70%] h-[70%] opacity-20 transform-gpu"
+                    style={{ background: 'radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%)' }}
                 />
                 <motion.div
                     animate={{
-                        scale: [1.2, 1, 1.2],
-                        opacity: [0.1, 0.2, 0.1],
-                        x: ['10%', '-10%', '10%'],
-                        y: ['10%', '-10%', '10%']
+                        scale: [1.1, 1, 1.1],
+                        opacity: [0.1, 0.15, 0.1],
                     }}
-                    transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-emerald-500/10 blur-[150px] rounded-full"
+                    transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+                    className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] opacity-20 transform-gpu"
+                    style={{ background: 'radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%)' }}
                 />
             </div>
 
@@ -72,11 +88,13 @@ const Price = () => {
                         className="flex flex-col items-center"
                     >
                         <span className="text-emerald-500 text-[10px] font-black mb-4 tracking-[0.4em] uppercase">Pricing Strategy</span>
-                        <h2 className="text-5xl md:text-7xl font-black mb-6 tracking-tighter uppercase italic">
-                            Choose Your Plan<span className="text-emerald-500">.</span>
+                        <h2 className="text-5xl md:text-8xl font-black mb-6 tracking-tighter uppercase italic leading-[0.85] select-none">
+                            <span className="bg-clip-text text-transparent bg-linear-to-b from-white via-[#cbd5e1] to-[#64748b] drop-shadow-[0_10px_30px_rgba(16,185,129,0.2)]">
+                                Pilih Paket Anda<span className="text-emerald-500">.</span>
+                            </span>
                         </h2>
                         <p className="text-neutral-500 text-lg max-w-xl mx-auto font-medium leading-relaxed">
-                            Sign up now, upgrade anytime. Every new account gets a 14-day trial of our Pro features.
+                            Daftar sekarang, tingkatkan kapan saja. Setiap akun baru mendapatkan uji coba 14 hari fitur Pro kami.
                         </p>
                     </motion.div>
 
@@ -93,13 +111,13 @@ const Price = () => {
                                     onClick={() => setBillingCycle('monthly')}
                                     className={`relative z-10 px-8 py-2.5 text-[10px] font-black uppercase tracking-[0.2em] transition-colors duration-500 ${billingCycle === 'monthly' ? 'text-black' : 'text-neutral-500 hover:text-white'}`}
                                 >
-                                    Monthly
+                                    Bulanan
                                 </button>
                                 <button
                                     onClick={() => setBillingCycle('yearly')}
                                     className={`relative z-10 px-8 py-2.5 text-[10px] font-black uppercase tracking-[0.2em] transition-colors duration-500 ${billingCycle === 'yearly' ? 'text-black' : 'text-neutral-500 hover:text-white'}`}
                                 >
-                                    Yearly
+                                    Tahunan
                                 </button>
 
                                 {/* The "Island" Slider */}
@@ -118,89 +136,110 @@ const Price = () => {
                     </div>
                 </div>
 
-                {/* Bento Pricing Grid */}
-                <div className="max-w-6xl mx-auto">
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-px bg-white/5 border border-white/10 rounded-[2.5rem] overflow-hidden backdrop-blur-sm shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)]">
-                        {pricingPlans.map((plan, index) => (
-                            <motion.div
-                                key={plan.name}
-                                initial={{ opacity: 0 }}
-                                whileInView={{ opacity: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1 }}
-                                className={`relative p-8 md:p-12 flex flex-col group transition-all duration-700 hover:bg-white/[0.03] ${index < 2 ? 'lg:border-r border-white/10' : ''}`}
-                            >
-                                {/* Special Badge for Premium */}
-                                {plan.badge && (
-                                    <motion.div
-                                        initial={{ rotate: 10, scale: 0.8 }}
-                                        animate={{ rotate: -5, scale: 1 }}
-                                        className="absolute top-12 right-8 bg-emerald-500 text-black px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest shadow-[0_10px_20px_rgba(16,185,129,0.3)] z-20"
-                                    >
-                                        {plan.badge}
-                                    </motion.div>
-                                )}
+                {/* High-End Integrated Comparison Matrix */}
+                <div className="max-w-6xl mx-auto mb-32 relative overflow-hidden">
+                    {/* Background Vertical Glow for Highlighted Column (Business Pro) */}
+                    <div className="absolute top-0 bottom-0 left-[33.33%] right-[33.33%] bg-emerald-500/5 border-x border-white/10 pointer-events-none hidden lg:block z-0" />
 
-                                {/* Card Header */}
-                                <div className="mb-10 relative z-10">
-                                    <h3 className="text-xl font-black text-white mb-1 group-hover:text-emerald-400 transition-colors duration-500 uppercase italic tracking-tighter">{plan.name}</h3>
-                                    <p className="text-neutral-500 text-[10px] font-black uppercase tracking-[0.2em] mb-10">{plan.tagline}</p>
-
-                                    <div className="mb-2">
-                                        <AnimatePresence mode="wait">
-                                            <motion.div
-                                                key={billingCycle}
-                                                initial={{ opacity: 0, y: 10, filter: 'blur(10px)' }}
-                                                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                                                exit={{ opacity: 0, y: -10, filter: 'blur(10px)' }}
-                                                className="flex items-baseline gap-1"
-                                            >
-                                                <span className="text-6xl font-black tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
-                                                    {billingCycle === 'monthly' ? plan.price.monthly : plan.price.yearly}
-                                                </span>
-                                            </motion.div>
-                                        </AnimatePresence>
-                                        <p className="text-neutral-500 text-[9px] font-black uppercase tracking-[0.3em] mt-4 opacity-50">{plan.description}</p>
-                                    </div>
-                                </div>
-
-                                {/* CTA Button (Fluid Style) */}
-                                <div className="mb-10 w-fit relative z-10">
-                                    <motion.button
-                                        whileHover={{ scale: 1.05 }}
-                                        whileTap={{ scale: 0.95 }}
-                                        className={`py-3.5 px-10 rounded-full font-black text-[10px] uppercase tracking-[0.2em] transition-all flex items-center gap-2 group/btn relative overflow-hidden ${plan.name === 'Standard'
-                                            ? "bg-white/5 text-white border border-white/10 hover:bg-white/10"
-                                            : "bg-emerald-500 text-black hover:bg-emerald-400 shadow-[0_15px_30px_rgba(16,185,129,0.2)]"
-                                            }`}
-                                    >
-                                        <span className="relative z-10">{plan.cta}</span>
-                                        <ArrowUpRight size={14} className="relative z-10 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" strokeWidth={3} />
-                                    </motion.button>
-                                </div>
-
-                                {/* Features List */}
-                                <div className="space-y-4 pt-8 border-t border-white/5 relative z-10">
-                                    {plan.features.map((feature, i) => (
-                                        <div key={i} className="flex items-center gap-3 group/feat">
-                                            <div className="w-5 h-5 rounded-full bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 group-hover/feat:bg-emerald-500/20 transition-all duration-300">
-                                                <Check size={12} className="text-emerald-500" strokeWidth={3} />
-                                            </div>
-                                            <span className="text-[10px] font-bold text-neutral-400 group-hover/feat:text-white transition-colors uppercase tracking-widest">
-                                                {feature}
-                                            </span>
+                    <div className="overflow-x-auto rounded-[2.5rem] border border-white/5 bg-[#050505]/80 backdrop-blur-3xl relative z-10 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)]">
+                        <table className="w-full border-collapse min-w-[800px]">
+                            <thead>
+                                <tr className="border-b border-white/5">
+                                    <th className="p-12 w-1/4">
+                                        <div className="text-left">
+                                            <h4 className="text-emerald-500 text-[10px] font-black uppercase tracking-[0.4em] mb-2">Matrix Layanan</h4>
+                                            <h3 className="text-2xl font-black text-white italic tracking-tighter uppercase leading-none">Pilih<br />Tingkatan</h3>
                                         </div>
+                                    </th>
+                                    {pricingPlans.map((plan, idx) => (
+                                        <th key={idx} className={`p-12 w-1/4 border-x border-white/5 ${plan.recommended ? 'bg-emerald-500/3 relative' : ''}`}>
+                                            <div className="text-center">
+                                                {plan.badge && (
+                                                    <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-emerald-500 text-black text-[9px] font-black uppercase px-4 py-1.5 rounded-full shadow-[0_10px_20px_rgba(16,185,129,0.3)] whitespace-nowrap">
+                                                        {plan.badge}
+                                                    </span>
+                                                )}
+                                                <p className="text-neutral-500 text-[10px] font-black uppercase tracking-widest mb-4">{plan.tagline}</p>
+                                                <h3 className="text-2xl font-black text-white uppercase italic tracking-tighter mb-6">{plan.name}</h3>
+                                                <div className="flex flex-col items-center">
+                                                    <AnimatePresence mode="wait">
+                                                        <motion.span
+                                                            key={billingCycle}
+                                                            initial={{ opacity: 0, scale: 0.9 }}
+                                                            animate={{ opacity: 1, scale: 1 }}
+                                                            className="text-4xl font-black text-white tracking-tighter"
+                                                        >
+                                                            {billingCycle === 'monthly' ? plan.price.monthly : plan.price.yearly}
+                                                        </motion.span>
+                                                    </AnimatePresence>
+                                                    <span className="text-neutral-600 text-[9px] font-bold uppercase tracking-widest mt-2">{plan.description}</span>
+                                                </div>
+                                            </div>
+                                        </th>
                                     ))}
-                                </div>
-
-                                {/* Liquid Reflective Effect */}
-                                <div className="absolute inset-0 bg-linear-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
-
-                                {plan.recommended && (
-                                    <div className="absolute inset-0 bg-emerald-500/5 pointer-events-none" />
-                                )}
-                            </motion.div>
-                        ))}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {[
+                                    { label: "Waktu Pengerjaan", values: ["2-3 Hari", "7-14 Hari", "Custom"] },
+                                    { label: "Kustomisasi UI/UX", values: ["Template Based", "High-End Custom", "Structural Engineering"] },
+                                    { label: "Optimasi SEO", values: [true, true, true] },
+                                    { label: "Sistem Manajemen / CMS", values: [false, true, true] },
+                                    { label: "Server & Hosting", values: [true, true, true] },
+                                    { label: "Sertifikat SSL", values: [true, true, true] },
+                                    { label: "Branding Kit", values: [false, true, true] },
+                                    { label: "Dedicated Analyst", values: [false, false, true] },
+                                ].map((row, i) => (
+                                    <tr key={i} className="border-b border-white/5 group/row hover:bg-white/1 transition-colors">
+                                        <td className="p-8 text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500 group-hover/row:text-neutral-300">
+                                            {row.label}
+                                        </td>
+                                        {row.values.map((val, idx) => (
+                                            <td key={idx} className={`p-12 border-x border-white/5 ${pricingPlans[idx].recommended ? 'bg-emerald-500/3' : ''}`}>
+                                                <div className="flex justify-center items-center">
+                                                    {typeof val === 'boolean' ? (
+                                                        val ? (
+                                                            <div className="w-6 h-6 rounded-full bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.1)]">
+                                                                <Check size={14} className="text-emerald-500" strokeWidth={4} />
+                                                            </div>
+                                                        ) : (
+                                                            <X size={16} className="text-neutral-700" strokeWidth={2} />
+                                                        )
+                                                    ) : (
+                                                        <span className={`text-[11px] font-bold uppercase tracking-tight ${pricingPlans[idx].recommended ? 'text-white' : 'text-neutral-500'}`}>
+                                                            {val}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                            </td>
+                                        ))}
+                                    </tr>
+                                ))}
+                                <tr>
+                                    <td className="p-12 font-mono text-[9px] text-neutral-600 uppercase tracking-widest italic flex items-center gap-2">
+                                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-500/30" />
+                                        Ready to Build
+                                    </td>
+                                    {pricingPlans.map((plan, idx) => (
+                                        <td key={idx} className={`p-12 ${plan.recommended ? 'bg-emerald-500/3' : ''}`}>
+                                            <div className="flex justify-center">
+                                                <motion.button
+                                                    whileHover={{ scale: 1.05 }}
+                                                    whileTap={{ scale: 0.95 }}
+                                                    className={`px-8 py-3.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em] transition-all flex items-center gap-2 ${plan.recommended
+                                                        ? 'bg-emerald-500 text-black shadow-[0_20px_40px_-10px_rgba(16,185,129,0.3)]'
+                                                        : 'bg-white/5 text-white border border-white/10 hover:border-emerald-500/30'
+                                                        }`}
+                                                >
+                                                    {plan.cta}
+                                                    <ArrowUpRight size={14} strokeWidth={3} />
+                                                </motion.button>
+                                            </div>
+                                        </td>
+                                    ))}
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
@@ -212,7 +251,7 @@ const Price = () => {
                 >
                     <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/5 border border-white/10 text-[9px] font-black uppercase tracking-[0.3em] text-neutral-500 backdrop-blur-md">
                         <Sparkles size={14} className="text-emerald-500" />
-                        <span>Infrastructure Performance Standard</span>
+                        <span>Standar Performa Infrastruktur</span>
                     </div>
                 </motion.div>
             </div>

@@ -9,12 +9,12 @@ const Header = () => {
     const isScrollingRef = useRef(false);
 
     const navLinks = [
-        { name: "Home", id: "home" },
-        { name: "Services", id: "services" },
-        { name: "Profile", id: "profile" },
-        { name: "Projects", id: "projects" },
-        { name: "Pricing", id: "pricing" },
-        { name: "Contact", id: "contact" },
+        { name: "Beranda", id: "home" },
+        { name: "Layanan", id: "services" },
+        { name: "Profil", id: "profile" },
+        { name: "Proyek", id: "projects" },
+        { name: "Harga", id: "pricing" },
+        { name: "Kontak", id: "contact" },
     ];
 
     useEffect(() => {
@@ -137,7 +137,7 @@ const Header = () => {
                             whileTap={{ scale: 0.95 }}
                             className="hidden md:flex items-center gap-2 bg-emerald-500/90 text-white px-6 py-2.5 rounded-full font-bold text-[10px] uppercase tracking-widest transition-all duration-300 shadow-[0_5px_15px_rgba(16,185,129,0.2)]"
                         >
-                            Konsultasi
+                            <a href="https://wa.me/+6285714412716">Konsultasi</a>
                             <ArrowRight size={14} strokeWidth={3} />
                         </motion.button>
 

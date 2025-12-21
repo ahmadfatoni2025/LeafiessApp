@@ -1,42 +1,18 @@
 // @ts-nocheck
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { HiCommandLine } from "react-icons/hi2";
 import { AiFillSliders, AiOutlineSlack, AiFillProfile } from "react-icons/ai";
+import { Sparkles, Activity, Users, Layout, ChevronRight } from "lucide-react";
 
+/**
+ * Hero Component
+ * Redesigned to match 'Juniper' aesthetic while maintaining 
+ * the Emerald Green brand palette and Indonesian localizations.
+ */
 const Hero = () => {
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.1,
-                delayChildren: 0.2,
-            },
-        },
-    };
-
-    const itemVariants = {
-        hidden: { y: 20, opacity: 0 },
-        visible: {
-            y: 0,
-            opacity: 1,
-            transition: {
-                duration: 0.8,
-                ease: [0.16, 1, 0.3, 1],
-            },
-        },
-    };
-
-    const floatingElements = [
-        { text: "(12+12)", top: "20%", left: "15%", delay: 0 },
-        { text: "-15+6", top: "45%", left: "18%", delay: 1 },
-        { text: "3y", top: "60%", left: "12%", delay: 2 },
-        { text: "24", top: "70%", left: "20%", delay: 0.5, isBox: true },
-        { text: "12", top: "35%", right: "15%", delay: 1.5, isBox: true },
-        { text: "17+6-4", top: "55%", right: "12%", delay: 2.5 },
-        { text: "5x9", top: "75%", right: "18%", delay: 3, hasSymbol: true },
-        { text: "-8", top: "65%", right: "30%", delay: 1 }
-    ];
+    const { scrollY } = useScroll();
+    const y1 = useTransform(scrollY, [0, 500], [0, 200]);
+    const opacityHero = useTransform(scrollY, [0, 400], [1, 0]);
 
     const scrollToSection = (id) => {
         const element = document.getElementById(id);
@@ -46,192 +22,161 @@ const Hero = () => {
     };
 
     return (
-        <section id="home" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-20 bg-transparent">
-            {/* Background Effects */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                {/* Main Green Glow */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full blur-[160px] opacity-60 pointer-events-none"
+        <section id="home" className="relative min-h-[100vh] flex flex-col items-center justify-start overflow-hidden pt-32 pb-20 bg-[#030502]">
+            {/* --- BACKGROUND SYSTEM (EMERALD) --- */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                {/* 1. Deep Space Base */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,#061a12_0%,#030502_100%)]" />
+
+                {/* 2. Starfield */}
+                {[...Array(50)].map((_, i) => (
+                    <motion.div
+                        key={i}
+                        initial={{ opacity: Math.random() }}
+                        animate={{ opacity: [0.2, 0.8, 0.2] }}
+                        transition={{ duration: 2 + Math.random() * 4, repeat: Infinity }}
+                        className="absolute bg-white rounded-full"
+                        style={{
+                            width: Math.random() * 2 + 'px',
+                            height: Math.random() * 2 + 'px',
+                            top: Math.random() * 100 + '%',
+                            left: Math.random() * 100 + '%',
+                        }}
+                    />
+                ))}
+
+                {/* 3. Emerald Volumetric Light Pillars */}
+                <div className="absolute inset-0 opacity-40">
+                    <div className="absolute top-[-10%] left-[20%] w-[1px] h-[120%] bg-emerald-500/20 blur-[60px] rotate-[-5deg]" />
+                    <div className="absolute top-[-10%] left-[50%] w-[1px] h-[120%] bg-emerald-400/10 blur-[80px]" />
+                    <div className="absolute top-[-10%] left-[80%] w-[1px] h-[120%] bg-emerald-600/20 blur-[60px] rotate-[5deg]" />
+                </div>
+
+                {/* 4. Central Emerald Glow (Static) */}
+                <div
+                    className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[60vw] h-[60vw] rounded-full blur-[140px] opacity-20 pointer-events-none"
                     style={{
-                        background: 'radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%)'
+                        background: 'radial-gradient(circle, #10b981 0%, transparent 70%)',
                     }}
                 />
 
-                {/* Floating Mathematical Elements */}
-                {floatingElements.map((el, i) => (
-                    <motion.div
-                        key={i}
-                        initial={{ opacity: 0 }}
-                        animate={{
-                            opacity: [0.1, 0.2, 0.1],
-                            y: [0, -15, 0],
-                            x: [0, i % 2 === 0 ? 10 : -10, 0]
-                        }}
-                        transition={{
-                            duration: 5 + i,
-                            repeat: Infinity,
-                            delay: el.delay,
-                            ease: "easeInOut"
-                        }}
-                        className="absolute font-mono text-emerald-500/10 text-lg md:text-xl pointer-events-none select-none"
-                        style={{
-                            top: el.top,
-                            left: el.left,
-                            right: el.right,
-                            ...(el.isBox && {
-                                border: '1px solid rgba(16, 185, 129, 0.1)',
-                                padding: '8px 12px',
-                                borderRadius: '8px',
-                                background: 'rgba(16, 185, 129, 0.05)'
-                            })
-                        }}
-                    >
-                        {el.hasSymbol && <span className="mr-2 text-xs opacity-50">√</span>}
-                        {el.text}
-                    </motion.div>
-                ))}
-
-                {/* Grid Overlay */}
-                <div className="absolute inset-0 pointer-events-none">
-                    {/* Grid */}
-                    <div
-                        className="
-            absolute inset-0
-            opacity-[0.1]
-            bg-[linear-gradient(#fff_1px,transparent_1px),linear-gradient(90deg,#fff_1px,transparent_1px)]
-            bg-[length:100px_100px]
-        "
-                    />
-
-                    {/* Fokus tengah + gradasi hitam */}
-                    <div
-                        className="
-            absolute inset-0
-            bg-radial
-            from-transparent
-            via-black/40
-            to-black
-        "
-                    />
-                </div>
-
+                {/* 5. Glassy Floating Objects */}
+                <motion.div
+                    animate={{ y: [0, -20, 0], rotate: [0, 10, 0] }}
+                    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute top-[20%] left-[10%] w-32 h-32 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-2xl rotate-45 opacity-20 hidden lg:block"
+                />
+                <motion.div
+                    animate={{ y: [0, 20, 0], rotate: [0, -15, 0] }}
+                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute top-[40%] right-[10%] w-40 h-40 rounded-full bg-emerald-500/5 border border-emerald-500/10 backdrop-blur-3xl opacity-10 hidden lg:block"
+                />
             </div>
 
+            {/* --- CONTENT CONTAINER --- */}
             <motion.div
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
+                style={{ opacity: opacityHero }}
                 className="container mx-auto px-6 text-center max-w-5xl relative z-10"
             >
-                <motion.div variants={itemVariants} className="flex justify-center mb-6">
-                    <span className="text-neutral-400 text-[10px] md:text-xs font-medium tracking-wider flex items-center gap-2">
-                        Siap Digunakan, dan tampil <span className="text-emerald-400">Profesional</span>
-                    </span>
+                {/* Intro Badge */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex justify-center mb-10"
+                >
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/5 border border-emerald-500/10 backdrop-blur-xl group cursor-default">
+                        <Sparkles size={14} className="text-emerald-400 animate-pulse" />
+                        <span className="text-emerald-400/80 text-[10px] font-black uppercase tracking-[0.3em]">
+                            Leafiess 2.0 <span className="text-emerald-300/40 mx-2">|</span> Pemimpin Website Digital
+                        </span>
+                    </div>
                 </motion.div>
 
-                <motion.div variants={itemVariants} className="mb-10">
-                    <h1 className="text-5xl md:text-8xl font-black text-white tracking-tighter leading-[0.9] mb-4 drop-shadow-[0_0_30px_rgba(52,211,153,0.3)]">
-                        Leafiess<br />
-                        <span className="text-emerald-400 text-4xl md:text-8xl">Solusi Manajemen Kebutuhan Bisnis</span>
+                {/* Main Heading with Metallic Sheen */}
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1 }}
+                    className="mb-8"
+                >
+                    <h1 className="text-6xl md:text-[140px] font-black tracking-tighter leading-[0.8] mb-8 select-none italic uppercase">
+                        <span className="bg-clip-text text-transparent bg-gradient-to-b from-white via-[#cbd5e1] to-[#64748b] drop-shadow-[0_10px_30px_rgba(16,185,129,0.3)]">
+                            Leafiess.
+                        </span>
                     </h1>
+                    <p className="text-2xl md:text-5xl font-light text-slate-300 tracking-tight leading-tight">
+                        Solusi Manajemen <span className="text-emerald-400 font-bold italic">Kebutuhan Bisnis</span>
+                    </p>
                 </motion.div>
 
-                <motion.div variants={itemVariants} className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 mb-12 text-neutral-300">
-                    <div className="flex items-center gap-2 text-[10px] md:text-xs font-semibold tracking-wide bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
-                        <span className="text-emerald-400"><AiFillSliders /></span>
-                        Custom Website
-                    </div>
-                    <div className="flex items-center gap-2 text-[10px] md:text-xs font-semibold tracking-wide bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
-                        <span className="text-emerald-400"><AiOutlineSlack /></span>
-                        Responsive dan Optimized
-                    </div>
-                    <div className="flex items-center gap-2 text-[10px] md:text-xs font-semibold tracking-wide bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
-                        <span className="text-emerald-400"><HiCommandLine /></span>
-                        Modern UI/UX
-                    </div>
-                    <div className="flex items-center gap-2 text-[10px] md:text-xs font-semibold tracking-wide bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
-                        <span className="text-emerald-400"><AiFillProfile /></span>
-                        Maintenance & Support
-                    </div>
-                </motion.div>
+                {/* Sub-text */}
+                <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                    className="text-slate-500 text-lg max-w-2xl mx-auto mb-12 font-medium leading-relaxed"
+                >
+                    Eksplorasi ekosistem digital modular kami untuk menyederhanakan operasional bisnis dan memantau progres Anda dengan efisiensi tinggi.
+                </motion.p>
 
-                <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
+                {/* CTAs */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.7 }}
+                    className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-24"
+                >
                     <motion.button
-                        whileHover={{ scale: 1.05 }}
+                        whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(16,185,129,0.4)" }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => scrollToSection('projects')}
-                        className="relative px-10 py-4 rounded-full font-black text-xs uppercase tracking-[0.2em] text-white flex items-center gap-4 group overflow-hidden transition-all duration-500 shadow-[0_20px_40px_-15px_rgba(16,185,129,0.3)] hover:shadow-[0_25px_50px_-12px_rgba(16,185,129,0.5)] bg-emerald-700"
+                        className="group relative px-10 py-5 rounded-full bg-emerald-600 text-black font-black text-xs uppercase tracking-[0.2em] flex items-center gap-3 transition-all duration-500 overflow-hidden"
                     >
-                        {/* Liquid Shine Effect */}
-                        <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none" />
-
-                        <span className="relative z-10 text-white">Buat website sekarang</span>
-                        <div className="relative z-10 w-6 h-6 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center transition-transform group-hover:translate-x-1 border border-white/10">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={4} stroke="white" className="size-3">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                            </svg>
-                        </div>
-
-                        {/* Liquid Glow Accent */}
-                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-linear-to-tr from-white/20 to-transparent pointer-events-none" />
+                        <div className="absolute inset-0 bg-linear-to-r from-emerald-400 to-emerald-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <span className="relative z-10 flex items-center gap-3 text-white">
+                            Mulai Sekarang
+                            <div className="w-6 h-6 rounded-full bg-black/20 flex items-center justify-center">
+                                <ChevronRight size={14} className="text-white" />
+                            </div>
+                        </span>
                     </motion.button>
 
                     <motion.button
-                        whileHover={{ scale: 1.05 }}
+                        whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.05)" }}
                         whileTap={{ scale: 0.95 }}
-                        onClick={() => scrollToSection('home')}
-                        className="relative px-10 py-4 rounded-full font-black text-xs uppercase tracking-[0.2em] text-white flex items-center gap-4 group overflow-hidden border border-white/20 hover:border-emerald-500/50 transition-all duration-500 bg-white/5 backdrop-blur-xl"
+                        className="px-10 py-5 rounded-full border border-emerald-600 text-emerald-400 font-black text-xs uppercase tracking-[0.2em] hover:text-white transition-all backdrop-blur-md flex items-center gap-3"
                     >
-                        {/* Hover Liquid Background */}
-                        <div className="absolute inset-0 bg-emerald-500/0 group-hover:bg-emerald-500/10 transition-colors duration-500" />
-
-                        {/* Floating Shine */}
-                        <div className="absolute -inset-full bg-linear-to-r from-transparent via-white/5 to-transparent rotate-45 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
-
-                        <span className="relative z-10">
-                            <routerlink to="/contact">about us</routerlink>
-                        </span>
-                        <div className="relative z-10 w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_10px_#10b981] animate-pulse" />
+                        Tonton Demo
+                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                     </motion.button>
+                </motion.div>
+
+                {/* Feature Pills */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1 }}
+                    className="flex flex-wrap justify-center items-center gap-x-12 gap-y-6 mb-32"
+                >
+                    {[
+                        { icon: <AiFillSliders />, text: "Kustomisasi Website" },
+                        { icon: <AiOutlineSlack />, text: "Responsif & Optimasi" },
+                        { icon: <HiCommandLine />, text: "Modern UI/UX" },
+                        { icon: <AiFillProfile />, text: "Dukungan 24/7" }
+                    ].map((feature, i) => (
+                        <div key={i} className="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 hover:text-emerald-400 transition-colors group cursor-default">
+                            <span className="text-emerald-500/20 group-hover:text-emerald-400 transition-colors text-lg">{feature.icon}</span>
+                            {feature.text}
+                        </div>
+                    ))}
                 </motion.div>
             </motion.div>
 
-            {/* Hero Footer */}
-            <div className="absolute bottom-10 left-0 right-0 px-10 flex justify-between items-center z-10 hidden md:flex">
-                <div className="flex items-center gap-6">
-                    <span className="text-[10px] font-bold text-neutral-500 uppercase tracking-widest">Follow Us</span>
-                    <div className="flex gap-4">
-                        {[
-                            { name: 'instagram', icon: <svg className="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" /></svg> },
-                            { name: 'twitter', icon: <svg className="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 4s-1 2.1-3 2.8c1.4.2 2-1 2-1s-1 3.5-5.5 4a12 12 0 0 1-18 10c9-1 12-8 12-8s-1.5 1.5-3.5 1.5" /></svg> },
-                            { name: 'github', icon: <svg className="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" /></svg> },
-                            { name: 'linkedin', icon: <svg className="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" /></svg> }
-                        ].map((social) => (
-                            <motion.a
-                                key={social.name}
-                                href="#"
-                                whileHover={{ y: -2, opacity: 1, scale: 1.1 }}
-                                className="text-neutral-400 hover:text-emerald-400 transition-all"
-                            >
-                                <div className="w-8 h-8 rounded-full border border-white/5 bg-white/5 flex items-center justify-center hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-colors">
-                                    {social.icon}
-                                </div>
-                            </motion.a>
-                        ))}
-                    </div>
-                </div>
+            {/* --- DATA CARDS (Bottom Section) --- */}
+            {/*  */}
 
-                <div className="flex items-center gap-3 text-neutral-500">
-                    <span className="text-[10px] font-bold uppercase tracking-widest">Scroll to explore</span>
-                    <motion.div
-                        animate={{ y: [0, 5, 0] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" className="size-3">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
-                        </svg>
-                    </motion.div>
-                </div>
-            </div>
+            {/* Bottom Glow for Transition */}
+            <div className="absolute bottom-0 left-0 right-0 h-[40vh] bg-linear-to-t from-[#030502] to-transparent pointer-events-none z-0" />
         </section>
     );
 };

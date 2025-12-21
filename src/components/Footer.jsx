@@ -16,23 +16,23 @@ const Footer = () => {
     const currentYear = new Date().getFullYear();
 
     const footerLinks = {
-        services: [
-            { name: 'Web Development', href: '#' },
-            { name: 'Mobile Solutions', href: '#' },
-            { name: 'UI/UX Design', href: '#' },
-            { name: 'System Management', href: '#' }
+        layanan: [
+            { name: 'Pengembangan Web', href: '#' },
+            { name: 'Solusi Mobile', href: '#' },
+            { name: 'Desain UI/UX', href: '#' },
+            { name: 'Manajemen Sistem', href: '#' }
         ],
-        company: [
-            { name: 'About Us', href: '#' },
-            { name: 'Join Our Team', href: '#' },
-            { name: 'Success Stories', href: '#' },
+        perusahaan: [
+            { name: 'Tentang Kami', href: '#' },
+            { name: 'Bergabung dengan Tim Kami', href: '#' },
+            { name: 'Kisah Sukses', href: '#' },
             { name: 'Press Kit', href: '#' }
         ],
-        resources: [
-            { name: 'Documentation', href: '#' },
-            { name: 'API Reference', href: '#' },
-            { name: 'Privacy Center', href: '#' },
-            { name: 'Security Matrix', href: '#' }
+        sumber: [
+            { name: 'Dokumentasi', href: '#' },
+            { name: 'Referensi API', href: '#' },
+            { name: 'Pusat Privasi', href: '#' },
+            { name: 'Matriks Keamanan', href: '#' }
         ]
     };
 
@@ -113,22 +113,22 @@ const Footer = () => {
                             </h2>
                         </div>
                         <p className="text-neutral-400 text-lg leading-relaxed max-w-md mb-10 font-medium">
-                            An elite creative agency focused on crafting premium digital management
-                            and web solutions that scale with your business needs. 24/7 support
-                            with latency-free execution.
+                            Agensi kreatif elit yang berfokus pada pembuatan solusi sistem manajemen digital
+                            dan web premium yang berkembang seiring dengan kebutuhan bisnis Anda. Dukungan 24/7
+                            dengan eksekusi tanpa latensi.
                         </p>
 
                         <motion.button
                             whileHover={{ x: 10 }}
                             className="bg-emerald-500 text-black px-8 py-4 rounded-2xl font-black text-sm uppercase tracking-widest flex items-center gap-4 group/btn shadow-[0_15px_30px_rgba(16,185,129,0.2)]"
                         >
-                            Contact Support
+                            Hubungi Dukungan
                             <div className="w-6 h-6 rounded-full bg-black/20 flex items-center justify-center">
                                 <ArrowUpRight size={16} className="group-hover/btn:rotate-45 transition-transform" />
                             </div>
                         </motion.button>
 
-                        <p className="mt-4 text-xs text-neutral-500 font-bold uppercase tracking-[0.2em]">All queries answered within 24 hours.</p>
+                        <p className="mt-4 text-xs text-neutral-500 font-bold uppercase tracking-[0.2em]">Semua pertanyaan dijawab dalam 24 jam.</p>
                     </motion.div>
 
                     {/* Links Grid */}
@@ -162,8 +162,8 @@ const Footer = () => {
                     <div className="flex flex-col md:flex-row items-center gap-8">
                         <span className="text-neutral-600 text-[10px] font-black uppercase tracking-[0.4em]">© {currentYear} Leafiess studio inc.</span>
                         <div className="flex items-center gap-6">
-                            <a href="#" className="text-neutral-600 hover:text-white text-[10px] font-black uppercase tracking-[0.4em] transition-colors">Privacy</a>
-                            <a href="#" className="text-neutral-600 hover:text-white text-[10px] font-black uppercase tracking-[0.4em] transition-colors">Terms</a>
+                            <a href="#" className="text-neutral-600 hover:text-white text-[10px] font-black uppercase tracking-[0.4em] transition-colors">Privasi</a>
+                            <a href="#" className="text-neutral-600 hover:text-white text-[10px] font-black uppercase tracking-[0.4em] transition-colors">Syarat & Ketentuan</a>
                         </div>
                     </div>
 
@@ -171,11 +171,11 @@ const Footer = () => {
                         <div className="relative group w-full lg:w-[400px]">
                             <input
                                 type="email"
-                                placeholder="YOUR@EMAIL.COM"
+                                placeholder="EMAIL@ANDA.COM"
                                 className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-black text-white uppercase tracking-widest focus:outline-none focus:border-emerald-500 transition-all"
                             />
                             <button className="absolute right-2 top-2 bottom-2 bg-emerald-500 text-black px-6 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-emerald-400 transition-all">
-                                Subscribe
+                                Berlangganan
                             </button>
                         </div>
                     </div>

@@ -1,207 +1,233 @@
+import React, { memo } from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, CheckCircle2, Globe, Cpu, Smartphone, Layout } from 'lucide-react';
+import { ExternalLink, Globe, Code2, Monitor, ArrowUpRight, Sparkles } from 'lucide-react';
 
 const projects = [
     {
-        title: "Lumina CRM",
-        category: "Enterprise Management",
+        title: "MBG Muhammadiyah",
+        headline: "Sistem MBG Muhammadiyah",
+        subHeadline: "MANAGEMENT SYSTEM",
+        category: "Industrial Dashboard",
+        tech: ["React", "TS", "PostgreSQL"],
+        year: "2025",
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200",
+        accent: "text-emerald-500",
+        link: "https://scsbanjarnegara.com/",
+        description: "Infrastruktur digital komprehensif untuk pelacakan aset dan pemantauan sumber daya institusi secara real-time."
+    },
+    {
+        title: "LazisMu Company Profile",
+        headline: "LazisMu Company Profile",
+        subHeadline: "PUBLIC PORTAL",
+        category: "Company Profile",
+        tech: ["Vite", "Tailwind", "GSAP"],
         year: "2024",
-        intensity: "high",
-        icon: <Cpu className="w-5 h-5" />,
-        description: "High-performance customer management system with AI insights."
+        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200",
+        accent: "text-emerald-400",
+        link: "https://lazismubanjarnegara.org/",
+        description: "Mendesain ulang kehadiran digital untuk organisasi amal Islam dengan fokus pada kepercayaan dan aksesibilitas."
     },
     {
-        title: "Zenith Portfolio",
-        category: "Digital Showcase",
+        title: "Nova E-com UI",
+        headline: "SPATIAL COMMERCE",
+        subHeadline: "RETAIL ENGINE",
+        category: "E-Commerce",
+        tech: ["Next.js", "Three.js", "Stripe"],
         year: "2024",
-        intensity: "medium",
-        icon: <Layout className="w-5 h-5" />,
-        description: "A minimalist, high-end portfolio for luxury automotive brands."
+        image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=1200",
+        accent: "text-emerald-600",
+        link: "https://github.com/ahmadfatoni2025",
+        description: "Pengalaman belanja inovatif menggunakan visualisasi produk 3D dan mesin checkout berkecepatan tinggi."
     },
     {
-        title: "Nexus Pay",
-        category: "Fintech Solution",
-        year: "2023",
-        intensity: "vibrant",
-        icon: <Globe className="w-5 h-5" />,
-        description: "Secure, global payment gateway with sub-second latency."
-    },
-    {
-        title: "Aura Health",
-        category: "Wellness Platform",
-        year: "2023",
-        intensity: "soft",
-        icon: <Smartphone className="w-5 h-5" />,
-        description: "Mobile-first wellness app with real-time biometric tracking."
-    },
-    {
-        title: "Nova E-com",
-        category: "Retail Tech",
+        title: "Kinetix Infrastructure",
+        headline: "MODULAR CLOUD",
+        subHeadline: "SYSTEM MONITOR",
+        category: "DevOps Tool",
+        tech: ["Docker", "Go", "InfluxDB"],
         year: "2024",
-        intensity: "soft",
-        icon: <Layout className="w-5 h-5" />,
-        description: "Next-gen e-commerce engine with spatial product previews."
+        image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200",
+        accent: "text-teal-500",
+        link: "https://github.com/ahmadfatoni2025",
+        description: "Dashboard pemantauan untuk arsitektur cloud modular, fokus pada infrastruktur agensi dengan lalu lintas tinggi."
     },
-    {
-        title: "Kinetix Cloud",
-        category: "Infrastructure",
-        year: "2024",
-        intensity: "medium",
-        icon: <Cpu className="w-5 h-5" />,
-        description: "Modular cloud architecture for high-traffic media agencies."
-    },
-    {
-        title: "Orbit Social",
-        category: "Social Network",
-        year: "2023",
-        intensity: "high",
-        icon: <Globe className="w-5 h-5" />,
-        description: "Decentralized social platform focused on privacy and speed."
-    },
-    {
-        title: "Titan CMS",
-        category: "Content Management",
-        year: "2023",
-        intensity: "vibrant",
-        icon: <Layout className="w-5 h-5" />,
-        description: "Headless CMS designed for multi-channel digital experiences."
-    }
 ];
 
-const ProjectCard = ({ project, index }) => {
-    const getIntensityStyles = (intensity) => {
-        switch (intensity) {
-            case 'high': return 'from-emerald-900/40 via-emerald-500/20 to-emerald-900/40 opacity-90';
-            case 'vibrant': return 'from-emerald-500/40 via-teal-400/30 to-emerald-500/40 opacity-100';
-            case 'medium': return 'from-emerald-900/60 via-emerald-600/10 to-emerald-950 opacity-80';
-            case 'soft': return 'from-emerald-950 via-emerald-900/20 to-black opacity-70';
-            default: return 'from-emerald-900 via-black to-black opacity-60';
-        }
-    };
-
+const ProjectCard = memo(({ project, index }) => {
     return (
         <motion.div
-            initial={{ opacity: 0, y: 30, scale: 0.95 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ delay: index * 0.05, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="group relative h-[220px] rounded-2xl overflow-hidden cursor-pointer border border-white/5 bg-black"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="group relative h-[550px] rounded-[2.5rem] overflow-hidden bg-neutral-900/40 border border-white/5 flex flex-col transform-gpu backdrop-blur-sm"
         >
-            {/* Mesh Gradient Background */}
-            <div className={`absolute inset-0 bg-linear-to-br transition-all duration-700 group-hover:scale-110 ${getIntensityStyles(project.intensity)}`} />
+            {/* Project Background - Website Preview */}
+            <div className="absolute inset-0 z-0 overflow-hidden">
+                <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover opacity-20 group-hover:scale-110 group-hover:opacity-40 transition-all duration-1000 ease-out transform-gpu"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-black via-black/60 to-transparent" />
+            </div>
 
-            {/* Grain Texture */}
-            <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-
-            {/* Card Glass Overlay */}
-            <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] transition-all group-hover:backdrop-blur-none group-hover:bg-transparent duration-500" />
-
-            <div className="relative h-full p-6 flex flex-col justify-between z-10">
-                <div className="flex justify-between items-start">
-                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-md border border-white/10 group-hover:bg-emerald-500/20 group-hover:border-emerald-500/50 transition-all duration-500">
-                        {project.icon}
-                    </div>
-                    <div className="flex -space-x-2">
-                        <div className="w-8 h-8 rounded-full border border-black bg-emerald-500 flex items-center justify-center">
-                            <CheckCircle2 size={14} className="text-black" />
-                        </div>
-                    </div>
+            {/* Top Bar - Gallery Metadata */}
+            <div className="relative z-10 p-8 flex items-center justify-between">
+                <div className="flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl">
+                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_10px_#10b981] animate-pulse" />
+                    <span className="text-[9px] font-black text-white/50 uppercase tracking-[0.4em]">Sistem Online</span>
                 </div>
-
-                <div>
-                    <div className="flex items-center gap-2 mb-1">
-                        <span className="text-[10px] font-black text-white/40 tracking-[0.2em] uppercase leading-none">·· {project.year}</span>
-                        <div className="h-px flex-1 bg-white/10 group-hover:bg-emerald-500/20 transition-all" />
-                    </div>
-                    <h3 className="text-xl font-black text-white tracking-tighter uppercase group-hover:text-emerald-400 transition-colors">
-                        {project.title}
-                    </h3>
-                    <p className="text-[10px] font-bold text-neutral-400 tracking-wider uppercase mt-1 line-clamp-1 opacity-60 group-hover:opacity-100 transition-all">
-                        {project.category}
-                    </p>
+                <div className="flex items-center gap-4 text-white/20">
+                    <Monitor size={14} />
+                    <div className="w-px h-3 bg-white/10" />
+                    <span className="text-[9px] font-black uppercase tracking-[0.3em]">{project.year}</span>
                 </div>
             </div>
 
-            {/* Hover Shine */}
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-linear-to-tr from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-all duration-1000 pointer-events-none" />
+            {/* Content Area - Website Title & Vision */}
+            <div className="relative z-10 flex-1 px-10 flex flex-col justify-end pb-12">
+                <motion.div
+                    initial={{ x: -20, opacity: 0 }}
+                    whileInView={{ x: 0, opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                >
+                    <p className={`text-[9px] font-black tracking-[0.5em] mb-4 ${project.accent} uppercase`}>
+                        {project.subHeadline}
+                    </p>
+                    <h3 className="text-5xl md:text-6xl font-black text-white leading-none tracking-tighter uppercase italic mb-6">
+                        {project.headline}
+                    </h3>
+                </motion.div>
+
+                <p className="max-w-sm text-neutral-500 text-sm font-medium leading-relaxed mb-8 group-hover:text-neutral-300 transition-colors duration-500">
+                    {project.description}
+                </p>
+
+                {/* Tech Stack Badges */}
+                <div className="flex flex-wrap gap-2 mb-10">
+                    {project.tech.map((t) => (
+                        <span key={t} className="px-3 py-1 rounded-md bg-white/5 border border-white/5 text-[8px] font-black text-neutral-500 uppercase tracking-widest">
+                            {t}
+                        </span>
+                    ))}
+                </div>
+
+                {/* CTA Button */}
+                <motion.a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex items-center gap-4 text-white group/btn w-fit"
+                >
+                    <div className="w-12 h-12 rounded-full border border-white/10 bg-white/5 flex items-center justify-center transition-all group-hover/btn:bg-emerald-500 group-hover/btn:border-emerald-400 group-hover/btn:text-black shadow-[0_10px_20px_rgba(0,0,0,0.2)]">
+                        <ArrowUpRight size={20} strokeWidth={3} />
+                    </div>
+                    <span className="text-[10px] font-black uppercase tracking-[0.3em] text-neutral-400 group-hover/btn:text-white transition-colors">Kunjungi Situs</span>
+                </motion.a>
+            </div>
+
+            {/* Liquid Reflective Effect */}
+            <div className="absolute inset-0 bg-linear-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none z-20" />
         </motion.div>
     );
-};
+});
 
-const Project = () => {
+ProjectCard.displayName = 'ProjectCard';
+
+const Project = memo(() => {
     return (
-        <section id="projects" className="py-32 px-6 relative overflow-hidden bg-black text-white">
-            {/* Ambient background glow consistent with Hero */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none">
-                <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-emerald-500/5 blur-[120px] rounded-full" />
-                <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-emerald-500/5 blur-[120px] rounded-full" />
+        <section id="projects" className="py-32 px-6 relative overflow-hidden bg-black text-white border-t border-white/5">
+            {/* Ambient Background Glows */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                <div
+                    className="absolute top-1/4 left-1/4 w-[800px] h-[800px] opacity-10 transform-gpu"
+                    style={{ background: 'radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%)' }}
+                />
+                <div
+                    className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] opacity-5 transform-gpu"
+                    style={{ background: 'radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%)' }}
+                />
             </div>
 
+            {/* Subtle Grid Decor */}
+            <div className="absolute inset-0 bg-size-[40px_40px] bg-[radial-gradient(circle,white_1px,transparent_1px)] mask-[radial-gradient(ellipse_at_center,black,transparent_75%)] opacity-[0.03]" />
+
             <div className="container mx-auto relative z-10">
-                {/* Header Section from Image */}
-                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 mb-20 overflow-hidden">
+                {/* Section Header */}
+                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-12 mb-24">
                     <motion.div
-                        initial={{ opacity: 0, x: -50 }}
+                        initial={{ opacity: 0, x: -30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                        className="flex flex-col"
+                        transition={{ duration: 0.8 }}
+                        className="w-full lg:w-auto"
                     >
-                        <div className="flex items-center gap-3 mb-4">
-                            <div className="flex gap-1">
-                                <span className="w-3 h-3 rounded-full bg-emerald-500" />
-                                <span className="w-3 h-3 rounded-full bg-emerald-500/60" />
-                                <span className="w-3 h-3 rounded-full bg-emerald-500/20" />
-                            </div>
+                        <div className="flex items-center gap-4 mb-6">
+                            <Code2 size={24} className="text-emerald-500" />
+                            <span className="text-[10px] font-black uppercase tracking-[0.5em] text-emerald-500">Eksposisi Galeri</span>
                         </div>
-                        <h2 className="text-6xl md:text-[120px] font-black tracking-tighter leading-[0.85] text-white uppercase italic">
-                            Projects<span className="text-emerald-500">.</span>
+                        <h2 className="text-5xl md:text-8xl font-black mb-6 tracking-tighter uppercase italic leading-[0.85] select-none">
+                            <span className="bg-clip-text text-transparent bg-linear-to-b from-white via-[#cbd5e1] to-[#64748b] drop-shadow-[0_10px_30px_rgba(16,185,129,0.2)]">
+                                KARYA<span className="text-emerald-500">.</span>KAMI
+                            </span>
                         </h2>
                     </motion.div>
 
                     <motion.div
-                        initial={{ opacity: 0, x: 50 }}
+                        initial={{ opacity: 0, x: 30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                        className="max-w-md"
+                        transition={{ duration: 0.8 }}
+                        className="max-w-md hidden lg:block"
                     >
-                        <p className="text-neutral-400 text-sm md:text-base font-medium leading-relaxed mb-6 opacity-80">
-                            Portofolio ini merepresentasikan standar keunggulan digital kami. Setiap proyek dikembangkan dengan fokus pada performa, ketelitian teknis, dan kesiapan untuk beradaptasi dengan perkembangan inovasi global.
-                            <span className="block mt-4 text-emerald-400/60 text-xs font-black uppercase tracking-widest italic">
-                                Design warm, soft, natural
-                            </span>
+                        <p className="text-neutral-500 text-xs font-bold uppercase tracking-[0.2em] leading-relaxed mb-8">
+                            Pilihan kurasi arsitektur digital tingkat industri dan sistem visual kelas atas yang dibangun dengan standar teknik global.
                         </p>
-                        <div className="flex items-center gap-4">
-                            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Intensity Scale</span>
-                            <div className="flex-1 h-px bg-white/10" />
+                        <div className="flex items-center gap-6">
+                            <Globe size={18} className="text-emerald-500/20" />
+                            <div className="flex-1 h-px bg-white/5" />
+                            <span className="text-[9px] font-black text-white/20 uppercase tracking-[0.5em]">Integritas Digital</span>
                         </div>
                     </motion.div>
                 </div>
 
                 {/* Projects Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16">
                     {projects.map((project, index) => (
-                        <ProjectCard key={index} project={project} index={index} />
+                        <ProjectCard key={project.title} project={project} index={index} />
                     ))}
                 </div>
 
-                {/* View All Button */}
-                <div className="mt-16 flex justify-center">
+                {/* Section Footer Call To Action */}
+                <div className="mt-32 flex flex-col items-center">
+                    <div className="flex items-center gap-3 mb-10">
+                        <div className="w-1 h-1 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981]" />
+                        <div className="w-1 h-1 rounded-full bg-emerald-500/40" />
+                        <div className="w-1 h-1 rounded-full bg-emerald-500/10" />
+                    </div>
+
                     <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="group flex items-center gap-4 px-8 py-4 rounded-full border border-white/10 hover:border-emerald-500/50 bg-white/5 backdrop-blur-md transition-all duration-500"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="group flex flex-col items-center gap-6"
                     >
-                        <span className="text-xs font-black uppercase tracking-[0.3em] text-neutral-400 group-hover:text-white transition-colors">Explorer History</span>
-                        <div className="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center text-black">
-                            <ExternalLink size={14} />
+                        <span className="text-[10px] font-black uppercase tracking-[0.6em] text-neutral-600 group-hover:text-emerald-500 transition-colors duration-500">Jelajahi Arsip Lengkap</span>
+                        <div className="w-16 h-16 rounded-full border border-white/5 bg-neutral-900/50 backdrop-blur-3xl flex items-center justify-center transition-all duration-700 group-hover:scale-110 group-hover:border-emerald-500/50 group-hover:bg-emerald-500/5">
+                            <ExternalLink size={20} className="text-neutral-500 group-hover:text-white transition-colors" />
                         </div>
                     </motion.button>
                 </div>
             </div>
+
+            {/* Subtle Scanlines Decor */}
+            <div className="absolute inset-0 z-20 pointer-events-none opacity-[0.02] bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,#fff_3px)]" />
         </section>
     );
-};
+});
+
+Project.displayName = 'Project';
 
 export default Project;
