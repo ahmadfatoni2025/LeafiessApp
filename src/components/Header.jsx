@@ -11,10 +11,10 @@ const Header = () => {
     const navLinks = [
         { name: "Beranda", id: "home" },
         { name: "Layanan", id: "services" },
-        { name: "FAQ", id: "faq" },
         { name: "Profil", id: "profile" },
         { name: "Proyek", id: "projects" },
         { name: "Harga", id: "pricing" },
+        { name: "FAQ", id: "faq" },
         { name: "Kontak", id: "contact" },
     ];
 
@@ -33,17 +33,26 @@ const Header = () => {
 
         const observerOptions = {
             root: null,
-            rootMargin: "-45% 0px -45% 0px",
-            threshold: 0
+            rootMargin: "-25% 0px -25% 0px", // Increased detection area (50% of screen height)
+            threshold: [0, 0.1, 0.2, 0.5]
         };
 
         const observerCallback = (entries) => {
             if (isScrollingRef.current) return;
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    setActiveTab(entry.target.id);
+
+            // Collect all sections that are currently visible
+            const visibleSections = entries.filter(entry => entry.isIntersecting);
+
+            if (visibleSections.length > 0) {
+                // Pick the section with the highest intersection ratio
+                const mostVisible = visibleSections.reduce((prev, current) =>
+                    (prev.intersectionRatio > current.intersectionRatio) ? prev : current
+                );
+
+                if (mostVisible.target.id) {
+                    setActiveTab(mostVisible.target.id);
                 }
-            });
+            }
         };
 
         const observer = new IntersectionObserver(observerCallback, observerOptions);
@@ -141,10 +150,25 @@ const Header = () => {
                                         {activeTab === link.id && (
                                             <motion.div
                                                 layoutId="activeTabPill"
-                                                className="absolute inset-0 bg-white/5 rounded-full border border-emerald-500/40 shadow-[0_0_15px_rgba(16,185,129,0.1)]"
-                                                transition={{ type: "spring", bounce: 0.2, duration: 0.8 }}
+                                                className={`absolute inset-0 rounded-full border shadow-[0_0_20px_rgba(16,185,129,0.2)] ${link.id === 'pricing'
+                                                    ? 'bg-emerald-500/20 border-emerald-500 shadow-[0_0_30px_rgba(16,185,129,0.4)]'
+                                                    : 'bg-white/10 border-emerald-500/50'
+                                                    }`}
+                                                transition={{
+                                                    type: "spring",
+                                                    stiffness: 380,
+                                                    damping: 30,
+                                                    mass: 1
+                                                }}
                                             >
-                                                <div className="absolute inset-0 bg-emerald-500/10 rounded-full blur-[2px]" />
+                                                {link.id === 'pricing' && (
+                                                    <motion.div
+                                                        animate={{ opacity: [0.4, 0.8, 0.4], scale: [1, 1.05, 1] }}
+                                                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                                                        className="absolute inset-0 bg-emerald-500/20 rounded-full blur-md"
+                                                    />
+                                                )}
+                                                <div className="absolute inset-0 bg-emerald-500/10 rounded-full blur-[4px]" />
                                             </motion.div>
                                         )}
                                     </li>
