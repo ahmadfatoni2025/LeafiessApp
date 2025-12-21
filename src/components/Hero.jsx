@@ -28,13 +28,25 @@ const Hero = () => {
         }
     };
 
+    // Stagger settings
+    const baseDelay = 2.4; // Starts right as loading screen is fully gone
+
     return (
         <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#030502] pt-16 md:pt-20">
             {/* --- BACKGROUND LAYER --- */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,#061d12_0%,#030502_100%)]" />
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 2, delay: baseDelay - 1 }}
+                    className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,#061d12_0%,#030502_100%)]"
+                />
 
-                <div className="absolute inset-0 opacity-[0.03]"
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 0.03 }}
+                    transition={{ duration: 2, delay: baseDelay - 0.5 }}
+                    className="absolute inset-0"
                     style={{
                         backgroundImage: `linear-gradient(#10b981 1px, transparent 1px), linear-gradient(90deg, #10b981 1px, transparent 1px)`,
                         backgroundSize: 'clamp(30px, 5vw, 60px) clamp(30px, 5vw, 60px)'
@@ -42,29 +54,42 @@ const Hero = () => {
                 />
 
                 <div className="absolute inset-0 opacity-10">
-                    <div className="absolute top-[-20%] left-[15%] w-px h-[140%] bg-emerald-500/20 blur-[80px] rotate-[-12deg]" />
-                    <div className="absolute top-[-20%] right-[15%] w-px h-[140%] bg-emerald-500/20 blur-[80px] rotate-[12deg]" />
+                    <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "140%", opacity: 1 }}
+                        transition={{ duration: 2, delay: baseDelay, ease: [0.16, 1, 0.3, 1] }}
+                        className="absolute top-[-20%] left-[15%] w-px bg-emerald-500/20 blur-[80px] -rotate-12"
+                    />
+                    <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "140%", opacity: 1 }}
+                        transition={{ duration: 2, delay: baseDelay, ease: [0.16, 1, 0.3, 1] }}
+                        className="absolute top-[-20%] right-[15%] w-px bg-emerald-500/20 blur-[80px] rotate-12"
+                    />
                 </div>
 
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] h-[90vw] max-w-[800px] max-h-[800px] bg-emerald-500/5 rounded-full blur-[140px]" />
+                <motion.div
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 3, delay: baseDelay - 1, ease: "easeOut" }}
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] h-[90vw] max-w-[800px] max-h-[800px] bg-emerald-500/5 rounded-full blur-[140px]"
+                />
             </div>
 
             {/* --- FLOATING ELEMENTS (HIDDEN ON MOBILE) --- */}
-            <FloatingElement icon={Globe} delay={0.2} x="10%" y="20%" color="text-emerald-400" />
-            <FloatingElement icon={Terminal} delay={0.6} x="88%" y="30%" color="text-emerald-300" />
-            <FloatingElement icon={Layout} delay={0.4} x="15%" y="70%" color="text-emerald-500" />
-            <FloatingElement icon={Zap} delay={0.8} x="85%" y="75%" color="text-emerald-400" />
+            <FloatingElement icon={Globe} delay={baseDelay + 0.2} x="10%" y="20%" color="text-emerald-400" />
+            <FloatingElement icon={Terminal} delay={baseDelay + 0.6} x="88%" y="30%" color="text-emerald-300" />
+            <FloatingElement icon={Layout} delay={baseDelay + 0.4} x="15%" y="70%" color="text-emerald-500" />
+            <FloatingElement icon={Zap} delay={baseDelay + 0.8} x="85%" y="75%" color="text-emerald-400" />
 
             {/* --- CONTENT CONTAINER --- */}
             <div className="container mx-auto px-4 md:px-6 relative z-10">
-                <motion.div
-                    className="flex flex-col items-center text-center max-w-5xl mx-auto"
-                >
+                <div className="flex flex-col items-center text-center max-w-5xl mx-auto">
                     {/* Status Badge */}
                     <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                        initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                        transition={{ duration: 1, delay: baseDelay, ease: [0.16, 1, 0.3, 1] }}
                         className="mb-6 md:mb-10"
                     >
                         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-3xl shadow-2xl overflow-hidden group">
@@ -78,9 +103,9 @@ const Hero = () => {
 
                     {/* Pre-title */}
                     <motion.div
-                        initial={{ opacity: 0, letterSpacing: "0.2em" }}
-                        animate={{ opacity: 1, letterSpacing: "0.4em" }}
-                        transition={{ duration: 1.5, delay: 0.2 }}
+                        initial={{ opacity: 0, y: 20, letterSpacing: "0.2em" }}
+                        animate={{ opacity: 1, y: 0, letterSpacing: "0.4em" }}
+                        transition={{ duration: 1.2, delay: baseDelay + 0.2, ease: [0.16, 1, 0.3, 1] }}
                         className="mb-2 md:mb-4"
                     >
                         <h2 className="text-[9px] md:text-sm font-black text-white/30 uppercase tracking-[0.4em] italic leading-none">
@@ -90,9 +115,9 @@ const Hero = () => {
 
                     {/* Main Title - Responsive Polish */}
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        transition={{ duration: 1.5, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                        initial={{ opacity: 0, scale: 0.9, y: 40, rotateX: 20 }}
+                        animate={{ opacity: 1, scale: 1, y: 0, rotateX: 0 }}
+                        transition={{ duration: 1.5, delay: baseDelay + 0.4, ease: [0.16, 1, 0.3, 1] }}
                         className="relative mb-6 md:mb-8 select-none"
                     >
                         <h1 className="text-[14vw] sm:text-[12vw] md:text-[140px] lg:text-[180px] xl:text-[220px] font-black leading-[0.85] tracking-tighter uppercase italic text-emerald-500 drop-shadow-[0_20px_50px_rgba(16,185,129,0.3)]"
@@ -110,25 +135,30 @@ const Hero = () => {
                     </motion.div>
 
                     {/* Hook & Subtext */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, delay: 0.8 }}
-                        className="max-w-3xl mx-auto space-y-4 px-4"
-                    >
-                        <h3 className="text-lg sm:text-2xl md:text-4xl lg:text-5xl font-black text-white tracking-tighter uppercase italic leading-[1.1]">
+                    <div className="max-w-3xl mx-auto space-y-4 px-4">
+                        <motion.h3
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 1, delay: baseDelay + 0.8, ease: [0.16, 1, 0.3, 1] }}
+                            className="text-lg sm:text-2xl md:text-4xl lg:text-5xl font-black text-white tracking-tighter uppercase italic leading-[1.1]"
+                        >
                             Bangun <span className="text-emerald-500">Website Elit</span> & Sistem Manajemen Digital.
-                        </h3>
-                        <p className="text-neutral-500 text-[10px] md:text-sm lg:text-base font-bold tracking-[0.15em] md:tracking-[0.25em] uppercase leading-relaxed max-w-2xl mx-auto">
+                        </motion.h3>
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 1, delay: baseDelay + 1, ease: [0.16, 1, 0.3, 1] }}
+                            className="text-neutral-500 text-[10px] md:text-sm lg:text-base font-bold tracking-[0.15em] md:tracking-[0.25em] uppercase leading-relaxed max-w-2xl mx-auto"
+                        >
                             Transformasi bisnis Anda menjadi otoritas digital dengan desain premium dan rekayasa tanpa latensi.
-                        </p>
-                    </motion.div>
+                        </motion.p>
+                    </div>
 
                     {/* CTAs - Responsive Layout */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 1.2 }}
+                        transition={{ duration: 1, delay: baseDelay + 1.2, ease: [0.16, 1, 0.3, 1] }}
                         className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-8 mt-10 md:mt-16 w-full sm:w-auto"
                     >
                         <motion.button
@@ -152,7 +182,7 @@ const Hero = () => {
                             </a>
                         </motion.button>
                     </motion.div>
-                </motion.div>
+                </div>
             </div>
 
             {/* Scroll Indicator - Professional Touch */}

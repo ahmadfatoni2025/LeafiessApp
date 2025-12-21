@@ -101,7 +101,13 @@ const Price = () => {
                 </div>
 
                 {/* High-End Integrated Comparison Matrix */}
-                <div className="max-w-6xl mx-auto mb-32 relative overflow-hidden">
+                <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                    className="max-w-6xl mx-auto mb-32 relative overflow-hidden"
+                >
                     {/* Background Vertical Glow for Highlighted Column (Business Pro) */}
                     <div className="absolute top-0 bottom-0 left-[33.33%] right-[33.33%] bg-emerald-500/5 border-x border-white/10 pointer-events-none hidden lg:block z-0" />
 
@@ -154,7 +160,14 @@ const Price = () => {
                                     { label: "Branding Kit", values: [false, true, true] },
                                     { label: "Dedicated Analyst", values: [false, false, true] },
                                 ].map((row, i) => (
-                                    <tr key={i} className="border-b border-white/5 group/row hover:bg-white/1 transition-colors">
+                                    <motion.tr
+                                        key={i}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.8, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                                        className="border-b border-white/5 group/row hover:bg-white/1 transition-colors"
+                                    >
                                         <td className="p-8 text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500 group-hover/row:text-neutral-300">
                                             {row.label}
                                         </td>
@@ -177,9 +190,14 @@ const Price = () => {
                                                 </div>
                                             </td>
                                         ))}
-                                    </tr>
+                                    </motion.tr>
                                 ))}
-                                <tr>
+                                <motion.tr
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.8, delay: 0.8 }}
+                                >
                                     <td className="p-12 font-mono text-[9px] text-neutral-600 uppercase tracking-widest italic flex items-center gap-2">
                                         <div className="w-1.5 h-1.5 rounded-full bg-emerald-500/30" />
                                         Ready to Build
@@ -201,11 +219,11 @@ const Price = () => {
                                             </div>
                                         </td>
                                     ))}
-                                </tr>
+                                </motion.tr>
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </motion.div>
 
                 {/* Footer Note */}
                 <motion.div

@@ -68,12 +68,14 @@ const Header = () => {
         }
     };
 
+    const baseDelay = 2.6; // Slightly after Hero starts
+
     return (
         <header className="fixed top-8 left-0 right-0 z-50 flex justify-center px-6 pointer-events-none">
             <motion.nav
                 initial={{ y: -100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 1.2, delay: baseDelay, ease: [0.16, 1, 0.3, 1] }}
                 className="w-full max-w-[900px] pointer-events-auto relative"
             >
                 {/* Unified Premium Pill */}

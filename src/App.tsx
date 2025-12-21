@@ -7,11 +7,25 @@ import Footer from './components/Footer.jsx'
 import Profile from './components/Profile.jsx'
 import Price from './components/Price.jsx'
 import CustomCursor from './components/CustomCursor.jsx'
+import LoadingScreen from './components/LoadingScreen.jsx'
 import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    // Simulate loading time or wait for resources
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 2000)
+
+    return () => clearTimeout(timer)
+  }, [])
+
   return (
     <div className="min-h-screen text-white cursor-none">
+      <LoadingScreen isLoading={isLoading} />
       <CustomCursor />
       <Header />
       <Hero />
