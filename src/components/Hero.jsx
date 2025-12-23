@@ -253,7 +253,7 @@ const Hero = () => {
                                 }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={() => scrollToSection('services')}
-                                className="relative w-full px-2 py-4 md:py-6 bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-500 text-white font-black text-base md:text-lg uppercase tracking-wider rounded-2xl flex items-center justify-center gap-4 group overflow-hidden z-50"
+                                className="relative w-full px-10 py-5 md:py-6 bg-gradient-to-r from-emerald-500 via-emerald-600 to-emerald-500 text-white font-black text-base md:text-lg uppercase tracking-wider rounded-2xl flex items-center justify-center gap-4 group overflow-hidden z-50"
                             >
                                 {/* Animated background gradient */}
                                 <motion.div
