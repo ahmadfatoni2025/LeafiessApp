@@ -14,7 +14,7 @@ const Price = lazy(() => import('./components/Price.jsx'))
 const FAQ = lazy(() => import('./components/FAQ.jsx'))
 const Footer = lazy(() => import('./components/Footer.jsx'))
 const CustomCursor = lazy(() => import('./components/CustomCursor.jsx'))
-const LoadingScreen = lazy(() => import('./components/LoadingScreen.jsx'))
+// const LoadingScreen = lazy(() => import('./components/LoadingScreen.jsx'))
 
 // Fallback skeleton or simple loading state
 const SectionLoader = () => (
@@ -54,10 +54,10 @@ function App() {
 
   return (
     <div className="min-h-screen text-white lg:cursor-none bg-[#030502] selection:bg-emerald-500/30 selection:text-emerald-400">
-      <Suspense fallback={null}>
+      {/* <Suspense fallback={null}>
         <LoadingScreen isLoading={isLoading} />
         {!isLoading && <CustomCursor />}
-      </Suspense>
+      </Suspense> */}
 
       <Suspense fallback={<SectionLoader />}>
         <Header />
