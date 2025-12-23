@@ -10,6 +10,15 @@
 
   .body {
     background-color: #000;
+    font-family: 'Outfit', sans-serif;
+    font-display: swap;
+    /* Performance: Ensure text remains visible during font load */
+  }
+
+  /* Optimize off-screen content rendering */
+  section {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 500px;
   }
 }
 

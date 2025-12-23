@@ -1,5 +1,6 @@
-import { useRef, useState, useEffect, useCallback, memo } from 'react';
+import React, { useRef, useState, useEffect, useCallback, memo } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
+import OptimizedImage from './OptimizedImage';
 
 const services = [
     {
@@ -7,56 +8,56 @@ const services = [
         title: "Website Company Profile",
         description: "Website untuk menampilkan identitas perusahaan, layanan, visi, dan informasi kontak secara profesional guna meningkatkan kredibilitas bisnis.",
         suitable: "Perusahaan, Startup, Organisasi, Instansi.",
-        image: "company_profile_ui.png"
+        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200"
     },
     {
         id: 2,
         title: "Website UMKM & Bisnis Lokal",
         description: "Website sederhana dan informatif untuk membantu UMKM tampil online, menjangkau pelanggan, dan mempermudah komunikasi.",
         suitable: "Toko, Jasa Lokal, Kuliner, Usaha Rumahan.",
-        image: "umkm_business_ui.png"
+        image: "https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&q=80&w=1200"
     },
     {
         id: 3,
         title: "Website Landing Page",
         description: "Website satu halaman yang dirancang khusus untuk promosi produk, layanan, atau kampanye tertentu dengan fokus pada konversi.",
         suitable: "Iklan, Peluncuran Produk, Promosi Jasa.",
-        image: "landing_page_ui.png"
+        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200"
     },
     {
         id: 4,
         title: "Website Toko Online (E-Commerce)",
         description: "Website penjualan online dengan katalog produk, sistem pemesanan, dan integrasi pembayaran untuk mendukung aktivitas jual beli.",
         suitable: "Bisnis Retail, Brand Produk, Reseller.",
-        image: "ecommerce_ui.png"
+        image: "https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=1200"
     },
     {
         id: 5,
         title: "Website Personal & Portofolio",
         description: "Website personal untuk menampilkan profil, karya, pengalaman, dan pencapaian secara profesional.",
         suitable: "Freelancer, Kreator, Profesional Individu.",
-        image: "personal_portfolio_ui.png"
+        image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=1200"
     },
     {
         id: 6,
         title: "Website Custom & Sistem Khusus",
         description: "Website dengan fitur khusus sesuai kebutuhan bisnis, tidak terbatas pada struktur website standar.",
         suitable: "Sistem Internal, Platform Layanan, Kebutuhan Spesifik.",
-        image: "custom_system_ui.png"
+        image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200"
     },
     {
         id: 7,
         title: "Website Organisasi & Komunitas",
         description: "Website untuk menyampaikan informasi, kegiatan, dan dokumentasi organisasi atau komunitas.",
         suitable: "Komunitas, Yayasan, Organisasi Sosial.",
-        image: "company_profile_ui.png"
+        image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1200"
     },
     {
         id: 8,
         title: "Redesign & Pengembangan Website",
         description: "Layanan pembaruan tampilan dan fungsi website lama agar lebih modern, cepat, dan relevan dengan kebutuhan saat ini.",
         suitable: "Bisnis yang sudah memiliki website namun perlu peningkatan.",
-        image: "custom_system_ui.png"
+        image: "https://images.unsplash.com/photo-1581291518151-0107aa4c194a?auto=format&fit=crop&q=80&w=1200"
     }
 ];
 
@@ -214,13 +215,10 @@ const Products = ({
                                                         transition={{ delay: 0.4, duration: 0.8 }}
                                                         className="relative aspect-4/3 rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-white/5 group/img"
                                                     >
-                                                        <img
+                                                        <OptimizedImage
                                                             src={service.image}
                                                             alt={service.title}
                                                             className="w-full h-full object-cover transition-transform duration-1000 group-hover/img:scale-110"
-                                                            onError={(e) => {
-                                                                e.target.src = "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200";
-                                                            }}
                                                         />
                                                         <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-transparent opacity-60" />
 

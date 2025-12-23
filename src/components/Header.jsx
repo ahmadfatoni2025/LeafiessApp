@@ -1,12 +1,15 @@
-import { useState, useEffect, useRef } from "react";
+// @ts-nocheck
+import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowRight, MessageSquareCode, Sparkles, Zap, Cpu, Shield, Star } from "lucide-react";
+import { Menu, X, ArrowRight, Sparkles, ChevronRight } from "lucide-react";
 
 const Header = () => {
     const [activeTab, setActiveTab] = useState("home");
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [hoveredTab, setHoveredTab] = useState(null);
     const isScrollingRef = useRef(false);
+    const rafRef = useRef(null);
 
     const navLinks = [
         { name: "Beranda", id: "home" },
@@ -18,41 +21,44 @@ const Header = () => {
         { name: "Kontak", id: "contact" },
     ];
 
-    const menuHighlights = [
-        { title: "Next-Gen Web", desc: "Experience 10ms response times.", icon: <Zap size={20} />, color: "from-emerald-500/20" },
-        { title: "AI Integrated", desc: "Smart systems for smart business.", icon: <Cpu size={20} />, color: "from-blue-500/20" },
-        { title: "Safe & Secure", desc: "Enterprise grade encryption.", icon: <Shield size={20} />, color: "from-red-500/20" },
-    ];
-
+    // Optimized scroll handler with RAF
     useEffect(() => {
-        const handleScroll = () => {
-            const isScrolled = window.scrollY > 20;
-            setScrolled(isScrolled);
-        };
-        window.addEventListener("scroll", handleScroll, { passive: true });
+        let ticking = false;
 
+        const handleScroll = () => {
+            if (!ticking) {
+                rafRef.current = requestAnimationFrame(() => {
+                    const isScrolled = window.scrollY > 120; // Slightly increased threshold
+                    setScrolled(isScrolled);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            if (rafRef.current) cancelAnimationFrame(rafRef.current);
+        };
+    }, []);
+
+    // Optimized intersection observer
+    useEffect(() => {
         const observerOptions = {
             root: null,
-            rootMargin: "-25% 0px -25% 0px", // Increased detection area (50% of screen height)
-            threshold: [0, 0.1, 0.2, 0.5]
+            rootMargin: "-25% 0px -55% 0px", // Adjusted margins
+            threshold: 0
         };
 
         const observerCallback = (entries) => {
             if (isScrollingRef.current) return;
 
-            // Collect all sections that are currently visible
-            const visibleSections = entries.filter(entry => entry.isIntersecting);
-
-            if (visibleSections.length > 0) {
-                // Pick the section with the highest intersection ratio
-                const mostVisible = visibleSections.reduce((prev, current) =>
-                    (prev.intersectionRatio > current.intersectionRatio) ? prev : current
-                );
-
-                if (mostVisible.target.id) {
-                    setActiveTab(mostVisible.target.id);
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setActiveTab(entry.target.id);
                 }
-            }
+            });
         };
 
         const observer = new IntersectionObserver(observerCallback, observerOptions);
@@ -61,238 +67,197 @@ const Header = () => {
             if (element) observer.observe(element);
         });
 
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-            observer.disconnect();
-        };
+        return () => observer.disconnect();
     }, []);
 
-    const scrollToSection = (id) => {
+    const scrollToSection = useCallback((id) => {
         const element = document.getElementById(id);
         if (element) {
             isScrollingRef.current = true;
             setActiveTab(id);
-            element.scrollIntoView({ behavior: "smooth" });
             setIsMenuOpen(false);
+
+            // Smooth scroll dengan offset
+            const headerHeight = 100; // Increased header height
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+
             setTimeout(() => {
                 isScrollingRef.current = false;
-            }, 1000);
+            }, 800);
         }
-    };
+    }, []);
 
     return (
         <>
-            <div className="fixed top-8 left-0 right-0 z-100 flex justify-center px-6 pointer-events-none">
+            {/* Container positioning - Made larger */}
+            <div className="fixed top-8 left-0 right-0 z-[100] flex justify-center px-4 md:px-8 pointer-events-none">
                 <motion.header
                     initial={{ y: -100, opacity: 0 }}
                     animate={{
                         y: 0,
                         opacity: 1,
-                        width: scrolled ? "900px" : "100%",
-                        maxWidth: scrolled ? "900px" : "1280px"
+                        width: scrolled ? "auto" : "100%",
+                        maxWidth: scrolled ? "950px" : "1400px" // Increased max width
                     }}
                     transition={{
-                        y: { duration: 1.2, ease: [0.16, 1, 0.3, 1] },
-                        opacity: { duration: 1.2 },
-                        width: { type: "spring", stiffness: 100, damping: 20, mass: 1 },
-                        maxWidth: { type: "spring", stiffness: 100, damping: 20, mass: 1 }
+                        y: { duration: 0.8, ease: "circOut" },
+                        width: { duration: 0.6, ease: "anticipate" },
+                        maxWidth: { duration: 0.6, ease: "anticipate" }
                     }}
-                    className="pointer-events-auto relative group flex justify-center"
+                    className="pointer-events-auto relative group flex justify-center w-full"
                 >
-                    {/* Liquid Glass / Dynamic Island Container */}
-                    <motion.div
-                        layout
-                        className={`relative flex items-center justify-between p-2 rounded-full transition-all duration-1000 ease-[0.16,1,0.3,1] w-full overflow-hidden
+                    {/* Glass Container - Made larger */}
+                    <div
+                        className={`relative flex items-center justify-between p-2.5 rounded-full transition-all duration-500 ease-out flex-1
                         ${scrolled
-                                ? "bg-black/60 backdrop-blur-3xl border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.5)] px-4"
-                                : "bg-black/20 backdrop-blur-2xl border border-white/5 px-8"
+                                ? "bg-black/75 backdrop-blur-3xl border border-white/12 shadow-2xl px-3 py-2 md:px-4 md:py-2.5"
+                                : "bg-black/35 backdrop-blur-xl border border-white/6 px-5 py-2.5 md:px-8 md:py-3"
                             }`}
                     >
-                        {/* Animated Border Liquid Highlight */}
-                        <div className="absolute inset-0 rounded-full overflow-hidden pointer-events-none">
-                            <motion.div
-                                className="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-emerald-500/50 to-transparent"
-                                animate={{ x: ["-100%", "100%"] }}
-                                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                            />
-                        </div>
+                        {/* Static Subtle Highlight */}
+                        <div className="absolute inset-0 rounded-full bg-linear-to-b from-white/6 to-transparent pointer-events-none" />
 
-                        {/* Brand Section */}
-                        <motion.div
-                            layout
-                            whileHover={{ scale: 1.02 }}
+                        {/* Brand Section - Enlarged */}
+                        <div
                             onClick={() => scrollToSection("home")}
-                            className="flex items-center gap-2 cursor-pointer relative z-20 shrink-0"
+                            className="flex items-center gap-3 cursor-pointer relative z-20 shrink-0 hover:opacity-80 transition-opacity ml-3 group/brand"
                         >
-                            <div className="w-8 h-8 rounded-xl bg-emerald-500 flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.4)] group-hover:shadow-[0_0_30px_rgba(16,185,129,0.6)] transition-all duration-700">
-                                <Sparkles size={14} className="text-black" />
+                            <div className="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center shadow-lg group-hover/brand:scale-110 transition-transform">
+                                <Sparkles size={18} className="text-black" /> {/* Increased icon size */}
                             </div>
-                            <span className={`font-black text-lg tracking-tighter text-white uppercase italic transition-all duration-700 whitespace-nowrap ${scrolled ? "hidden lg:block scale-90" : "scale-100"}`}>
+                            <span className={`font-black tracking-tighter text-white uppercase italic whitespace-nowrap transition-all ${scrolled ? "hidden md:block text-lg" : "text-lg md:text-xl"}`}>
                                 Leafiess<span className="text-emerald-500">.</span>
                             </span>
-                        </motion.div>
+                        </div>
 
-                        {/* Middle Nav: Desktop */}
-                        <motion.div
-                            layout
-                            className="hidden lg:flex items-center justify-center flex-1 mx-4"
-                        >
+                        {/* Middle Nav: Desktop - Enlarged */}
+                        <div className="hidden lg:flex items-center justify-center flex-1 mx-4">
                             <ul className="flex items-center gap-1">
                                 {navLinks.map((link) => (
-                                    <li key={link.id} className="relative">
+                                    <li key={link.id} className="relative"
+                                        onMouseEnter={() => setHoveredTab(link.id)}
+                                        onMouseLeave={() => setHoveredTab(null)}>
                                         <button
                                             onClick={() => scrollToSection(link.id)}
-                                            className={`px-4 py-2 text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-700 relative z-10 whitespace-nowrap
-                                            ${activeTab === link.id ? "text-white" : "text-neutral-500 hover:text-white"}`}
+                                            className={`px-4.5 py-2.5 text-[10px] font-bold uppercase tracking-widest transition-all relative z-10 whitespace-nowrap rounded-full
+                                            ${activeTab === link.id ? "text-white" : "text-neutral-400 hover:text-neutral-200"}`}
                                         >
                                             {link.name}
+
+                                            {/* Active Indicator - Enlarged */}
+                                            {activeTab === link.id && (
+                                                <motion.div
+                                                    layoutId="activeTabPill"
+                                                    className="absolute inset-0 bg-white/12 border border-white/12 rounded-full -z-10 shadow-[0_0_20px_rgba(255,255,255,0.08)]"
+                                                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                                />
+                                            )}
+
+                                            {/* Hover effect */}
+                                            {hoveredTab === link.id && activeTab !== link.id && (
+                                                <motion.div
+                                                    className="absolute inset-0 bg-white/8 rounded-full -z-10"
+                                                    initial={{ opacity: 0 }}
+                                                    animate={{ opacity: 1 }}
+                                                    exit={{ opacity: 0 }}
+                                                />
+                                            )}
                                         </button>
-                                        {activeTab === link.id && (
-                                            <motion.div
-                                                layoutId="activeTabPill"
-                                                className={`absolute inset-0 rounded-full border shadow-[0_0_20px_rgba(16,185,129,0.2)] ${link.id === 'pricing'
-                                                    ? 'bg-emerald-500/20 border-emerald-500 shadow-[0_0_30px_rgba(16,185,129,0.4)]'
-                                                    : 'bg-white/10 border-emerald-500/50'
-                                                    }`}
-                                                transition={{
-                                                    type: "spring",
-                                                    stiffness: 380,
-                                                    damping: 30,
-                                                    mass: 1
-                                                }}
-                                            >
-                                                {link.id === 'pricing' && (
-                                                    <motion.div
-                                                        animate={{ opacity: [0.4, 0.8, 0.4], scale: [1, 1.05, 1] }}
-                                                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                                                        className="absolute inset-0 bg-emerald-500/20 rounded-full blur-md"
-                                                    />
-                                                )}
-                                                <div className="absolute inset-0 bg-emerald-500/10 rounded-full blur-[4px]" />
-                                            </motion.div>
-                                        )}
                                     </li>
                                 ))}
                             </ul>
-                        </motion.div>
+                        </div>
 
-                        {/* Right Section: CTA & Toggle */}
-                        <motion.div layout className="flex items-center gap-2 shrink-0">
-                            <motion.a
-                                href="https://wa.me/6285714412716"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                whileHover={{ scale: 1.05, backgroundColor: "rgba(16, 185, 129, 1)" }}
-                                whileTap={{ scale: 0.95 }}
-                                className={`hidden md:flex items-center gap-2 bg-emerald-500/90 text-white font-black text-[10px] uppercase tracking-widest transition-all duration-700 rounded-full whitespace-nowrap
-                                ${scrolled ? "px-4 py-2" : "px-7 py-3"}`}
+                        {/* Right Section: CTA & Toggle - Enlarged */}
+                        <div className="flex items-center gap-3 shrink-0">
+                            <button
+                                onClick={() => scrollToSection("contact")}
+                                className={`hidden sm:flex items-center gap-3 bg-emerald-500 text-black font-black text-[10px] uppercase tracking-widest rounded-full transition-all hover:scale-105 active:scale-95 group/cta
+                                ${scrolled ? "px-5 py-3" : "px-7 py-4"}`}
                             >
-                                <span className={scrolled ? "hidden xl:inline" : "inline"}>Chat</span>
-                                <ArrowRight size={14} />
-                            </motion.a>
+                                <span>Chat</span>
+                                <ArrowRight size={14} strokeWidth={3} className="group-hover/cta:translate-x-1.5 transition-transform" />
+                            </button>
 
+                            {/* Mobile Toggle - Enlarged */}
                             <button
                                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                                className="lg:hidden w-10 h-10 rounded-full flex items-center justify-center text-white hover:bg-white/5 transition-all relative border border-white/5 z-100"
+                                className="lg:hidden w-11 h-11 rounded-full flex items-center justify-center text-white bg-white/6 border border-white/10 hover:bg-white/12 transition-all z-[110]"
                             >
-                                <AnimatePresence mode="wait">
-                                    {isMenuOpen ? (
-                                        <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }}>
-                                            <X size={18} />
-                                        </motion.div>
-                                    ) : (
-                                        <motion.div key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }}>
-                                            <Menu size={18} />
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
+                                {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
                             </button>
-                        </motion.div>
-                    </motion.div>
+                        </div>
+                    </div>
                 </motion.header>
             </div>
 
-            {/* Redesigned Mega Menu Overlay */}
+            {/* Mobile Menu - Enlarged */}
             <AnimatePresence>
                 {isMenuOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, y: "-100%" }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: "-100%" }}
-                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                        className="fixed inset-0 z-90 bg-black/98 backdrop-blur-3xl flex flex-col items-center justify-center"
-                    >
-                        {/* Abstract Background Liquid Blobs */}
-                        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                            <div className="absolute top-[-20%] left-[-10%] w-[70%] h-[70%] bg-emerald-500/10 rounded-full blur-[150px] animate-pulse" />
-                            <div className="absolute bottom-[-20%] right-[-10%] w-[70%] h-[70%] bg-emerald-600/5 rounded-full blur-[150px]" />
-                        </div>
-
-                        {/* Centered Navigation Content */}
-                        <div className="relative z-10 w-full max-w-lg px-10 text-center flex flex-col items-center gap-12">
-                            <div className="space-y-2">
-                                <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.1 }}
-                                    className="text-emerald-500 text-[10px] font-black uppercase tracking-[0.8em] mb-4"
-                                >
-                                    Eksplorasi
-                                </motion.div>
-                                <div className="h-px w-12 bg-emerald-500/30 mx-auto" />
+                    <>
+                        {/* Mobile Menu - Full Screen */}
+                        <motion.div
+                            initial={{ opacity: 0, y: "100%" }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: "100%" }}
+                            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                            className="fixed inset-0 z-[95] bg-[#050505] flex flex-col pt-32 px-6 pb-10"
+                        >
+                            {/* Background Elements */}
+                            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                                <div className="absolute top-1/4 -right-1/4 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[120px]" />
+                                <div className="absolute bottom-0 left-0 w-full h-[300px] bg-linear-to-t from-emerald-900/10 to-transparent" />
                             </div>
 
-                            <nav className="flex flex-col gap-4 w-full">
+                            <nav className="flex flex-col gap-2 flex-1 relative z-10 overflow-y-auto">
                                 {navLinks.map((link, index) => (
                                     <motion.button
                                         key={link.id}
-                                        initial={{ opacity: 0, y: 30 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: index * 0.08 + 0.2, duration: 0.8 }}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: 0.1 + index * 0.05 }}
                                         onClick={() => scrollToSection(link.id)}
-                                        className="group relative py-2 overflow-hidden"
+                                        className={`flex items-center justify-between p-4 rounded-2xl transition-all border border-transparent
+                                            ${activeTab === link.id
+                                                ? 'bg-white/10 text-white border-white/10'
+                                                : 'text-white/60 hover:text-white hover:bg-white/5'
+                                            }`}
                                     >
-                                        <span className={`text-4xl md:text-7xl font-black uppercase italic tracking-tighter transition-all duration-500 inline-block
-                                            ${activeTab === link.id ? "text-emerald-500 scale-110" : "text-white/30 group-hover:text-white"}`}>
+                                        <span className="text-2xl font-bold tracking-tight">
                                             {link.name}
                                         </span>
-                                        {/* Subtle active indicator for mobile */}
-                                        {activeTab === link.id && (
-                                            <motion.div
-                                                layoutId="mobileActiveLine"
-                                                className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-1 bg-emerald-500 rounded-full"
-                                            />
+                                        {activeTab === link.id ? (
+                                            <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.8)]" />
+                                        ) : (
+                                            <ArrowRight size={18} className="opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-emerald-500" />
                                         )}
                                     </motion.button>
                                 ))}
                             </nav>
 
-                            {/* Back Button / Tombol Kembali */}
-                            <motion.button
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ delay: 0.8 }}
-                                onClick={() => setIsMenuOpen(false)}
-                                className="mt-8 flex items-center gap-3 text-neutral-500 hover:text-white transition-all duration-300 group"
+                            {/* CTA Section - Absolute Bottom */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.4 }}
+                                className="mt-6 border-t border-white/10 pt-6 relative z-10"
                             >
-                                <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:border-emerald-500 group-hover:text-emerald-500 transition-all">
-                                    <X size={14} />
-                                </div>
-                                <span className="text-[10px] font-black uppercase tracking-[0.3em]">Kembali</span>
-                            </motion.button>
-                        </div>
-
-                        {/* Mini Showcase in Menu (Optional for very high end feel) */}
-                        <div className="absolute bottom-10 left-0 right-0 hidden lg:flex justify-center opacity-20 pointer-events-none scale-75">
-                            <div className="h-[200px] w-[600px] flex gap-10">
-                                {menuHighlights.map((item, i) => (
-                                    <div key={i} className="flex-1 border border-white/10 rounded-2xl p-4">
-                                        <div className="text-white font-bold uppercase italic text-xs">{item.title}</div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </motion.div>
+                                <button
+                                    onClick={() => scrollToSection("contact")}
+                                    className="w-full flex items-center justify-center gap-3 bg-emerald-500 text-black font-black text-lg uppercase tracking-widest py-5 rounded-2xl shadow-[0_10px_30px_rgba(16,185,129,0.2)] hover:bg-emerald-400 hover:scale-[1.02] active:scale-[0.98] transition-all group/cta-mobile"
+                                >
+                                    <span>Mulai Sekarang</span>
+                                    <ChevronRight size={22} strokeWidth={3} className="group-hover/cta-mobile:translate-x-2 transition-transform" />
+                                </button>
+                            </motion.div>
+                        </motion.div>
+                    </>
                 )}
             </AnimatePresence>
         </>
@@ -300,4 +265,3 @@ const Header = () => {
 };
 
 export default Header;
-
