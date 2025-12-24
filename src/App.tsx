@@ -14,7 +14,7 @@ const Price = lazy(() => import('./components/Price.jsx'))
 const FAQ = lazy(() => import('./components/FAQ.jsx'))
 const Footer = lazy(() => import('./components/Footer.jsx'))
 const CustomCursor = lazy(() => import('./components/CustomCursor.jsx'))
-// const LoadingScreen = lazy(() => import('./components/LoadingScreen.jsx'))
+const LoadingScreen = lazy(() => import('./components/LoadingScreen.jsx'))
 
 // Fallback skeleton or simple loading state
 const SectionLoader = () => (

@@ -27,7 +27,7 @@ const teamMembers = [
         name: "Manyu",
         role: "BACKEND LEAD",
         focus: "SCALABLE SYSTEMS",
-        img: "/public/profile/manyu.jpeg",
+        img: "/public/profile/manyu.png",
         icon: <Database size={16} />,
         color: "#059669",
         link: "https://wa.me/6288233078885"
@@ -36,7 +36,7 @@ const teamMembers = [
         name: "candra",
         role: "HUMAN RESOURCE",
         focus: "TALENT ACQUISITION",
-        img: "/public/profile/candra.jpeg",
+        img: "/public/profile/candra.png",
         icon: <Users2 size={16} />,
         color: "#34d399",
         link: "https://wa.me/6283194785932"
