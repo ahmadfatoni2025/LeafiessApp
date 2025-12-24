@@ -17,7 +17,7 @@ const teamMembers = [
     {
         name: "Tony",
         role: "FRONTEND LEAD",
-        focus: "UI/UX ARCHITECTURE",
+        focus: "UI/UX ARCHITECTURES",
         img: "/public/profile/toni.png",
         icon: <Code2 size={16} />,
         color: "#10b981",
