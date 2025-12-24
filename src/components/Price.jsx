@@ -15,7 +15,7 @@ const pricingPlans = [
     {
         name: "Business Pro",
         tagline: "Custom Company Profile",
-        price: { monthly: "Rp3.9jt", yearly: "Rp3.5jt" },
+        price: { monthly: "Rp3.4jt", yearly: "Rp3.2jt" },
         description: "Investasi branding profesional",
         features: ["Waktu Live: 7-14 Hari Kerja", "Kustomisasi: Tinggi (Bebas Custom)", "Sistem Login: Dashboard Basic", "Fitur: SEO & Speed Optimized", "Cocok Untuk: Bisnis & Portfolio"],
         cta: "Mulai Pro",
@@ -25,7 +25,7 @@ const pricingPlans = [
     {
         name: "Enterprise",
         tagline: "Full Custom System",
-        price: { monthly: "Rp8.5jt", yearly: "Rp7.9jt" },
+        price: { monthly: "Relatif", yearly: "Rp7.9jt" },
         description: "Solusi digital skala besar",
         features: ["Waktu Live: Sesuai Kompleksitas", "Kustomisasi: Ultra (Full Engineering)", "Sistem Login: Integrated Dashboard", "Security: SSL & Layered Security", "Cocok Untuk: Startup & Corporate"],
         cta: "Konsultasi",
