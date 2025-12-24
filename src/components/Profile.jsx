@@ -18,7 +18,7 @@ const teamMembers = [
         name: "Tony",
         role: "FRONTEND LEAD",
         focus: "UI/UX ARCHITECTURE",
-        img: "https://i.pinimg.com/736x/2b/f0/b0/2bf0b0feecc5c890ea47f90c7c7c775d.jpg",
+        img: "/public/profile/toni.png",
         icon: <Code2 size={16} />,
         color: "#10b981",
         link: "https://wa.me/6285714412716"
@@ -27,7 +27,7 @@ const teamMembers = [
         name: "Manyu",
         role: "BACKEND LEAD",
         focus: "SCALABLE SYSTEMS",
-        img: "https://i.pinimg.com/736x/09/e4/0a/09e40a3f556058ae2f57ba22bce36f12.jpg",
+        img: "/public/profile/manyu.jpeg",
         icon: <Database size={16} />,
         color: "#059669",
         link: "https://wa.me/6288233078885"
@@ -36,7 +36,7 @@ const teamMembers = [
         name: "candra",
         role: "HUMAN RESOURCE",
         focus: "TALENT ACQUISITION",
-        img: "https://i.pinimg.com/1200x/d3/a2/38/d3a238f0e817a045c2002f14457eddc0.jpg",
+        img: "/public/profile/candra.jpeg",
         icon: <Users2 size={16} />,
         color: "#34d399",
         link: "https://wa.me/6283194785932"

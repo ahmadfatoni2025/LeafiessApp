@@ -133,21 +133,6 @@ const Hero = () => {
             {/* --- CONTENT CONTAINER --- */}
             <div className="container mx-auto px-4 md:px-6 relative z-30">
                 <div className="flex flex-col items-center text-center max-w-5xl mx-auto">
-                    {/* Status Badge */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 15, filter: "blur(5px)" }}
-                        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                        transition={{ duration: 0.8, delay: baseDelay, ease: [0.16, 1, 0.3, 1] }}
-                        className="mb-6 md:mb-10"
-                    >
-                        <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-2xl shadow-2xl overflow-hidden group hover:bg-white/10 transition-all duration-300">
-                            <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 via-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                            <Sparkles size={10} className="text-emerald-400 animate-pulse" />
-                            <span className="text-emerald-400 text-[7px] md:text-[10px] font-black uppercase tracking-[0.3em] md:tracking-[0.4em] relative z-10">
-                                Tamilan elegan & modern, serta <span className="text-white/60 ml-1">Automasi Sistem</span>
-                            </span>
-                        </div>
-                    </motion.div>
 
                     {/* Pre-title */}
                     <motion.div

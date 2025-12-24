@@ -178,7 +178,7 @@ const Header = () => {
                         <div className="flex items-center gap-3 shrink-0">
                             <button
                                 onClick={() => scrollToSection("contact")}
-                                className={`hidden sm:flex items-center gap-3 bg-emerald-500 text-black font-black text-[10px] uppercase tracking-widest rounded-full transition-all hover:scale-105 active:scale-95 group/cta
+                                className={`hidden sm:flex items-center gap-3 bg-emerald-500 text-white font-black text-[10px] uppercase tracking-widest rounded-full transition-all hover:scale-105 active:scale-95 group/cta
                                 ${scrolled ? "px-5 py-3" : "px-7 py-4"}`}
                             >
                                 <span>Chat</span>

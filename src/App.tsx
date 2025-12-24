@@ -54,10 +54,9 @@ function App() {
 
   return (
     <div className="min-h-screen text-white lg:cursor-none bg-[#030502] selection:bg-emerald-500/30 selection:text-emerald-400">
-      {/* <Suspense fallback={null}>
-        <LoadingScreen isLoading={isLoading} />
+      <Suspense fallback={null}>
         {!isLoading && <CustomCursor />}
-      </Suspense> */}
+      </Suspense>
 
       <Suspense fallback={<SectionLoader />}>
         <Header />
