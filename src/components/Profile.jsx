@@ -13,16 +13,12 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-import toniImg from '@/public/profile/toni.png';
-import manyuImg from '@/public/profile/manyu.png';
-import candraImg from '@/public/profile/candra.png';
-
 const teamMembers = [
     {
         name: "Tony",
         role: "FRONTEND LEAD",
         focus: "UI/UX ARCHITECTURES",
-        img: "./public/profile/toni.png",
+        img: "/profile/toni.png",
         icon: <Code2 size={16} />,
         color: "#10b981",
         link: "https://wa.me/6285714412716"
