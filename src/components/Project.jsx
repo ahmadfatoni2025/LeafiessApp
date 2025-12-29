@@ -9,7 +9,7 @@ const projects = [
         headline: "SISTEM MBG",
         category: "Industrial Dashboard",
         tech: ["React", "TS", "PostgreSQL"],
-        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200",
+        image: "./project/scsbanjarnegara.png",
         link: "https://scsbanjarnegara.com/",
         description: "Digital infrastructure for asset tracking and resource monitoring."
     },
@@ -18,7 +18,7 @@ const projects = [
         headline: "LAZISMU WEB",
         category: "Public Portal",
         tech: ["Vite", "Tailwind", "GSAP"],
-        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200",
+        image: "./project/lazismubanjarnegara.png",
         link: "https://lazismubanjarnegara.org/",
         description: "Redesigning digital presence for public trust and accessibility."
     }
