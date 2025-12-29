@@ -13,6 +13,10 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
+import toniImg from '@/public/profile/toni.png';
+import manyuImg from '@/public/profile/manyu.png';
+import candraImg from '@/public/profile/candra.png';
+
 const teamMembers = [
     {
         name: "Tony",
