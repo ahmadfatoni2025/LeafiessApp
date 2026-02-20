@@ -1,179 +1,134 @@
 import { motion } from 'framer-motion';
-import {
-    Cpu,
-    Fingerprint,
-    ArrowUpRight,
-    Zap,
-    Target,
-    Activity,
-    Terminal,
-    Code2,
-    Database,
-    Users2
-} from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { Github, Linkedin, MessageCircle, ArrowUpRight, Code2, Database, Users2 } from 'lucide-react';
 
 const teamMembers = [
     {
+        id: "AF001",
         name: "Tony",
-        role: "FRONTEND LEAD",
-        focus: "UI/UX ARCHITECTURES",
-        img: "/profile/toni.png",
-        icon: <Code2 size={16} />,
+        fullName: "Tony Fatoni", // Asumsi nama lengkap
+        role: "Frontend Lead",
+        focus: "UI/UX Architectures",
+        status: "ACTIVE",
         color: "#10b981",
+        img: "/profile/toni.png",
+        skills: [
+            { name: "React / Next.js", pct: "95%" },
+            { name: "Tailwind CSS", pct: "98%" },
+            { name: "Motion", pct: "90%" }
+        ],
         link: "https://wa.me/6285714412716"
     },
     {
+        id: "MY002",
         name: "Manyu",
-        role: "BACKEND LEAD",
-        focus: "SCALABLE SYSTEMS",
-        img: "/profile/manyu.png",
-        icon: <Database size={16} />,
+        fullName: "Abimanyu",
+        role: "Backend Lead",
+        focus: "Scalable Systems",
+        status: "ACTIVE",
         color: "#059669",
+        img: "/profile/manyu.png",
+        skills: [
+            { name: "Node.js", pct: "92%" },
+            { name: "PostgreSQL", pct: "90%" },
+            { name: "System Design", pct: "88%" }
+        ],
         link: "https://wa.me/6288233078885"
     },
     {
-        name: "candra",
-        role: "HUMAN RESOURCE",
-        focus: "TALENT ACQUISITION",
-        img: "/profile/candra.png",
-        icon: <Users2 size={16} />,
+        id: "CD003",
+        name: "Candra",
+        fullName: "Candra Winata",
+        role: "HR & Talent",
+        focus: "Talent Acquisition",
+        status: "ACTIVE",
         color: "#34d399",
+        img: "/profile/candra.png",
+        skills: [
+            { name: "Recruitment", pct: "94%" },
+            { name: "People Ops", pct: "90%" },
+            { name: "Culture", pct: "95%" }
+        ],
         link: "https://wa.me/6283194785932"
     }
 ];
 
 const Profile = () => {
     return (
-        <section id="profile" className="py-32 px-4 relative overflow-hidden bg-black text-white selection:bg-emerald-500/30 selection:text-emerald-400">
-            {/* Subtle Masked Background - Profile Variation */}
-            <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                {/* 1. Base Gradient Glow */}
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,#061a12_0%,#000_100%)] opacity-20" />
-
-                {/* 2. Masked Grid Pattern (Large Grid) */}
-                <div className="absolute inset-0 opacity-[0.08]"
-                    style={{
-                        backgroundImage: `linear-gradient(#10b981 1px, transparent 1px), linear-gradient(90deg, #10b981 1px, transparent 1px)`,
-                        backgroundSize: '120px 120px',
-                        maskImage: 'radial-gradient(circle at center, black 20%, transparent 80%)',
-                        WebkitMaskImage: 'radial-gradient(circle at center, black 20%, transparent 80%)'
-                    }}
-                />
-
-                {/* 3. Soft Ambient Glow */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[70vw] bg-emerald-500/5 rounded-full blur-[120px] opacity-40" />
-            </div>
-
-            <div className="container mx-auto relative z-10">
-                {/* --- ELEGANT H1 HEADER --- */}
-                <div className="flex flex-col mb-12 md:mb-20">
-                    <motion.div
-                        initial={{ opacity: 0, x: -50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                        className="flex items-center gap-4 mb-4"
-                    >
-                        <div className="flex gap-1">
-                            {[1, 2, 3].map(i => <div key={i} className="w-6 md:w-8 h-1 bg-emerald-500 rounded-full" />)}
+        <section id="profile" className="py-24 relative border-b border-[#ffffff17] bg-[#0c0c12]">
+            {/* --- REF: MARQUEE INTEGRATED --- */}
+            <div className="absolute top-0 left-0 right-0 overflow-hidden border-b border-t border-[#ffffff17] py-10 bg-[#111118]">
+                <div className="flex gap-12 w-max animate-[mq_30s_linear_infinite]">
+                    {[...Array(2)].map((_, i) => (
+                        <div key={i} className="flex gap-12">
+                            <span className="flex items-center gap-2.5 font-mono-jb text-[0.65rem] tracking-[0.13em] text-[#9090A8] whitespace-nowrap"><span className="w-1 h-1 bg-[#ffffff2e] rounded-full" />PREMIUM DEVELOPMENT</span>
+                            <span className="flex items-center gap-2.5 font-mono-jb text-[0.65rem] tracking-[0.13em] text-[#9090A8] whitespace-nowrap"><span className="w-1 h-1 bg-[#ffffff2e] rounded-full" />SYSTEM ARCHITECTURE</span>
+                            <span className="flex items-center gap-2.5 font-mono-jb text-[0.65rem] tracking-[0.13em] text-[#9090A8] whitespace-nowrap"><span className="w-1 h-1 bg-[#ffffff2e] rounded-full" />UI/UX DESIGN</span>
+                            <span className="flex items-center gap-2.5 font-mono-jb text-[0.65rem] tracking-[0.13em] text-[#9090A8] whitespace-nowrap"><span className="w-1 h-1 bg-[#ffffff2e] rounded-full" />SCALABLE SOLUTIONS</span>
+                            <span className="flex items-center gap-2.5 font-mono-jb text-[0.65rem] tracking-[0.13em] text-[#9090A8] whitespace-nowrap"><span className="w-1 h-1 bg-[#ffffff2e] rounded-full" />LEAFYESS TEAM</span>
                         </div>
-                        <span className="text-[9px] md:text-[10px] font-black tracking-[0.3em] md:tracking-[0.4em] uppercase text-emerald-500/60">Elite_Profiles//2024</span>
-                    </motion.div>
-
-                    <motion.h1
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                        className="text-4xl md:text-[120px] font-[1000] italic tracking-tighter leading-[0.85] text-white uppercase"
-                    >
-                        Our Core Team<span className="text-emerald-500">.</span>
-                    </motion.h1>
-
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, delay: 0.4 }}
-                        className="text-neutral-500 text-sm md:text-xl font-medium mt-6 md:mt-8 max-w-2xl border-l border-emerald-500/30 pl-4 md:pl-8"
-                    >
-                        Dengan pendekatan rekayasa yang terukur, kami membangun ekosistem digital berperforma tinggi yang didukung oleh tim arsitek frontend, engineer backend, dan talenta spesialis untuk menghasilkan solusi yang stabil, scalable, dan berkelanjutan.
-                    </motion.p>
-                </div>
-
-                {/* --- AGENCY CORE TEAM --- */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {teamMembers.map((member, i) => (
-                        <motion.a
-                            key={member.name}
-                            href={member.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                            className="group relative h-[450px] md:h-[600px] rounded-[32px] overflow-hidden border border-white/5 bg-neutral-900/40 cursor-pointer block"
-                        >
-                            {/* Member Image */}
-                            <img
-                                src={member.img}
-                                alt={member.name}
-                                className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 brightness-[0.7] group-hover:scale-105"
-                            />
-
-                            {/* Hero-style Overlays */}
-                            <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black pointer-events-none" />
-                            <div
-                                className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-700"
-                                style={{ background: `radial-gradient(circle at center, ${member.color}, transparent)` }}
-                            />
-
-                            {/* Card Content UI */}
-                            <div className="absolute inset-0 z-10 p-8 flex flex-col justify-between">
-                                <div className="flex justify-between items-start">
-                                    <div className="p-3 rounded-xl bg-black/40 backdrop-blur-md border border-white/10 text-emerald-500">
-                                        {member.icon}
-                                    </div>
-                                    <div className="flex flex-col items-end">
-                                        <span className="text-[9px] font-black uppercase tracking-[0.3em] text-white/40">Status</span>
-                                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-400">DEPLOYED://</span>
-                                    </div>
-                                </div>
-
-                                <div className="relative">
-                                    {/* Tech Lines */}
-                                    <div className="flex items-center gap-3 mb-4">
-                                        <Zap size={14} className="text-emerald-500/50" />
-                                        <div className="h-px flex-1 bg-white/10" />
-                                        <Activity size={14} className="text-white/20" />
-                                    </div>
-
-                                    <span className="text-[10px] font-black uppercase tracking-[0.4em] text-emerald-500 mb-2 block">{member.role}</span>
-                                    <h3 className="text-2xl md:text-4xl font-black italic tracking-tighter text-white uppercase leading-none mb-4 group-hover:text-emerald-400 transition-colors">
-                                        {member.name}<span className="text-emerald-500">!</span>
-                                    </h3>
-
-                                    <div className="flex items-center justify-between mt-6 pt-4 border-t border-white/10">
-                                        <p className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest">{member.focus}</p>
-                                        <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-emerald-500 transition-colors">
-                                            <ArrowUpRight size={14} className="group-hover:text-black transition-colors" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Scanner Line Effect */}
-                            <div className="absolute top-0 left-0 w-full h-px bg-emerald-500/30 opacity-0 group-hover:opacity-100 group-hover:top-full transition-all duration-3000 pointer-events-none" />
-                        </motion.a>
                     ))}
                 </div>
             </div>
 
-            {/* Global Holographic Scanlines */}
-            <div className="absolute inset-0 z-20 pointer-events-none opacity-[0.03] bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,#fff_3px)]" />
-        </section >
+            <div className="container mx-auto px-6 mt-16">
+                <div className="inline-flex items-center gap-2 font-mono-jb text-[0.63rem] tracking-[0.14em] text-[#9090A8] mb-6 px-3 py-1 border border-[#ffffff17] rounded-full">
+                    <span className="text-[#5a5a72]">//</span> core_team
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr_1fr] gap-8 items-start">
+                    {teamMembers.map((member, index) => (
+                        <motion.div
+                            key={member.id}
+                            initial={{ opacity: 0, y: 24 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.75, delay: index * 0.2 }}
+                            className="border border-[#ffffff17] bg-[#111118] p-6 rounded-[12px] relative overflow-hidden group hover:border-[#ffffff2e] transition-colors"
+                        >
+                            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#ffffff24] to-transparent" />
+
+                            <div className="flex items-center justify-between mb-5">
+                                <span className="font-mono-jb text-[0.55rem] tracking-[0.16em] text-[#5a5a72]">ID · {member.id}</span>
+                                <span className="flex items-center gap-1.5 font-mono-jb text-[0.55rem] tracking-[0.1em] text-[#4ade80] px-2.5 py-1 border border-[#4ade8033] rounded-full bg-[#4ade800f]">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-[#4ade80]" />
+                                    {member.status}
+                                </span>
+                            </div>
+
+                            <div className="w-full aspect-square bg-[#050508] border border-[#ffffff17] rounded-lg overflow-hidden mb-5 relative">
+                                <img src={member.img} alt={member.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 opacity-80 group-hover:opacity-100" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#050508] via-transparent to-transparent opacity-60"></div>
+                            </div>
+
+                            <div className="space-y-3 relative z-10">
+                                <div>
+                                    <div className="text-[1.1rem] text-white font-space font-bold uppercase">{member.fullName}</div>
+                                    <div className="font-mono-jb text-[0.6rem] tracking-[0.1em] text-[#4ade80] mb-1">{member.role}</div>
+                                </div>
+                                <div className="w-full h-px bg-[#ffffff17]" />
+                                <div>
+                                    <div className="font-mono-jb text-[0.55rem] tracking-[0.12em] text-[#5a5a72] mb-1">spesialisasi</div>
+                                    <div className="text-[0.8rem] text-[#D8D8E0] font-medium">{member.focus}</div>
+                                </div>
+
+                                <div className="space-y-2 mt-4">
+                                    {member.skills.map((skill) => (
+                                        <div key={skill.name} className="flex justify-between items-center text-[0.65rem]">
+                                            <span className="text-[#9090A8]">{skill.name}</span>
+                                            <span className="font-mono-jb text-[#5a5a72]">{skill.pct}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <a href={member.link} target="_blank" rel="noreferrer" className="mt-6 flex items-center justify-center p-3 w-full border border-[#ffffff17] rounded-lg hover:bg-emerald-500/10 hover:text-emerald-400 text-[#9090A8] transition-all gap-2 text-xs font-mono-jb uppercase">
+                                <MessageCircle size={14} /> Contact
+                            </a>
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
+        </section>
     );
 };
 

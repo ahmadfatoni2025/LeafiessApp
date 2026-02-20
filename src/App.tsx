@@ -13,7 +13,7 @@ const Profile = lazy(() => import('./components/Profile.jsx'))
 const Price = lazy(() => import('./components/Price.jsx'))
 const FAQ = lazy(() => import('./components/FAQ.jsx'))
 const Footer = lazy(() => import('./components/Footer.jsx'))
-const CustomCursor = lazy(() => import('./components/CustomCursor.jsx'))
+const Contact = lazy(() => import('./components/Contact.jsx'))
 // const LoadingScreen = lazy(() => import('./components/LoadingScreen.jsx'))
 
 // Fallback skeleton or simple loading state
@@ -53,9 +53,9 @@ function App() {
   }, [handleResize])
 
   return (
-    <div className="min-h-screen text-white lg:cursor-none bg-[#030502] selection:bg-emerald-500/30 selection:text-emerald-400">
+    <div className="min-h-screen text-white bg-[#030502] selection:bg-emerald-500/30 selection:text-emerald-400">
       <Suspense fallback={null}>
-        {!isLoading && <CustomCursor />}
+        {/* <LoadingScreen /> */}
       </Suspense>
 
       <Suspense fallback={<SectionLoader />}>
@@ -117,6 +117,10 @@ function App() {
 
         <Suspense fallback={<SectionLoader />}>
           <FAQ />
+        </Suspense>
+
+        <Suspense fallback={<SectionLoader />}>
+          <Contact />
         </Suspense>
       </main>
 

@@ -57,7 +57,7 @@ const Footer = () => {
 
                 {/* Massive Background Brand Text */}
                 <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full overflow-hidden flex justify-center pointer-events-none select-none z-0">
-                    <h1 className="text-[35vw] md:text-[28vw] font-black leading-none m-0 tracking-tighter text-white opacity-[0.02] translate-y-1/3">
+                    <h1 className="font-space text-[35vw] md:text-[28vw] font-bold leading-none m-0 tracking-tighter text-white opacity-[0.02] translate-y-1/3">
                         LEAFIESS
                     </h1>
                 </div>
@@ -108,11 +108,11 @@ const Footer = () => {
                             <div className="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center group-hover/logo:rotate-12 transition-transform">
                                 <span className="text-black font-black text-xl">L</span>
                             </div>
-                            <h2 className="text-2xl md:text-3xl font-black text-white tracking-tighter">
+                            <h2 className="font-space text-2xl md:text-3xl font-bold text-white tracking-tight">
                                 Leafiess<span className="text-emerald-500">.</span>
                             </h2>
                         </div>
-                        <p className="text-neutral-400 text-sm md:text-lg leading-relaxed max-w-md mb-8 md:mb-10 font-medium">
+                        <p className="text-[#9090A8] text-sm md:text-base leading-relaxed max-w-md mb-8 md:mb-10 font-normal">
                             Agensi kreatif elit yang berfokus pada pembuatan solusi sistem manajemen digital
                             dan web premium yang berkembang seiring dengan kebutuhan bisnis Anda. Dukungan 24/7
                             dengan eksekusi tanpa latensi.
@@ -120,7 +120,7 @@ const Footer = () => {
 
                         <div className="relative group/btn-wrap w-full sm:w-fit">
                             {/* 3D Depth Layer */}
-                            <div className="absolute inset-0 bg-emerald-700 translate-y-1.5 rounded-2xl md:rounded-[2rem] blur-[2px] opacity-40" />
+                            <div className="absolute inset-0 bg-emerald-700 translate-y-1.5 rounded-[1rem] md:rounded-[2rem] blur-[2px] opacity-40" />
 
                             <motion.a
                                 href="https://wa.me/6285714412716"
@@ -128,7 +128,7 @@ const Footer = () => {
                                 rel="noopener noreferrer"
                                 whileHover={{ y: -4, scale: 1.02 }}
                                 whileTap={{ y: 2, scale: 0.98 }}
-                                className="relative w-full sm:w-auto bg-emerald-500 text-black px-10 py-5 rounded-2xl md:rounded-[2rem] font-black text-xs md:text-sm uppercase tracking-[0.2em] flex items-center justify-center sm:justify-start gap-5 group/btn overflow-hidden shadow-[0_20px_40px_rgba(16,185,129,0.3)] border-t border-white/30"
+                                className="relative w-full sm:w-auto bg-emerald-500 text-white px-10 py-5 rounded-[1rem] md:rounded-[2rem] font-black text-xs md:text-sm uppercase tracking-[0.2em] flex items-center justify-center sm:justify-start gap-5 group/btn overflow-hidden shadow-[0_20px_40px_rgba(16,185,129,0.3)] border-t border-white/30"
                             >
                                 {/* Futuristic Internal Glow */}
                                 <div className="absolute inset-0 bg-linear-to-tr from-white/20 to-transparent pointer-events-none" />
@@ -142,8 +142,8 @@ const Footer = () => {
 
                                 <div className="relative z-10 flex items-center gap-4">
                                     <div className="relative">
-                                        <div className="w-2 h-2 rounded-full bg-black animate-ping absolute inset-0 opacity-20" />
-                                        <div className="w-2 h-2 rounded-full bg-black" />
+                                        <div className="w-2 h-2 rounded-[1rem] bg-black animate-ping absolute inset-0 opacity-20" />
+                                        <div className="w-2 h-2 rounded-[1rem] bg-black" />
                                     </div>
                                     <span>Hubungi Dukungan</span>
                                 </div>
@@ -203,10 +203,10 @@ const Footer = () => {
                 {/* --- BOTTOM BAR: Dopler/Pine Hybrid --- */}
                 <div className="pt-12 border-t border-white/5 flex flex-col lg:flex-row items-center justify-between gap-8">
                     <div className="flex flex-col md:flex-row items-center gap-8">
-                        <span className="text-neutral-600 text-[10px] font-black uppercase tracking-[0.4em]">© {currentYear} Leafiess studio inc.</span>
+                        <span className="font-mono-jb text-[#9090A8] text-[10px] uppercase tracking-[0.1em]">© {currentYear} Leafiess studio inc.</span>
                         <div className="flex items-center gap-6">
-                            <a href="#" className="text-neutral-600 hover:text-white text-[10px] font-black uppercase tracking-[0.4em] transition-colors">Privasi</a>
-                            <a href="#" className="text-neutral-600 hover:text-white text-[10px] font-black uppercase tracking-[0.4em] transition-colors">Syarat & Ketentuan</a>
+                            <a href="#" className="font-mono-jb text-[#9090A8] hover:text-white text-[10px] uppercase tracking-[0.1em] transition-colors">Privasi</a>
+                            <a href="#" className="font-mono-jb text-[#9090A8] hover:text-white text-[10px] uppercase tracking-[0.1em] transition-colors">Syarat & Ketentuan</a>
                         </div>
                     </div>
 
@@ -215,9 +215,9 @@ const Footer = () => {
                             <input
                                 type="email"
                                 placeholder="EMAIL@ANDA.COM"
-                                className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-xs font-black text-white uppercase tracking-widest focus:outline-none focus:border-emerald-500 transition-all"
+                                className="w-full bg-[#111118] border border-white/10 rounded-lg px-6 py-4 text-xs font-mono-jb text-white uppercase tracking-widest focus:outline-none focus:border-emerald-500 transition-all"
                             />
-                            <button className="absolute right-2 top-2 bottom-2 bg-emerald-500 text-black px-6 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-emerald-400 transition-all">
+                            <button className="absolute right-2 top-2 bottom-2 bg-emerald-500 text-black px-6 rounded-md text-[10px] font-mono-jb uppercase tracking-widest hover:bg-emerald-400 transition-all font-bold">
                                 Berlangganan
                             </button>
                         </div>

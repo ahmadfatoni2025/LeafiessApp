@@ -114,27 +114,28 @@ const Header = () => {
                 >
                     {/* Glass Container - Made larger */}
                     <div
-                        className={`relative flex items-center justify-between p-2.5 rounded-full transition-all duration-500 ease-out flex-1
+                        className={`relative flex items-center justify-between p-2.5 rounded-full transition-all duration-500 ease-out flex-1 
                         ${scrolled
                                 ? "bg-black/75 backdrop-blur-3xl border border-white/12 shadow-2xl px-3 py-2 md:px-4 md:py-2.5"
-                                : "bg-black/35 backdrop-blur-xl border border-white/6 px-5 py-2.5 md:px-8 md:py-3"
+                                : "bg-black/35 backdrop-blur-xl border border-emerald-400/50 px-5 py-2.5 md:px-8 md:py-3"
                             }`}
                     >
                         {/* Static Subtle Highlight */}
                         <div className="absolute inset-0 rounded-full bg-linear-to-b from-white/6 to-transparent pointer-events-none" />
 
                         {/* Brand Section - Enlarged */}
-                        <div
-                            onClick={() => scrollToSection("home")}
-                            className="flex items-center gap-3 cursor-pointer relative z-20 shrink-0 hover:opacity-80 transition-opacity ml-3 group/brand"
+                        <motion.div
+                            initial={{ y: -20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            className="flex items-center gap-2 group cursor-pointer"
                         >
-                            <div className="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center shadow-lg group-hover/brand:scale-110 transition-transform">
-                                <Sparkles size={18} className="text-black" /> {/* Increased icon size */}
+                            <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
+                                <span className=" font-bold text-lg text-emerald-500">L</span>
                             </div>
-                            <span className={`font-black tracking-tighter text-white uppercase italic whitespace-nowrap transition-all ${scrolled ? "hidden md:block text-lg" : "text-lg md:text-xl"}`}>
+                            <span className="font-space font-bold text-lg tracking-tight text-white group-hover:text-emerald-500 transition-colors">
                                 Leafiess<span className="text-emerald-500">.</span>
                             </span>
-                        </div>
+                        </motion.div>
 
                         {/* Middle Nav: Desktop - Enlarged */}
                         <div className="hidden lg:flex items-center justify-center flex-1 mx-4">
@@ -145,30 +146,30 @@ const Header = () => {
                                         onMouseLeave={() => setHoveredTab(null)}>
                                         <button
                                             onClick={() => scrollToSection(link.id)}
-                                            className={`px-4.5 py-2.5 text-[10px] font-bold uppercase tracking-widest transition-all relative z-10 whitespace-nowrap rounded-full
-                                            ${activeTab === link.id ? "text-white" : "text-neutral-400 hover:text-neutral-200"}`}
+                                            onMouseEnter={() => setHoveredTab(link.id)}
+                                            onMouseLeave={() => setHoveredTab(null)}
+                                            className={`relative px-4 py-2 rounded-lg text-xs uppercase tracking-widest transition-all duration-300 ${activeTab === link.id
+                                                ? "text-emerald-400 bg-emerald-500/10"
+                                                : "text-neutral-400 hover:text-white"
+                                                }`}
                                         >
-                                            {link.name}
-
-                                            {/* Active Indicator - Enlarged */}
                                             {activeTab === link.id && (
                                                 <motion.div
-                                                    layoutId="activeTabPill"
-                                                    className="absolute inset-0 bg-white/12 border border-white/12 rounded-full -z-10 shadow-[0_0_20px_rgba(255,255,255,0.08)]"
+                                                    layoutId="activeTab"
+                                                    className="absolute inset-0 rounded-lg bg-emerald-500/10 border border-emerald-500/20"
                                                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                                                 />
                                             )}
-
-                                            {/* Hover effect */}
-                                            {hoveredTab === link.id && activeTab !== link.id && (
-                                                <motion.div
-                                                    className="absolute inset-0 bg-white/8 rounded-full -z-10"
-                                                    initial={{ opacity: 0 }}
-                                                    animate={{ opacity: 1 }}
-                                                    exit={{ opacity: 0 }}
-                                                />
-                                            )}
+                                            <span className="relative z-10">{link.name}</span>
                                         </button>
+                                        {hoveredTab === link.id && activeTab !== link.id && (
+                                            <motion.div
+                                                className="absolute inset-0 bg-white/8 rounded-full -z-10"
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                exit={{ opacity: 0 }}
+                                            />
+                                        )}
                                     </li>
                                 ))}
                             </ul>
@@ -177,12 +178,13 @@ const Header = () => {
                         {/* Right Section: CTA & Toggle - Enlarged */}
                         <div className="flex items-center gap-3 shrink-0">
                             <button
-                                onClick={() => scrollToSection("contact")}
-                                className={`hidden sm:flex items-center gap-3 bg-emerald-500 text-white font-black text-[10px] uppercase tracking-widest rounded-full transition-all hover:scale-105 active:scale-95 group/cta
-                                ${scrolled ? "px-5 py-3" : "px-7 py-4"}`}
+                                className="group relative px-5 py-2.5 rounded-lg bg-white/5 border border-white/10 overflow-hidden"
                             >
-                                <span>Chat</span>
-                                <ArrowRight size={14} strokeWidth={3} className="group-hover/cta:translate-x-1.5 transition-transform" />
+                                <div className="absolute inset-0 bg-emerald-500/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                                <div className="relative flex items-center gap-2">
+                                    <span className=" text-xs font-bold uppercase tracking-wide text-white">Let's Talk</span>
+                                    <ArrowRight size={14} className="text-emerald-500 group-hover:-rotate-45 transition-transform duration-300" />
+                                </div>
                             </button>
 
                             {/* Mobile Toggle - Enlarged */}
