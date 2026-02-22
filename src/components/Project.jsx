@@ -37,7 +37,7 @@ const projects = [
         desc: "Aplikasi manajemen keuangan pribadi dengan analisis pengeluaran berbasis AI dan integrasi multi-bank yang aman.",
         tags: ["Next.js", "Prisma", "Chart.js", "Framer Motion"],
         image: "https://i.pinimg.com/1200x/53/7e/9c/537e9c22a28f9e0001b232055a1125a8.jpg",
-        link: "#"
+        link: "https://chat-portofolio.vercel.app/Hi-I-am-Loukas"
     },
     {
         id: "eco",
@@ -48,7 +48,7 @@ const projects = [
         desc: "Marketplace produk ramah lingkungan dengan fitur jejak karbon calculator setiap pembelian.",
         tags: ["Vue", "Nuxt", "Node.js", "Stripe"],
         image: "https://i.pinimg.com/1200x/9d/ea/ad/9deaadd8955f67bb3fb475b4b37ca1fa.jpg",
-        link: "#"
+        link: "https://jsmastery.com/"
     },
 ];
 
